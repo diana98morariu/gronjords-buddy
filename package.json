@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "express": "4.17.1",
+    "objection": "2.2.3",
+    "knex": "0.21.12"
+  }
+}
