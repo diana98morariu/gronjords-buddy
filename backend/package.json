@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "express": "4.17.1",
+    "objection": "2.2.3",
+    "knex": "0.21.12",
+    "helmet": "4.2.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "migrate:latest": "knex migrate:latest",
+    "migrate:make": "knex migrate:make",
+    "migrate:rollback": "knex migrate:rollback",
+    "seed:make": "knex seed:make",
+    "seed:run": "knex seed:run",
+    "start-dev": "cross-env PORT=5555 nodemon app",
+    "start-prod": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
