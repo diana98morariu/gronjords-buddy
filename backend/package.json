@@ -3,7 +3,10 @@
     "express": "4.17.1",
     "objection": "2.2.3",
     "knex": "0.21.12",
-    "helmet": "4.2.0"
+    "helmet": "4.2.0",
+    "express-session": "1.17.1",
+    "connect-session-knex": "2.0.0",
+    "pg": "8.5.1"
   },
   "scripts": {
     "start": "node app.js",

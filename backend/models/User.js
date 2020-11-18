@@ -26,7 +26,7 @@ class User extends Model {
       ],
 
       properties: {
-        id: { type: "integer" },
+        user_id: { type: "integer" },
 
         first_name: { type: "string", minLength: 2, maxLength: 50 },
         last_name: { type: "string", minLength: 2, maxLength: 50 },
@@ -75,9 +75,9 @@ class User extends Model {
     return {
       posts: {
         relation: Model.HasManyRelation,
-        modelClass: Popst,
+        modelClass: Post,
         join: {
-          from: "users.id",
+          from: "users.user_id",
           to: "posts.user_id",
         },
       },
@@ -86,7 +86,7 @@ class User extends Model {
         relation: Model.HasManyRelation,
         modelClass: Like,
         join: {
-          from: "users.id",
+          from: "users.user_id",
           to: "likes.user_id",
         },
       },
@@ -95,7 +95,7 @@ class User extends Model {
         relation: Model.HasManyRelation,
         modelClass: Comment,
         join: {
-          from: "users.id",
+          from: "users.user_id",
           to: "comments.user_id",
         },
       },
@@ -104,7 +104,7 @@ class User extends Model {
         relation: Model.HasManyRelation,
         modelClass: Enrollment,
         join: {
-          from: "users.id",
+          from: "users.user_id",
           to: "enrollments.user_id",
         },
       },
