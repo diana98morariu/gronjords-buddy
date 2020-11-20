@@ -9,7 +9,7 @@ const session = require("express-session");
 const KnexStore = require("connect-session-knex")(session);
 const { sessionKey, serverPORT, clientEndpoint } = require(__dirname +
   "/config/otherConfigs");
-// const routes = require(__dirname + '/routes/routes');
+const routes = require(__dirname + "/routes/routes.js");
 
 const client = process.env.CLIENT || clientEndpoint;
 
@@ -40,24 +40,24 @@ const knex = Knex(knexFile.development);
 Model.knex(knex);
 
 // ====================== CREATE SESSIONS WITH KNEX ======================
-// const store = new KnexStore({ knex });
+const store = new KnexStore({ knex });
 
 // ====================== SETUP SESSIONS ======================
-// app.use(
-//     session({
-//       secret: process.env.SESSION || sessionKey,
-//       name: 'user_sid',
-//       resave: false,
-//       saveUninitialized: false,
-//       cookie: {
-//         expires: 120000 * 600000
-//       },
-//       store
-//     })
-// );
+app.use(
+  session({
+    secret: process.env.SESSION || sessionKey,
+    name: "user_sid",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 120000 * 600000,
+    },
+    store,
+  })
+);
 
 // ====================== ADD ROUTES ======================
-// app.use('/api', routes);
+app.use("/api", routes);
 
 // ====================== CREATE SERVER ======================
 const PORT = process.env.PORT || serverPORT;

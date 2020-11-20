@@ -6,7 +6,10 @@
     "helmet": "4.2.0",
     "express-session": "1.17.1",
     "connect-session-knex": "2.0.0",
-    "pg": "8.5.1"
+    "pg": "8.5.1",
+    "uuidv4": "6.2.5",
+    "uuid": "8.3.1",
+    "bcrypt": "5.0.0"
   },
   "scripts": {
     "start": "node app.js",

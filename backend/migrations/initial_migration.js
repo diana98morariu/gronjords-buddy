@@ -6,13 +6,12 @@ exports.up = function (knex) {
       table.string("last_name").notNullable();
       table.date("birthdate").notNullable();
       table.string("phone_nr").notNullable();
-      table.string("image").notNullable();
+      table.string("image");
       table.integer("room").notNullable();
       table.string("email").unique().notNullable();
       table.string("password").notNullable();
       table.datetime("reset_pass_time");
       table.string("activate_or_reset_pass_key").notNullable();
-      table.boolean("verified").notNullable().defaultTo(false);
       table.boolean("admin").notNullable().defaultTo(false);
       table.timestamp("created_at").defaultTo(knex.fn.now());
     })
