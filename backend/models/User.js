@@ -21,7 +21,6 @@ class User extends Model {
         "password",
         "activate_or_reset_pass_key",
         "phone_nr",
-        "image",
         "room",
       ],
 
