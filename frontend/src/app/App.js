@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./App.module.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header/Header.js";
-import Home from "./pages/Login/Login.js";
+import Home from "./pages/Home/Home.js";
 
 const App = () => {
   return (
