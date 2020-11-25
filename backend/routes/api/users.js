@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const User = require(__dirname + "/../../models/User");
+const Group = require(__dirname + "/../../models/Group");
+const Enrollment = require(__dirname + "/../../models/Enrollment");
 const { isAuthenticated } = require(__dirname + "/../../helpers/auth");
 // const { v4: uuid, isUuid } = require("uuidv4");
 const { v4: uuidv4 } = require("uuid");
@@ -112,14 +114,33 @@ router.post("/register", async (req, res, next) => {
           return res.status(500).send({});
         }
         try {
+          const strRoom = room.toString();
+          const floor = room % 1000;
+          const strFloor = floor.toString();
+          const blockFloor = strRoom.substring(0, 2);
+
+          if (
+            strRoom.length !== 4 ||
+            strRoom.startsWith("5") ||
+            strRoom.startsWith("7") ||
+            strRoom.startsWith("8") ||
+            strRoom.startsWith("9") ||
+            strFloor.startsWith("0") ||
+            strFloor.startsWith("9") ||
+            room % 100 > 23
+          ) {
+            return res.status(404).send({ response: "Room does not exist" });
+          }
           const existingRoom = await User.query()
             .select()
             .where({ room: room })
             .limit(1);
+
           const existingEmail = await User.query()
             .select()
             .where({ email: email })
             .limit(1);
+
           const existingPhoneNr = await User.query()
             .select()
             .where({ phone_nr: phone_nr })
@@ -142,17 +163,95 @@ router.post("/register", async (req, res, next) => {
               password: hashedPassword,
               activate_or_reset_pass_key: uuidv4(),
             };
-            console.log(newUser);
             const createdUser = await User.query().insert(newUser);
 
             if (!createdUser)
               return res
                 .status(404)
                 .send({ response: "Error while inserting user" });
+            console.log(createdUser.id);
+            const floorGroup = await Group.query()
+              .select("id")
+              .where({ group_name: "Floor " + blockFloor });
+
+            if (room % 100 <= 12) {
+              const kitchenGroupA = await Group.query()
+                .select("id")
+                .where({ group_name: "Kitchen " + blockFloor + "A" });
+              console.log(kitchenGroupA[0].id);
+              if (floorGroup && kitchenGroupA) {
+                const newFloorMate = await Enrollment.query().insert({
+                  user_id: createdUser.id,
+                  group_id: floorGroup[0].id,
+                });
+                if (!newFloorMate)
+                  return res.status(404).send({
+                    response: "Error while inserting user in floor group",
+                  });
+
+                const newKitchenMate = await Enrollment.query().insert({
+                  user_id: createdUser.id,
+                  group_id: kitchenGroupA[0].id,
+                });
+                if (!newKitchenMate)
+                  return res.status(404).send({
+                    response: "Error while inserting user in kitchen group",
+                  });
+
+                const newMate = await Enrollment.query().insert({
+                  user_id: createdUser.id,
+                  group_id: 1,
+                });
+
+                if (!newMate)
+                  return res.status(404).send({
+                    response: "Error while inserting user in main group",
+                  });
+              }
+            } else if (room % 100 > 12) {
+              const kitchenGroupB = await Group.query()
+                .select("id")
+                .where({ group_name: "Kitchen " + blockFloor + "B" });
+              console.log(kitchenGroupB[0].id);
+
+              if (floorGroup && kitchenGroupB) {
+                const newFloorMate = await Enrollment.query().insert({
+                  user_id: createdUser.id,
+                  group_id: floorGroup[0].id,
+                });
+                if (!newFloorMate)
+                  return res.status(404).send({
+                    response: "Error while inserting user in floor group",
+                  });
+
+                const newKitchenMate = await Enrollment.query().insert({
+                  user_id: createdUser.id,
+                  group_id: kitchenGroupB[0].id,
+                });
+                if (!newKitchenMate)
+                  return res.status(404).send({
+                    response: "Error while inserting user in kitchen group",
+                  });
+
+                const newMate = await Enrollment.query().insert({
+                  user_id: createdUser.id,
+                  group_id: 1,
+                });
+
+                if (!newMate)
+                  return res.status(404).send({
+                    response: "Error while inserting user in main group",
+                  });
+              }
+            }
+            const groups = await Enrollment.query()
+              .select("id")
+              .where({ user_id: createdUser.id });
 
             return res.status(200).send({
               response: "User created successfully!",
               newUser: createdUser,
+              groups: groups,
             });
           }
         } catch (error) {
