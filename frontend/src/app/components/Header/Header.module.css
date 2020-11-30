@@ -30,7 +30,8 @@
   text-decoration: none;
 }
 
-.HeaderContainer .NavbarRight .Button,
+.HeaderContainer .NavbarRight .SignupButton,
+.Button,
 .ProfileButton {
   color: var(--grey);
   cursor: pointer;
@@ -56,4 +57,10 @@
 .HeaderContainer .NavbarRight .Button:hover {
   background-color: var(--hover-black);
   color: var(--green-color);
+}
+
+.HeaderContainer .NavbarRight .ProfileButton img {
+  width: 1.5rem;
+  margin-left: 0.3rem;
+  transition: 0.3s;
 }
