@@ -7,6 +7,34 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const { clientEndpoint } = require(__dirname + "/../../config/otherConfigs");
 
+//====================== CHECK IF USER HAS A SESSION ======================
+router.get("/checkauth", isAuthenticated, async (req, res) => {
+  try {
+    // ====================== FIND LOGGED USER ======================
+    const loggedUser = await User.query()
+      .select(
+        "id",
+        "email",
+        "first_name",
+        "last_name",
+        "birthdate",
+        "created_at"
+      )
+      .findById(req.session.user.id);
+    if (!loggedUser)
+      return res.json({ status: 0, msg: "User not authorized!" });
+
+    // ====================== SEND BACK LOGGED USER ======================
+    return res
+      .status(200)
+      .json({ status: 1, msg: "User authorized!", user: loggedUser });
+
+    // ====================== HANDLE ERROR ======================
+  } catch (err) {
+    return res.json({ status: 0, msg: "User not authorized!" });
+  }
+});
+
 router.get("/user/:id", isAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
