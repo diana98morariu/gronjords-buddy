@@ -46,9 +46,9 @@ router.get("/user/:id", isAuthenticated, async (req, res) => {
     if (user.length === 0)
       return res.status(404).send({ response: "User does not exist" });
 
-    return res.status(200).json({
+    return res.status(200).send({
       status: 1,
-      message: "User retrieved successfully",
+      response: "User retrieved successfully",
       data: user,
     });
   } catch (err) {
@@ -85,7 +85,7 @@ router.post("/login", async (req, res) => {
         };
         return res.status(200).json({
           status: 1,
-          message: "User logged in",
+          response: "User logged in",
           user: user,
         });
       }
@@ -98,7 +98,7 @@ router.post("/logout", isAuthenticated, (req, res, next) => {
     if (err)
       return res.json({
         status: 0,
-        message: "Error while trying to logout user!",
+        response: "Error while trying to logout user!",
       });
     res.clearCookie("user_sid");
     res.status(200).json({ status: 1, msg: "User has logged out!" });
@@ -268,6 +268,7 @@ router.post("/register", async (req, res, next) => {
               .where({ user_id: createdUser.id });
 
             return res.status(200).send({
+              status: 1,
               response: "User created successfully!",
               newUser: createdUser,
               groups: groups,

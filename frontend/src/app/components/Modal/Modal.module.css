@@ -18,7 +18,7 @@
 
 .loginForm {
   width: 500px;
-  margin-top: 35px;
+  margin-top: 20px;
 }
 
 .titleContainer {
@@ -37,7 +37,7 @@
 }
 
 .loginTitle {
-  padding: 1.5rem 0px 1.5rem 0px;
+  padding: 0.5em 0 0.5em 0;
   font-size: 18px;
 }
 
@@ -81,4 +81,18 @@
 
 div.Modal_FormContainer__2s9g6 > form > button > span.MuiButton-label {
   color: white !important;
+}
+
+@media (max-width: 414px) {
+  .modalContainer {
+    max-width: 22rem;
+  }
+  .FormContainer {
+    width: 100%;
+    padding: 0 1em;
+  }
+  .loginForm {
+    width: 100%;
+    margin-bottom: 18px;
+  }
 }

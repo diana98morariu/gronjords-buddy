@@ -269,7 +269,7 @@ const AuthModal = (props) => {
           history.push(goTo);
         }
         props.closeModal();
-      } else return toastr.error(res.message);
+      } else return toastr.error(res.response);
     }
 
     // ====================== SIGNUP ======================
@@ -293,11 +293,12 @@ const AuthModal = (props) => {
       if (!isFormValid.formIsValid)
         return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
 
+      const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
       const signUpData = {
-        first_name: user_first_name,
-        last_name: user_last_name,
+        first_name: capitalize(user_first_name),
+        last_name: capitalize(user_last_name),
         birthdate: user_birthdate,
-        room: user_room,
+        room: parseInt(user_room),
         phone_nr: user_phone,
         email: user_email,
         password: user_password,
@@ -310,14 +311,9 @@ const AuthModal = (props) => {
 
       // ====================== RESPONSE ======================
       if (res.status === 1) {
-        toastr.success(
-          "Follow the email instructions to validate your account",
-          "Your account is now created!"
-        );
-
-        setRedirectTo(undefined);
+        toastr.success("Your account is now created!");
         props.closeModal();
-      } else return toastr.error(res.message);
+      } else return toastr.error(res.response);
     }
 
     // ====================== RECOVER PASSWORD ======================
@@ -342,7 +338,7 @@ const AuthModal = (props) => {
 
         setRedirectTo(undefined);
         props.closeModal();
-      } else return toastr.error(res.message);
+      } else return toastr.error(res.response);
     }
 
     // ====================== CHANGE PASSWORD ======================
@@ -381,7 +377,7 @@ const AuthModal = (props) => {
         setRedirectTo(undefined);
         setPassword("");
         setShowPage("Log in");
-      } else return toastr.error(res.message);
+      } else return toastr.error(res.response);
     }
   };
 
