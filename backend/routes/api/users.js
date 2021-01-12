@@ -155,7 +155,7 @@ router.post("/register", async (req, res, next) => {
             strRoom.startsWith("9") ||
             strFloor.startsWith("0") ||
             strFloor.startsWith("9") ||
-            room % 100 > 23
+            room % 100 >= 23
           ) {
             return res.status(404).send({ response: "Room does not exist" });
           }
@@ -181,18 +181,20 @@ router.post("/register", async (req, res, next) => {
             !existingEmail[0] &&
             !existingPhoneNr[0]
           ) {
+            profile_image = "user.png";
             const newUser = {
               first_name,
               last_name,
               phone_nr,
+              image: profile_image,
               room,
               birthdate,
               email,
               password: hashedPassword,
               activate_or_reset_pass_key: uuidv4(),
             };
-            const createdUser = await User.query().insert(newUser);
 
+            const createdUser = await User.query().insert(newUser);
             if (!createdUser)
               return res
                 .status(404)
@@ -290,4 +292,28 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+router.delete("/", isAuthenticated, async (req, res) => {
+  try {
+    const user = await User.query().deleteById(req.session.user.id);
+    if (!user)
+      return res.json({ status: 0, message: "Error deleting the user!" });
+
+    req.session.destroy((err) => {
+      if (err)
+        return res.json({
+          status: 0,
+          message: "Error while trying to logout user!",
+          code: 404,
+        });
+
+      // ====================== CLEAR USER COOKIE ======================
+      res.clearCookie("user_sid");
+
+      // ====================== EVERYTHING OK ======================
+      return res.json({ status: 1, message: "User deleted successfully!" });
+    });
+  } catch (err) {
+    return res.json({ status: 0, message: "Error deleting the user!" });
+  }
+});
 module.exports = router;

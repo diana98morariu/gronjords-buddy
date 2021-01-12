@@ -43,7 +43,7 @@ class User extends Model {
         },
         image: {
           type: "string",
-          minLength: 36,
+          minLength: 5,
           maxLength: 41,
         },
         room: {
