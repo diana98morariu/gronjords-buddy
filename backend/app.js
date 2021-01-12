@@ -1,5 +1,7 @@
 // ====================== IMPORTS ======================
 const express = require("express");
+var bodyParser = require("body-parser");
+
 const app = express();
 const helmet = require("helmet");
 const { Model } = require("objection");
@@ -14,8 +16,8 @@ const routes = require(__dirname + "/routes/routes.js");
 const client = process.env.CLIENT || clientEndpoint;
 
 // ====================== MIDDLEWARE ======================
-app.use(express.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
-app.use(express.json()); // parse application/json
+app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // parse application/json
 
 // ====================== HELMET ======================
 app.use(helmet());

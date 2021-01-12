@@ -9,6 +9,7 @@ exports.seed = (knex) => {
       birthdate: "1997-05-09",
       phone_nr: "45268917",
       room: 4420,
+      image: "user.png",
     },
     {
       first_name: "Andreea",
@@ -19,6 +20,7 @@ exports.seed = (knex) => {
       birthdate: "1995-11-16",
       phone_nr: "45967823",
       room: 3302,
+      image: "user.png",
     },
     {
       first_name: "Diana",
@@ -29,6 +31,7 @@ exports.seed = (knex) => {
       birthdate: "1998-06-03",
       phone_nr: "49276378",
       room: 4420,
+      image: "user.png",
     },
   ];
 
@@ -90,6 +93,14 @@ exports.seed = (knex) => {
     {
       group_name: "Gronjords Main",
       image: "gronjords-main.jpeg",
+    },
+    {
+      group_name: "Market",
+      image: "market.jpeg",
+    },
+    {
+      group_name: "Sublet rooms",
+      image: "sublet-rooms.jpeg",
     },
     ////////////////////////////////////////////////
     {
