@@ -1,0 +1,202 @@
+.ThumbsUp {
+  color: #00e17b;
+}
+
+.PostContainer {
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px 0 #dcdcdc;
+}
+
+.postImgContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.postImg {
+  display: inline-flex;
+  width: calc(50% - 1px);
+  position: relative;
+}
+
+.postImg.unique {
+  display: inline-flex;
+  width: 100%;
+  position: relative;
+}
+
+.postImg:not(.unique):first-of-type {
+  margin-right: 2px;
+}
+
+.postImg img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.postImg .moreImgs {
+  cursor: pointer;
+  user-select: none;
+  color: #fff;
+  font-size: 1.85rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.editPosition {
+  position: absolute;
+  right: 0;
+  top: 1.5rem;
+  z-index: 10;
+}
+
+.topContainer {
+  display: flex;
+  padding: 0.9rem 0.4rem;
+  margin: 0 0.5rem;
+  position: relative;
+}
+
+.nameContainer {
+  margin-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nameContainer .name {
+  color: rgb(5, 5, 5);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  transition: 0.3s;
+}
+
+.nameContainer .name:hover {
+  text-decoration: underline;
+}
+
+.nameContainer .time {
+  color: rgb(101, 103, 107);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.textContainer {
+  padding: 0.5rem 0.4rem;
+  margin: 0 0.5rem;
+  color: rgb(5, 5, 5);
+  font-size: 15px;
+}
+
+.editDelete {
+  cursor: pointer;
+  position: absolute;
+  right: 0.25rem;
+  filter: invert(40%) sepia(44%) saturate(65%) hue-rotate(182deg)
+    brightness(89%) contrast(87%);
+}
+
+.likes {
+  padding: 0.5rem 0;
+  margin: 0 0.9rem;
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.likesNumber {
+  color: rgb(101, 103, 107);
+  font-size: 15px;
+  cursor: pointer;
+  margin-left: 0.2rem;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  margin: 0 0.9rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  border-radius: 4px;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 2rem;
+  color: rgb(101, 103, 107);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.button.liked img {
+  filter: invert(38%) sepia(39%) saturate(6421%) hue-rotate(205deg)
+    brightness(100%) contrast(92%);
+}
+
+.button:hover {
+  background-color: rgb(240, 242, 245);
+}
+
+.button img {
+  margin-right: 6px;
+}
+
+.button.comm::before {
+  content: "";
+  display: inline-block;
+  height: 18px;
+  margin: 0 6px -3px 0;
+  min-width: 18px;
+  position: relative;
+  top: -2px;
+  width: 18px;
+  background-image: url("https://static.xx.fbcdn.net/rsrc.php/v3/yx/r/cOvW0EWujLu.png");
+  background-repeat: no-repeat;
+  background-size: 708px 1818px;
+  background-position: -323px -1369px;
+}
+
+.viewComments {
+  color: rgb(101, 103, 107);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0.66rem 0.9rem;
+}
+
+.bottomContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+  padding-bottom: 0.65rem;
+  margin: 0 0.9rem;
+  margin-bottom: 0;
+  margin-top: 0.4rem;
+}
+
+.inputAddComment {
+  background-color: rgb(240, 242, 245);
+  color: rgb(28, 30, 33);
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  border: none;
+  font-size: 0.925rem;
+  margin-left: 0.5rem;
+}

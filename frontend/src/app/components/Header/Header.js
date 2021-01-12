@@ -1,45 +1,41 @@
 import React from "react";
 import classes from "./Header.module.css";
 import LogoGrojords from "../../assets/images/logo.svg";
-import {
-  faHome,
-  faUsers,
-  faShoppingCart,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHome, faUsers, faStore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserIcon from "../../assets/images/user_icon.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import {
   useStore,
-  useSetStoreValue,
+  // useSetStoreValue,
   useSetAndDelete,
-  useStoreValue,
+  // useStoreValue,
 } from "react-context-hook";
-import { logout } from "../../helpers/auth";
+// import { logout } from "../../helpers/auth";
 
 const Header = (props) => {
-  const history = useHistory();
+  // const history = useHistory();
 
   const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
   const [showModal, setShowModal] = useStore("showModal");
   const [setRedirectTo] = useSetAndDelete("redirectTo");
-  const setUser = useSetStoreValue("user");
-  const user_data = useStoreValue("user");
+  // const setUser = useSetStoreValue("user");
+  // const user_data = useStoreValue("user");
   const setModal = (modalName) => setShowModal(modalName);
   const closeModal = () => {
     setRedirectTo(undefined);
     setShowModal(undefined);
   };
 
-  const handleLogout = async () => {
-    const res = await logout();
-    if (res.status === 1) {
-      history.push("/");
-      setIsAuthenticated(false);
-      setUser(undefined);
-    }
-  };
+  // const handleLogout = async () => {
+  //   const res = await logout();
+  //   if (res.status === 1) {
+  //     history.push("/");
+  //     setIsAuthenticated(false);
+  //     setUser(undefined);
+  //   }
+  // };
 
   let modalToShow;
 
@@ -73,7 +69,7 @@ const Header = (props) => {
               <NavLink exact to="/market" activeClassName={classes.active}>
                 <span className={classes.Button}>
                   <FontAwesomeIcon
-                    icon={faShoppingCart}
+                    icon={faStore}
                     className={classes.NavIcons}
                   />
                 </span>
