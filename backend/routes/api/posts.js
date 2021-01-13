@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const Post = require(__dirname + "/../../models/Post");
+const Like = require(__dirname + "/../../models/Like");
+const Comment = require(__dirname + "/../../models/Comment");
 const { isAuthenticated } = require(__dirname + "/../../helpers/auth");
 const { uploadFile, removeImages } = require(__dirname +
   "/../../helpers/handleImages.js");
@@ -157,5 +159,160 @@ router.delete("/:id", isAuthenticated, async (req, res, next) => {
     return res.json({ status: 0, message: "Error deleting post!" });
   }
 });
+
+//like a post
+router.post("/:postId/like", isAuthenticated, async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const user_id = req.session.user.id;
+    if (!postId || !user_id)
+      return res.json({ status: 0, message: "Missing ids!", code: 404 });
+
+    const newPost = await Post.query().findById(postId);
+    if (!newPost) {
+      return res.json({ status: 0, message: "Post does not exist!" });
+    }
+    const oldLike = await Like.query()
+      .select("*")
+      .where({ post_id: JSON.parse(postId), user_id });
+    if (oldLike) {
+      return res.json({ status: 0, message: "Like already exists!" });
+    }
+    const addedLike = {
+      post_id: JSON.parse(postId),
+      user_id,
+    };
+
+    const newLike = await Like.query().insertGraph(addedLike);
+    if (!newLike) {
+      return res.json({ status: 0, message: "Could not like post!" });
+    }
+    return res.json({
+      status: 1,
+      message: "Like added successfully!",
+      data: newLike,
+    });
+  } catch (err) {
+    return res.json({ status: 0, message: "Error liking post!" });
+  }
+});
+
+//dislike a post
+router.delete("/:postId/dislike", isAuthenticated, async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const user_id = req.session.user.id;
+    if (!postId || !user_id)
+      return res.json({ status: 0, message: "Missing ids!", code: 404 });
+
+    const newPost = await Post.query().findById(postId);
+    if (!newPost) {
+      return res.json({ status: 0, message: "Post does not exist!" });
+    }
+
+    const oldLike = await Like.query()
+      .select("*")
+      .where({ post_id: JSON.parse(postId), user_id });
+    if (!oldLike) {
+      return res.json({ status: 0, message: "Like does not exist!" });
+    }
+
+    const noLike = await Like.query().deleteById(oldLike[0].id);
+    if (!noLike) {
+      return res.json({ status: 0, message: "Could not like post!" });
+    }
+    return res.json({
+      status: 1,
+      message: "Like deleted successfully!",
+    });
+  } catch (err) {
+    return res.json({ status: 0, message: "Error disliking post!" });
+  }
+});
+
+//comment post
+router.post("/:postId/comment", isAuthenticated, async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const user_id = req.session.user.id;
+    const commentContent = req.body.content;
+
+    if (!postId || !user_id)
+      return res.json({ status: 0, message: "Missing ids!", code: 404 });
+
+    if (!commentContent)
+      return res.json({
+        status: 0,
+        message: "Missing content of the comment!",
+        code: 404,
+      });
+
+    const newPost = await Post.query().findById(postId);
+    if (!newPost) {
+      return res.json({ status: 0, message: "Post does not exist!" });
+    }
+
+    const oldComment = await Comment.query()
+      .select()
+      .where({
+        post_id: JSON.parse(postId),
+        user_id: user_id,
+        content: commentContent,
+      })
+      .limit(1);
+
+    if (oldComment[0]) {
+      return res.json({ status: 0, message: "Comment already exists!" });
+    }
+
+    const addedComment = {
+      post_id: JSON.parse(postId),
+      user_id,
+      content: commentContent,
+    };
+
+    const newComment = await Comment.query().insertGraph(addedComment);
+    if (!newComment) {
+      return res.json({ status: 0, message: "Could not comment on post!" });
+    }
+    return res.json({
+      status: 1,
+      message: "Comment added successfully!",
+      data: newComment,
+    });
+  } catch (err) {
+    return res.json({ status: 0, message: "Error commenting on post!" });
+  }
+});
+
+//delete comment
+router.delete(
+  "/:commentId/deletecomment",
+  isAuthenticated,
+  async (req, res) => {
+    try {
+      const commentId = req.params.commentId;
+      const user_id = req.session.user.id;
+      if (!commentId || !user_id)
+        return res.json({ status: 0, message: "Missing ids!", code: 404 });
+
+      const oldComment = await Comment.query().findById(commentId);
+      if (!oldComment) {
+        return res.json({ status: 0, message: "Comment does not exist!" });
+      }
+
+      const noComment = await Comment.query().deleteById(commentId);
+      if (!noComment) {
+        return res.json({ status: 0, message: "Could not delete comment!" });
+      }
+      return res.json({
+        status: 1,
+        message: "Comment deleted successfully!",
+      });
+    } catch (err) {
+      return res.json({ status: 0, message: "Error deleting comment!" });
+    }
+  }
+);
 
 module.exports = router;

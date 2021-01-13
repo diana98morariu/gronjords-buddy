@@ -238,7 +238,6 @@ router.post("/register", async (req, res, next) => {
               const kitchenGroupB = await Group.query()
                 .select("id")
                 .where({ group_name: "Kitchen " + blockFloor + "B" });
-              console.log(kitchenGroupB[0].id);
 
               if (!kitchenGroupB)
                 return res.status(404).send({
