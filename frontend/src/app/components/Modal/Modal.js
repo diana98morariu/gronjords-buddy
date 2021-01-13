@@ -391,9 +391,9 @@ const AuthModal = (props) => {
       >
         <div className={classes.modalContainer}>
           <div className={classes.titleContainer}>
-            <div onClick={handleClose} className={classes.closeButton}>
+            {/* <div onClick={handleClose} className={classes.closeButton}>
               <FontAwesomeIcon icon={faTimes} />
-            </div>
+            </div> */}
             <div className={classes.loginTitle}>
               <p>
                 <img src={LogoGrojords} alt="Login" style={{ width: "15em" }} />
