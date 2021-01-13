@@ -3,7 +3,7 @@ import classes from "./ProfileImg.module.css";
 export let size;
 
 const ProfileImg = () => {
-  return <div class={classes.ProfileImg} />;
+  return <div className={classes.ProfileImg} />;
 };
 
 export default ProfileImg;

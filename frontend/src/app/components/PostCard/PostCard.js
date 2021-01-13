@@ -9,10 +9,8 @@ const PostCard = (props) => {
     <div className={classes.PostContainer}>
       <div className={classes.topContainer}>
         <ProfileImg />
-        <div class="nameContainer">
-          <div class="name" onclick={() => {}}>
-            Andreea Steriu
-          </div>
+        <div className="nameContainer">
+          <div className="name">Andreea Steriu</div>
           <div className={classes.time}>{moment().format("HH:mm A")}</div>
         </div>
 
@@ -26,7 +24,7 @@ const PostCard = (props) => {
           />
         </div>
 
-        {/* <div class="editPosition">
+        {/* <div className="editPosition">
           <EditDelete showDialog={showDialog} />
         </div> */}
       </div>
