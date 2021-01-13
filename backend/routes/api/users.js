@@ -19,6 +19,7 @@ router.get("/checkauth", isAuthenticated, async (req, res) => {
         "email",
         "first_name",
         "last_name",
+        "room",
         "birthdate",
         "created_at"
       )
