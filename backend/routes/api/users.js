@@ -3,10 +3,10 @@ const User = require(__dirname + "/../../models/User");
 const Group = require(__dirname + "/../../models/Group");
 const Enrollment = require(__dirname + "/../../models/Enrollment");
 const { isAuthenticated } = require(__dirname + "/../../helpers/auth");
-// const { v4: uuid, isUuid } = require("uuidv4");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const nodemailer = require("nodemailer");
 const { clientEndpoint } = require(__dirname + "/../../config/otherConfigs");
 
 //====================== CHECK IF USER HAS A SESSION ======================
@@ -21,6 +21,7 @@ router.get("/checkauth", isAuthenticated, async (req, res) => {
         "last_name",
         "room",
         "birthdate",
+        "image",
         "created_at"
       )
       .findById(req.session.user.id);
@@ -316,4 +317,5 @@ router.delete("/", isAuthenticated, async (req, res) => {
     return res.json({ status: 0, message: "Error deleting the user!" });
   }
 });
+
 module.exports = router;
