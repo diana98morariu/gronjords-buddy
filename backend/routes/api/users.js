@@ -9,10 +9,8 @@ const saltRounds = 10;
 const nodemailer = require("nodemailer");
 const { clientEndpoint } = require(__dirname + "/../../config/otherConfigs");
 
-//====================== CHECK IF USER HAS A SESSION ======================
 router.get("/checkauth", isAuthenticated, async (req, res) => {
   try {
-    // ====================== FIND LOGGED USER ======================
     const loggedUser = await User.query()
       .select(
         "id",
@@ -28,17 +26,15 @@ router.get("/checkauth", isAuthenticated, async (req, res) => {
     if (!loggedUser)
       return res.json({ status: 0, msg: "User not authorized!" });
 
-    // ====================== SEND BACK LOGGED USER ======================
     return res
       .status(200)
       .json({ status: 1, msg: "User authorized!", user: loggedUser });
-
-    // ====================== HANDLE ERROR ======================
   } catch (err) {
     return res.json({ status: 0, msg: "User not authorized!" });
   }
 });
 
+//get specific user
 router.get("/user/:id", isAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
@@ -55,6 +51,60 @@ router.get("/user/:id", isAuthenticated, async (req, res) => {
     });
   } catch (err) {
     return res.status(404).send({ response: "Error getting user!" });
+  }
+});
+
+//get all users
+router.get("/", isAuthenticated, async (req, res) => {
+  try {
+    const users = await User.query().select("*");
+    if (users.length === 0)
+      return res.status(404).send({ response: "Users do not exist" });
+
+    return res.status(200).send({
+      status: 1,
+      response: "Users retrieved successfully",
+      data: users,
+    });
+  } catch (err) {
+    return res.status(404).send({ response: "Error getting users!" });
+  }
+});
+
+//get all users from a specific group
+router.get("/:groupId", isAuthenticated, async (req, res) => {
+  try {
+    const groupId = req.params.groupId;
+    if (!groupId)
+      return res.status(404).send({ response: "Missing group id!" });
+
+    const groups = await Group.query().select("*").where({ id: groupId });
+    if (!groups)
+      return res.status(404).send({ response: "Group does not exist!" });
+
+    const users = await User.query()
+      .select(
+        "users.id",
+        "users.first_name",
+        "users.last_name",
+        "users.room",
+        "users.image"
+      )
+      .join("enrollments", "users.id", "enrollments.user_id")
+      .where("enrollments.group_id", groupId);
+    if (!users) {
+      res.json({
+        status: 0,
+        message: "Error getting the users from the db",
+      });
+    }
+    return res.status(200).send({
+      status: 1,
+      response: "Users retrieved successfully",
+      data: users,
+    });
+  } catch (err) {
+    return res.status(404).send({ response: "Error getting users!" });
   }
 });
 
@@ -293,6 +343,7 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+//delete profile
 router.delete("/", isAuthenticated, async (req, res) => {
   try {
     const user = await User.query().deleteById(req.session.user.id);
