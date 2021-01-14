@@ -1,17 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./PostCard.module.css";
 import ProfileImg from "../MiniComponents/ProfileImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { getSpecificUser } from "../../helpers/auth";
+import ClipLoader from "react-spinners/ClipLoader";
+import toastr from "toastr";
 import moment from "moment";
 const PostCard = (props) => {
+  const [users, setUsers] = useState(undefined);
+  const { title, content, created_at, user_id } = props.post;
+  setInterval(() => {}, 1000);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      if (props.post) {
+        const res = await getSpecificUser(user_id);
+        const resarray = [res.data[0]];
+        console.log(resarray);
+        if (res) {
+          setUsers(resarray);
+        } else toastr.error("Something went wrong!");
+      }
+    };
+
+    if (props.post) fetchUsers();
+  });
+
+  if (users === undefined)
+    return (
+      <div className="loading">
+        <ClipLoader size={50} color={"#e83251"} />
+      </div>
+    );
+
   return (
     <div className={classes.PostContainer}>
       <div className={classes.topContainer}>
         <ProfileImg />
         <div className="nameContainer">
-          <div className="name">Andreea Steriu</div>
-          <div className={classes.time}>{moment().format("HH:mm A")}</div>
+          {/* {users.map((user) => {
+            return (
+              <div className={classes.name} key={user.id}>
+                {user.firt_name + " " + user.last_name}
+              </div>
+            );
+          })} */}
+          <div className={classes.time}>
+            {moment(created_at).format("HH:mm A")}
+          </div>
         </div>
 
         <div>
@@ -30,8 +66,8 @@ const PostCard = (props) => {
       </div>
 
       <div className={classes.textContainer}>
-        <div className={classes.title}>Title</div>
-        content
+        <div className={classes.title}>{title}</div>
+        {content}
       </div>
       <div className={classes.likes}>
         <FontAwesomeIcon icon={faThumbsUp} className={classes.ThumbsUp} />
