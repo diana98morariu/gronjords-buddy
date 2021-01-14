@@ -1,22 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Home.module.css";
 import GroupsCard from "../../components/GroupCard/GroupsCard";
 import SmallProfile from "../../components/SmallProfile/SmallProfile";
 import AdministrationIcon from "../../assets/images/administration.svg";
 import TechnicianIcon from "../../assets/images/technician.svg";
 import { useStore, useStoreValue } from "react-context-hook";
+import ClipLoader from "react-spinners/ClipLoader";
+import { getFeedPosts } from "../../helpers/posts";
+import toastr from "toastr";
+import { removePost } from "../../helpers/posts";
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
+  const [posts, setPosts] = useState(undefined);
+  const [showPage, setShowPage] = useState("0");
+  const user_data = useStoreValue("user");
+
+  const handleDeletePost = async (id) => {
+    const result = await removePost(id);
+    if (result.status === 1) {
+      const newPosts = [...posts];
+      const indexDeleted = newPosts.findIndex((post) => post.id === id);
+      newPosts.splice(indexDeleted, 1);
+      setPosts(newPosts);
+      toastr.success("Property deleted successfully!");
+    }
+  };
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      if (posts === undefined) {
+        const posts = await getFeedPosts();
+        if (posts) setPosts(posts);
+        else toastr.error("Something went wrong!");
+      }
+    };
+
+    if (posts === undefined) fetchPosts();
+  });
+
+  if (posts === undefined)
+    return (
+      <div className="loading">
+        <ClipLoader size={50} color={"#e83251"} />
+      </div>
+    );
+
+  if (showPage !== "1" && posts) {
+    setShowPage("1");
+  }
 
   return (
     <React.Fragment>
+      <div className="loading">
+        <ClipLoader
+          size={50}
+          color={"#E4215B"}
+          loading={showPage === "1" ? false : true}
+        />
+      </div>
       {!isAuthenticated ? (
         ""
       ) : (
-        <div className={classes.HomeContainer}>
+        <div className={classes.HomeContainer} style={{ opacity: showPage }}>
           <div className={classes.LeftContainers}>
-            <GroupsCard />
+            <GroupsCard posts={posts} handleDeletePost={handleDeletePost} />
           </div>
           <div className={classes.RightContainers}>
             {" "}

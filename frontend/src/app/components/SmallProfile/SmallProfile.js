@@ -10,9 +10,13 @@ const SmallProfile = () => {
         <div className={classes.Icon} />
         <div className={classes.infoContainer}>
           <div className={classes.Name}>
-            {/* {user_data.first_name + " " + user_data.last_name}{" "} */}
+            {user_data
+              ? user_data.first_name + " " + user_data.last_name
+              : "Unknown name"}{" "}
           </div>
-          <div className={classes.Room}>Room 3302</div>
+          <div className={classes.Room}>
+            Room {user_data ? user_data.room : "unknown"}{" "}
+          </div>
         </div>
       </div>
       <div className={classes.Button}>View my posts</div>

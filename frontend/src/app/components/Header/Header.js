@@ -1,7 +1,12 @@
 import React from "react";
 import classes from "./Header.module.css";
 import LogoGrojords from "../../assets/images/logo.svg";
-import { faHome, faUsers, faStore } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faUsers,
+  faStore,
+  faPowerOff,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   useStore,
@@ -25,20 +30,20 @@ const Header = (props) => {
     setRedirectTo(undefined);
     setShowModal(undefined);
   };
-
-  const handleLogout = async () => {
-    const res = await logout();
-    if (res.status === 1) {
-      history.push("/");
-      setIsAuthenticated(false);
-      setUser(undefined);
-    }
-  };
-
   let modalToShow;
 
   if (showModal)
     modalToShow = <Modal page={showModal} closeModal={closeModal} />;
+
+  const handleLogout = async () => {
+    const res = await logout();
+    if (res.status === 1) {
+      setIsAuthenticated(false);
+      setUser(undefined);
+      history.push("/");
+      window.location.reload();
+    }
+  };
 
   return (
     <React.Fragment>
@@ -75,6 +80,14 @@ const Header = (props) => {
               <NavLink exact to="/profile" activeClassName={classes.active}>
                 <span className={classes.ProfileButton}>
                   <img src={UserIcon} alt="user-icon" />
+                </span>
+              </NavLink>
+              <NavLink exact to="/profile" activeClassName={classes.active}>
+                <span className={classes.Button} onClick={handleLogout}>
+                  <FontAwesomeIcon
+                    icon={faPowerOff}
+                    className={classes.NavIcons}
+                  />
                 </span>
               </NavLink>
             </div>
