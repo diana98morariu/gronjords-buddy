@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 // import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Home from "./pages/Home/Home";
-// import Profile from "./pages/Profile/Profile";
+import Profile from "./pages/Profile/Profile";
 import toastr from "toastr";
 import toastrSetup from "./helpers/toastrSettings";
 import auth, { checkAuth } from "./helpers/auth";
@@ -63,10 +63,10 @@ const App = () => {
                 path="/"
                 component={(props) => <Home {...props} />}
               />
-              {/* <PrivateRoute
+              <Route
                 path="/profile"
                 component={(props) => <Profile {...props} />}
-              /> */}
+              />
             </Switch>
           </div>
         </Router>
