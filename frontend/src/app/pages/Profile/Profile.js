@@ -19,7 +19,6 @@ const Profile = () => {
       if (user_data) {
         const posts = await getUserPosts(user_data.id);
         const user = await getSpecificUser(user_data.id);
-
         setPosts(posts);
         setUser(user.data[0]);
       }
@@ -41,7 +40,6 @@ const Profile = () => {
 
   const handleDeletePost = async (id) => {
     // const result = await removePost(id);
-    // console.log(result);
     // if (result.status === 1) {
     //   const newPosts = [...posts];
     //   const indexDeleted = newPosts.findIndex((post) => post.id === id);
