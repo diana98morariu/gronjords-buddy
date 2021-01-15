@@ -82,7 +82,7 @@ const Header = (props) => {
                   <img src={UserIcon} alt="user-icon" />
                 </span>
               </NavLink>
-              <NavLink exact to="/profile" activeClassName={classes.active}>
+              <NavLink exact to="/" activeClassName={classes.active}>
                 <span className={classes.Button} onClick={handleLogout}>
                   <FontAwesomeIcon
                     icon={faPowerOff}

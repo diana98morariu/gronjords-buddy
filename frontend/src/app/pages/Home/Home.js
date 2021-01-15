@@ -4,7 +4,7 @@ import GroupsCard from "../../components/GroupCard/GroupsCard";
 import SmallProfile from "../../components/SmallProfile/SmallProfile";
 import AdministrationIcon from "../../assets/images/administration.svg";
 import TechnicianIcon from "../../assets/images/technician.svg";
-import { useStore, useStoreValue } from "react-context-hook";
+import { useStore } from "react-context-hook";
 import ClipLoader from "react-spinners/ClipLoader";
 import { getFeedPosts } from "../../helpers/posts";
 import toastr from "toastr";
@@ -14,7 +14,6 @@ const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
   const [posts, setPosts] = useState(undefined);
   const [showPage, setShowPage] = useState("0");
-  const user_data = useStoreValue("user");
 
   useEffect(() => {
     const fetchPosts = async () => {
