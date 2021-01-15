@@ -16,17 +16,6 @@ const Home = () => {
   const [showPage, setShowPage] = useState("0");
   const user_data = useStoreValue("user");
 
-  const handleDeletePost = async (id) => {
-    const result = await removePost(id);
-    if (result.status === 1) {
-      const newPosts = [...posts];
-      const indexDeleted = newPosts.findIndex((post) => post.id === id);
-      newPosts.splice(indexDeleted, 1);
-      setPosts(newPosts);
-      toastr.success("Property deleted successfully!");
-    }
-  };
-
   useEffect(() => {
     const fetchPosts = async () => {
       if (posts === undefined) {
@@ -49,6 +38,17 @@ const Home = () => {
   if (showPage !== "1" && posts) {
     setShowPage("1");
   }
+  const handleDeletePost = async (id) => {
+    const result = await removePost(id);
+    console.log(result);
+    if (result.status === 1) {
+      const newPosts = [...posts];
+      const indexDeleted = newPosts.findIndex((post) => post.id === id);
+      newPosts.splice(indexDeleted, 1);
+      setPosts(newPosts);
+      toastr.success("Property deleted successfully!");
+    }
+  };
 
   return (
     <React.Fragment>
@@ -64,7 +64,7 @@ const Home = () => {
       ) : (
         <div className={classes.HomeContainer} style={{ opacity: showPage }}>
           <div className={classes.LeftContainers}>
-            <GroupsCard posts={posts} handleDeletePost={handleDeletePost} />
+            <GroupsCard posts={posts} delete={handleDeletePost} />
           </div>
           <div className={classes.RightContainers}>
             {" "}

@@ -7,18 +7,31 @@ import { getSpecificUser } from "../../helpers/auth";
 import ClipLoader from "react-spinners/ClipLoader";
 import toastr from "toastr";
 import moment from "moment";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+
 const PostCard = (props) => {
   const [users, setUsers] = useState(undefined);
-  const { title, content, created_at, user_id } = props.post;
+  const { id, title, content, created_at, user_id } = props.post;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   setInterval(() => {}, 1000);
   useEffect(() => {
     const fetchUsers = async () => {
       if (props.post) {
         const res = await getSpecificUser(user_id);
-        const resarray = [res.data[0]];
-        console.log(resarray);
+
         if (res) {
-          setUsers(resarray);
+          setUsers(res);
         } else toastr.error("Something went wrong!");
       }
     };
@@ -49,20 +62,37 @@ const PostCard = (props) => {
             {moment(created_at).format("HH:mm A")}
           </div>
         </div>
-
-        <div>
-          <img
-            className={classes.editDelete}
-            src="https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/oVV-iPd4q_P.png"
-            alt=""
-            height="16"
-            width="16"
-          />
+        <div className={classes.editDelete}>
+          <Button
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <img
+              className={classes.editDelete}
+              src="https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/oVV-iPd4q_P.png"
+              alt=""
+              height="16"
+              width="16"
+            />{" "}
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Edit</MenuItem>
+            <MenuItem
+              onClick={(e) => {
+                props.delete(id);
+              }}
+            >
+              Delete
+            </MenuItem>
+          </Menu>
         </div>
-
-        {/* <div className="editPosition">
-          <EditDelete showDialog={showDialog} />
-        </div> */}
       </div>
 
       <div className={classes.textContainer}>
