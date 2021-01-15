@@ -1,0 +1,10 @@
+.ProfileContainer {
+  display: flex;
+}
+
+.LeftContainer {
+  flex: 60%;
+}
+.RightContainer {
+  flex: 40%;
+}
