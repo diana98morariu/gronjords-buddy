@@ -88,16 +88,32 @@ router.get("/group/:groupId", isAuthenticated, async (req, res, next) => {
 router.get("/:userId", isAuthenticated, async (req, res, next) => {
   try {
     if (req.params.userId == req.session.user.id) {
-      const posts = await Post.query()
-        .select("*")
-        .where({ user_id: req.params.userId });
+      const posts = await User.query()
+        .select(
+          "users.id",
+          "users.first_name",
+          "users.last_name",
+          "users.room",
+          "users.image",
+          "posts.id",
+          "posts.title",
+          "posts.content",
+          "posts.images",
+          "posts.group_id",
+          "posts.from_date",
+          "posts.to_date",
+          "posts.price",
+          "posts.created_at"
+        )
+        .join("posts", "users.id", "posts.user_id")
+        .where("posts.user_id", req.params.userId);
       if (!posts) {
         res.json({
           status: 0,
           message: "Error getting the posts from the db",
         });
       }
-      return res.send(JSON.stringify(posts));
+      return res.send(posts);
     }
     return res.send({
       status: 0,
