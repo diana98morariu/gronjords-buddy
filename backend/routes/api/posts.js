@@ -1,5 +1,7 @@
 const router = require("express").Router();
+const User = require(__dirname + "/../../models/User");
 const Post = require(__dirname + "/../../models/Post");
+const Enrollment = require(__dirname + "/../../models/Enrollment");
 const Like = require(__dirname + "/../../models/Like");
 const Comment = require(__dirname + "/../../models/Comment");
 const { isAuthenticated } = require(__dirname + "/../../helpers/auth");
@@ -11,15 +13,72 @@ const multipleUpload = uploadFile.array("images", 1);
 //get all posts
 router.get("/", isAuthenticated, async (req, res, next) => {
   try {
-    const posts = await Post.query().select("*");
-    // .where({ userId: req.session.user.id });
+    const posts = await User.query()
+      .select(
+        "users.id",
+        "users.first_name",
+        "users.last_name",
+        "users.room",
+        "users.image",
+        "posts.id",
+        "posts.title",
+        "posts.content",
+        "posts.images",
+        "posts.group_id",
+        "posts.from_date",
+        "posts.to_date",
+        "posts.price",
+        "posts.created_at"
+      )
+      .join("posts", "users.id", "posts.user_id");
     if (!posts) {
       res.json({
         status: 0,
         message: "Error getting the posts from the db",
       });
     }
-    return res.send(JSON.stringify(posts));
+    return res.send(posts);
+  } catch (error) {
+    return res.json({ status: 0, message: "Error returning the posts" });
+  }
+});
+
+//get all posts from a specific group
+router.get("/group/:groupId", isAuthenticated, async (req, res, next) => {
+  try {
+    const groupId = req.params.groupId;
+    if (!groupId)
+      return res.json({
+        status: 0,
+        message: "Missing group id",
+      });
+
+    const posts = await User.query()
+      .select(
+        "users.id",
+        "users.first_name",
+        "users.last_name",
+        "users.room",
+        "users.image",
+        "posts.id",
+        "posts.title",
+        "posts.content",
+        "posts.images",
+        "posts.group_id",
+        "posts.from_date",
+        "posts.to_date",
+        "posts.price",
+        "posts.created_at"
+      )
+      .join("posts", "users.id", "posts.user_id")
+      .where("posts.group_id", groupId);
+    if (!posts) {
+      res.json({
+        status: 0,
+        message: "Error getting the posts from the db",
+      });
+    }
+    return res.send(posts);
   } catch (error) {
     return res.json({ status: 0, message: "Error returning the posts" });
   }
@@ -94,6 +153,17 @@ router.post("/:groupId", isAuthenticated, async (req, res, next) => {
         req.files.map((img) => photos.push(img.location.slice(-41)));
         newPost.images = JSON.stringify(photos[0]);
       }
+
+      const enrollments = await Enrollment.query()
+        .select("*")
+        .where({ user_id: userId, group_id: groupId })
+        .limit(1);
+
+      if (enrollments.length < 1)
+        return res.json({
+          status: 0,
+          message: "User does not belong to the group",
+        });
 
       newPost.title = data.title;
       newPost.content = data.content;
