@@ -7,11 +7,7 @@ const GroupCard = (props) => {
       {props.posts.map((post) => {
         return (
           <div className={classes.PostCard} key={post.id}>
-            <PostCard
-              post={post}
-              from={"Profile"}
-              delete={props.handleDeletePost}
-            />
+            <PostCard post={post} from={"Profile"} delete={props.delete} />
           </div>
         );
       })}
