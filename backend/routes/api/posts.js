@@ -89,13 +89,11 @@ router.post("/:groupId", isAuthenticated, async (req, res, next) => {
       const data = req.body;
       const groupId = req.params.groupId;
 
-      if (req.files.length < 1)
-        return res
-          .status(400)
-          .json({ status: 0, message: "Missing images!", code: 404 });
-      const photos = [];
-      req.files.map((img) => photos.push(img.location.slice(-41)));
-      newPost.images = JSON.stringify(photos[0]);
+      if (req.files.length > 0) {
+        const photos = [];
+        req.files.map((img) => photos.push(img.location.slice(-41)));
+        newPost.images = JSON.stringify(photos[0]);
+      }
 
       newPost.title = data.title;
       newPost.content = data.content;
@@ -145,13 +143,14 @@ router.delete("/:id", isAuthenticated, async (req, res, next) => {
     if (post.user_id !== req.session.user.id)
       return res.json({ status: 0, message: "Unauthorized!", code: 404 });
 
-    const photo = [];
-    photo.push(post.images);
-    const awsRes = await removeImages(photo);
+    if (post.images) {
+      const photo = [];
+      photo.push(post.images);
+      const awsRes = await removeImages(photo);
 
-    if (awsRes.status === 0)
-      return res.json({ status: 0, message: "problem with aws", code: 404 });
-
+      if (awsRes.status === 0)
+        return res.json({ status: 0, message: "Problem with aws", code: 404 });
+    }
     const dbRes = await Post.query().deleteById(id);
     if (!dbRes) return res.json({ status: 0, message: "Post does not exist!" });
     return res.json({ status: 1, message: "Post deleted successfully!" });

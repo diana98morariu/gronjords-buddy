@@ -6,8 +6,6 @@ const { isAuthenticated } = require(__dirname + "/../../helpers/auth");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const nodemailer = require("nodemailer");
-const { clientEndpoint } = require(__dirname + "/../../config/otherConfigs");
 
 router.get("/checkauth", isAuthenticated, async (req, res) => {
   try {
