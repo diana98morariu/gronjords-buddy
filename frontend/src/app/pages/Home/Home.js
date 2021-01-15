@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./Home.module.css";
-import GroupsCard from "../../components/GroupCard/GroupsCard";
+import PostCard from "../../components/PostCard/PostCard";
 import SmallProfile from "../../components/SmallProfile/SmallProfile";
 import AdministrationIcon from "../../assets/images/administration.svg";
 import TechnicianIcon from "../../assets/images/technician.svg";
@@ -63,7 +63,19 @@ const Home = () => {
       ) : (
         <div className={classes.HomeContainer} style={{ opacity: showPage }}>
           <div className={classes.LeftContainers}>
-            <GroupsCard posts={posts} delete={handleDeletePost} />
+            <div className={classes.GroupsPostsContainer}>
+              {posts.map((post) => {
+                return (
+                  <div className={classes.PostCard} key={post.id}>
+                    <PostCard
+                      post={post}
+                      from={"Home"}
+                      delete={handleDeletePost}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className={classes.RightContainers}>
             {" "}
