@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GroupCard from "../../components/GroupCard/GroupsCard";
+import GroupCard from "../../components/GroupsCard/GroupsCard";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import classes from "./Profile.module.css";
 import ClipLoader from "react-spinners/ClipLoader";
