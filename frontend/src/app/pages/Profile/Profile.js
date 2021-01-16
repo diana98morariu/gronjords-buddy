@@ -30,7 +30,7 @@ const Profile = () => {
   if (posts === undefined || user === undefined)
     return (
       <div className="loading">
-        <ClipLoader size={50} color={"#e83251"} />
+        <ClipLoader size={50} color={"#00e17b"} />
       </div>
     );
 
@@ -60,7 +60,7 @@ const Profile = () => {
       {!isAuthenticated ? (
         ""
       ) : (
-        <div className={classes.ProfileContainer}>
+        <div className={classes.ProfileContainer} style={{ opacity: showPage }}>
           <div className={classes.LeftContainer}>
             <div className={classes.GroupsPostsContainer}>
               {posts.map((post) => {

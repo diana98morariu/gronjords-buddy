@@ -40,7 +40,7 @@ const Home = () => {
   if (posts === undefined)
     return (
       <div className="loading">
-        <ClipLoader size={50} color={"#e83251"} />
+        <ClipLoader size={50} color={"#00e17b"} />
       </div>
     );
 
@@ -59,7 +59,7 @@ const Home = () => {
     }
   };
 
-  const openPropertyPage = (id) => {
+  const openProfilePage = (id) => {
     history.push(`/profile`);
   };
 
@@ -97,7 +97,7 @@ const Home = () => {
           </div>
           <div className={classes.RightContainers}>
             {" "}
-            <SmallProfile click={openPropertyPage} />
+            <SmallProfile click={openProfilePage} />
             <div className={classes.AdministrationContainer}>
               <div className={classes.ProfileLink}>
                 <img src={TechnicianIcon} alt="Technician" />
