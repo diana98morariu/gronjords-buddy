@@ -3,7 +3,7 @@ import classes from "./Modal.module.css";
 import TextField from "@material-ui/core/TextField";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import LogoGrojords from "../../assets/images/logo.svg";
+import LogoGrojords from "../../assets/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { withStyles } from "@material-ui/core/styles";
