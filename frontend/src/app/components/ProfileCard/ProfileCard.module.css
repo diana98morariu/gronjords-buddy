@@ -1,5 +1,6 @@
 .ProfileCardContainer {
   display: block;
+  position: relative;
   background: #fff;
   padding: 1em;
   margin: 0 1em;
@@ -8,12 +9,51 @@
   margin-bottom: 1rem;
   box-shadow: 0 0 10px 0 #dcdcdc;
 }
-
 .MiddleContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 0.5em 0;
-  margin: 0.5em 0;
+  row-gap: 1em;
+  padding: 1em 0;
+  margin: 1em 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.BottomContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1em;
+}
+.ProfileInfoContainer {
+  display: flex;
+}
+.Password {
+  border: none;
+  pointer-events: none;
+  width: 3.5em;
+  font-size: 20px;
+}
+.InfoTitles {
+  font-weight: bold;
+}
+.SecurityInfoTitles {
+  font-weight: bold;
+}
+.FullName {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.Room {
+  font-size: 0.9rem;
+}
+.JoinedIn {
+  font-size: 0.9rem;
+  padding-top: 1em;
+}
+.editDelete {
+  cursor: pointer;
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  filter: invert(40%) sepia(44%) saturate(65%) hue-rotate(182deg)
+    brightness(89%) contrast(87%);
 }
