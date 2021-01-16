@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
-import GroupCard from "../../components/GroupCard/GroupsCard";
+import BigGroupCard from "../../components/GroupCards/BigGroupCard/BigGroupCard";
+import GroupsCard from "../../components/GroupCards/GroupsCard/GroupsCard";
 import classes from "./Groups.module.css";
 import ClipLoader from "react-spinners/ClipLoader";
-import { getUserPosts } from "../../helpers/posts";
-import { getSpecificUser } from "../../helpers/auth";
+import {
+  getNotJoinedGroups,
+  getOneGroup,
+  getUserGroups,
+} from "../../helpers/groups";
+import { getGroupPosts } from "../../helpers/posts";
 import { useStore, useStoreValue } from "react-context-hook";
 
-const Groups = () => {
+const GroupsPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
-  const [posts, setPosts] = useState(undefined);
+  const [notJoinedGroups, setNotJoinedGroups] = useState(undefined);
+  const [joinedGroups, setJoinedGroups] = useState(undefined);
+  //   const [posts, setPosts] = useState(undefined);
   //   const [user, setUser] = useState(undefined);
   const [showPage, setShowPage] = useState("0");
   const user_data = useStoreValue("user");
@@ -16,37 +23,29 @@ const Groups = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (user_data) {
-        const posts = await getUserPosts(user_data.id);
-        const user = await getSpecificUser(user_data.id);
-        setPosts(posts);
-        setUser(user.data[0]);
+        const notJoinedGroups = await getNotJoinedGroups(user_data.id);
+        const joinedGroups = await getUserGroups(user_data.id);
+        // const oneGroup = await getOneGroup(id)
+        // const groupPosts = await getGroupPosts(id)
+        setNotJoinedGroups(notJoinedGroups);
+        setJoinedGroups(joinedGroups);
       }
     };
 
     if (user_data) fetchData();
   }, [user_data]);
 
-  if (posts === undefined || user === undefined)
+  if (joinedGroups === undefined || notJoinedGroups === undefined)
     return (
       <div className="loading">
-        <ClipLoader size={50} color={"#e83251"} />
+        <ClipLoader size={50} color={"#00c76d"} />
       </div>
     );
 
-  if (showPage !== "1" && posts && user) {
+  if (showPage !== "1" && joinedGroups && notJoinedGroups) {
     setShowPage("1");
   }
 
-  const handleDeletePost = async (id) => {
-    // const result = await removePost(id);
-    // if (result.status === 1) {
-    //   const newPosts = [...posts];
-    //   const indexDeleted = newPosts.findIndex((post) => post.id === id);
-    //   newPosts.splice(indexDeleted, 1);
-    //   setPosts(newPosts);
-    //   toastr.success("Property deleted successfully!");
-    // }
-  };
   return (
     <React.Fragment>
       <div className="loading">
@@ -59,12 +58,15 @@ const Groups = () => {
       {!isAuthenticated ? (
         ""
       ) : (
-        <div className={classes.ProfileContainer}>
+        <div className={classes.GroupsPageContainer}>
           <div className={classes.LeftContainer}>
-            <GroupCard posts={posts} delete={handleDeletePost} />
+            <BigGroupCard />
           </div>
           <div className={classes.RightContainer}>
-            <ProfileCard user={user} />
+            <GroupsCard
+              notJoinedGroups={notJoinedGroups}
+              joinedGroups={joinedGroups}
+            />
           </div>
         </div>
       )}
@@ -72,4 +74,4 @@ const Groups = () => {
   );
 };
 
-export default Groups;
+export default GroupsPage;

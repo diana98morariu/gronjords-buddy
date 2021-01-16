@@ -34,7 +34,7 @@ router.post("/administration", isAuthenticated, async (req, res) => {
     });
     var mailOptions = {
       from: "testkea03@gmail.com",
-      to: "diana.morariu@gmail.com, Administration <administration@gmail.com>",
+      to: `${user.email}, Administration <administration@gmail.com>`,
       subject: `${user.first_name} ${user.last_name} - ${user.email} Room: ${user.room} - Subject - ${req.body.subject}`,
       text: `${req.body.message}`,
     };
@@ -84,7 +84,7 @@ router.post("/blamaend", isAuthenticated, async (req, res) => {
     });
     var mailOptions = {
       from: "testkea03@gmail.com",
-      to: "diana.morariu@gmail.com, Blåmænd <blamaend@gmail.com>",
+      to: `${user.email}, Blåmænd <blamaend@gmail.com>`,
       subject: `${user.first_name} ${user.last_name} - ${user.email} Room: ${user.room} - Subject - ${req.body.subject}`,
       text: `${req.body.message}`,
     };

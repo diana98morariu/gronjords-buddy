@@ -24,6 +24,37 @@ router.get("/", isAuthenticated, async (req, res, next) => {
 });
 
 // get groups of a specific user
+router.get("/notjoined/:userId", isAuthenticated, async (req, res, next) => {
+  try {
+    if (req.params.userId == req.session.user.id) {
+      const enrollments = await Group.query()
+        .select(
+          "groups.id",
+          "groups.group_name",
+          "groups.image",
+          "enrollments.user_id"
+        )
+        .leftOuterJoin("enrollments", "groups.id", "=", "enrollments.group_id")
+        // .whereNot("enrollments.user_id", req.session.user.id)
+        .distinct();
+      if (!enrollments) {
+        res.json({
+          status: 0,
+          message: "Error getting the groups from the db",
+        });
+      }
+      return res.send(enrollments);
+    }
+    return res.send({
+      status: 0,
+      message: "Error returning the groups of the user",
+    });
+  } catch (error) {
+    return res.json({ status: 0, message: "Error returning the groups" });
+  }
+});
+
+//get groups that are not joined by the user
 router.get("/:userId", isAuthenticated, async (req, res, next) => {
   try {
     if (req.params.userId == req.session.user.id) {

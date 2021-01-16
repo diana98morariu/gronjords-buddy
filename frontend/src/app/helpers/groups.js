@@ -18,6 +18,23 @@ export const getAllGroups = async () => {
   }
 };
 
+export const getNotJoinedGroups = async (id) => {
+  try {
+    const options = {
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(groupsEndpoint + `/notjoined/${id}`, options);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return { status: 0, message: "Can not connect to the server", code: 999 };
+  }
+};
+
 export const getUserGroups = async (id) => {
   try {
     const options = {
