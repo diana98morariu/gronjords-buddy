@@ -420,21 +420,21 @@ const AuthModal = (props) => {
       showPage === "Contact Blåmænd"
     ) {
       // ====================== VALIDATION ======================
-      const resetPassValidData = [
+      const emailContentData = [
         { type: "subject", val: user_subject },
         { type: "message", val: user_message },
       ];
 
-      const isFormValid = validateForm(resetPassValidData);
+      const isFormValid = validateForm(emailContentData);
       if (!isFormValid.formIsValid)
         return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
-      const resetPassData = { subject: user_subject, message: user_message };
+      const emailContent = { subject: user_subject, message: user_message };
       setLoadingButton(true);
       let res;
       if (showPage === "Contact Blåmænd") {
-        res = await contactTechnician(resetPassData);
+        res = await contactTechnician(emailContent);
       } else if (showPage === "Contact Administration") {
-        res = await contactAdministration(resetPassData);
+        res = await contactAdministration(emailContent);
       }
       setLoadingButton(false);
 

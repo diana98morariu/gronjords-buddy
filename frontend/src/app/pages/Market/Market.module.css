@@ -1,0 +1,10 @@
+.MarketContainer {
+  display: flex;
+}
+
+.LeftContainers {
+  flex: 60%;
+}
+.RightContainers {
+  flex: 40%;
+}

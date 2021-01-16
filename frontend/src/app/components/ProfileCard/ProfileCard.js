@@ -44,7 +44,7 @@ const ProfileCard = (props) => {
   if (user_data === undefined)
     return (
       <div className="loading">
-        <ClipLoader size={50} color={"#e83251"} />
+        <ClipLoader size={50} color={"#00e17b"} />
       </div>
     );
 
