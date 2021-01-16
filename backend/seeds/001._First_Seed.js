@@ -15,7 +15,7 @@ exports.seed = (knex) => {
       first_name: "Andreea",
       last_name: "Steriu",
       password: "$2b$10$rmiFymi5sFuvhKHGrWXJNuYv/udozDLiz6AV08Ubh/7eYg7A4dp2a",
-      email: "andreea.steriu@gmail.com",
+      email: "steriuandreeavio@gmail.com",
       activate_or_reset_pass_key: "75442486-0878-441c-9db1-a7006c25a39f",
       birthdate: "1995-11-16",
       phone_nr: "45967823",
@@ -26,7 +26,7 @@ exports.seed = (knex) => {
       first_name: "Diana",
       last_name: "Morariu",
       password: "$2b$10$rmiFymi5sFuvhKHGrWXJNuYv/udozDLiz6AV08Ubh/7eYg7A4dp2a",
-      email: "diamorariu@gmail.com",
+      email: "diana.morariu@gmail.com",
       activate_or_reset_pass_key: "75442486-0878-441c-9db1-a7006c25a39f",
       birthdate: "1998-06-03",
       phone_nr: "49276378",
@@ -639,27 +639,27 @@ exports.seed = (knex) => {
     },
     {
       user_id: 1,
-      group_id: 83,
+      group_id: 85,
     },
     {
       user_id: 1,
-      group_id: 85,
-    },
-    {
-      user_id: 3,
-      group_id: 83,
+      group_id: 87,
     },
     {
       user_id: 3,
       group_id: 85,
     },
     {
-      user_id: 2,
-      group_id: 56,
+      user_id: 3,
+      group_id: 87,
     },
     {
       user_id: 2,
-      group_id: 57,
+      group_id: 58,
+    },
+    {
+      user_id: 2,
+      group_id: 59,
     },
   ];
   return knex("likes")
