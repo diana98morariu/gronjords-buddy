@@ -12,6 +12,7 @@ import { withStore } from "react-context-hook";
 import { useStore, useSetStoreValue } from "react-context-hook";
 // import { useStoreState } from 'react-context-hook';
 import ClipLoader from "react-spinners/ClipLoader";
+import GroupsPage from "./pages/Groups/Groups";
 
 // const Test = () => {
 //   const globalState = useStoreState()
@@ -66,6 +67,10 @@ const App = () => {
               <Route
                 path="/profile"
                 component={(props) => <Profile {...props} />}
+              />
+              <Route
+                path="/groups"
+                component={(props) => <GroupsPage {...props} />}
               />
             </Switch>
           </div>
