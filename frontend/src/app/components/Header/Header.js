@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Header.module.css";
-import LogoGrojords from "../../assets/images/logo.svg";
+import LogoGrojords from "../../assets/images/logo.png";
 import {
   faHome,
   faUsers,
