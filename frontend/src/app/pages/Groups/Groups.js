@@ -38,7 +38,7 @@ const GroupsPage = () => {
   if (joinedGroups === undefined || notJoinedGroups === undefined)
     return (
       <div className="loading">
-        <ClipLoader size={50} color={"#00c76d"} />
+        <ClipLoader size={50} color={"#00e17b"} />
       </div>
     );
 

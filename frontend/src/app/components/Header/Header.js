@@ -41,7 +41,7 @@ const Header = (props) => {
       setIsAuthenticated(false);
       setUser(undefined);
       history.push("/");
-      window.location.reload();
+      // window.location.reload();
     }
   };
 

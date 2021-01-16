@@ -2,6 +2,8 @@ const router = require("express").Router();
 const User = require(__dirname + "/../../models/User");
 const { isAuthenticated } = require(__dirname + "/../../helpers/auth");
 const nodemailer = require("nodemailer");
+const { userEmail, passEmail } = require(__dirname +
+  "/../../../backend/config/otherConfigs.js");
 
 router.post("/administration", isAuthenticated, async (req, res) => {
   try {
@@ -28,8 +30,8 @@ router.post("/administration", isAuthenticated, async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-        user: "testkea03@gmail.com",
-        pass: "gronjordsbuddy",
+        user: userEmail,
+        pass: passEmail,
       },
     });
     var mailOptions = {
@@ -78,8 +80,8 @@ router.post("/blamaend", isAuthenticated, async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-        user: "testkea03@gmail.com",
-        pass: "gronjordsbuddy",
+        user: userEmail,
+        pass: passEmail,
       },
     });
     var mailOptions = {

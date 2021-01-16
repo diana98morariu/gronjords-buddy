@@ -6,4 +6,6 @@ module.exports = {
   // usersEndpoint: 'http://localhost:5555/api/users',
   clientEndpoint: "http://localhost:3000",
   mapKey: "your mapbox access key",
+  userEmail: "",
+  passEmail: "",
 };
