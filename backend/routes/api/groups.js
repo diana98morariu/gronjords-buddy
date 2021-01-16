@@ -59,7 +59,12 @@ router.get("/:userId", isAuthenticated, async (req, res, next) => {
   try {
     if (req.params.userId == req.session.user.id) {
       const enrollments = await Group.query()
-        .select("groups.id", "groups.group_name", "enrollments.user_id")
+        .select(
+          "groups.id",
+          "groups.group_name",
+          "groups.image",
+          "enrollments.user_id"
+        )
         .join("enrollments", "groups.id", "enrollments.group_id")
         .where("enrollments.user_id", req.session.user.id);
       if (!enrollments) {

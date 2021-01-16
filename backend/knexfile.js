@@ -13,14 +13,14 @@ module.exports = {
   },
 
   // production: {
-  //   client: "mysql",
+  //   client: 'mysql',
   //   connection: process.env.JAWSDB_URL,
   //   migrations: {
-  //     directory: __dirname + "/migrations",
+  //     directory: __dirname + '/migrations'
   //   },
   //   seeds: {
-  //     directory: __dirname + "/seeds",
-  //   },
+  //     directory: __dirname + '/seeds'
+  //   }
   // },
 
   ...knexSnakeCaseMappers(),
