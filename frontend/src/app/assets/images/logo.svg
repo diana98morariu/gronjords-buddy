@@ -1,1 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="395" height="122" viewBox="0 0 395 122"><text transform="translate(86 58)" font-size="60" font-family="HelveticaNeue-CondensedBold, Helvetica Neue" font-weight="700"><tspan x="0" y="0">GRØNJORDS </tspan><tspan x="0" y="51">BUDDY</tspan></text><g transform="translate(0 13.893)"><g transform="translate(55.572 0)"><rect width="23" height="21" transform="translate(0.428 0.107)" fill="#00e17b"/><rect width="23" height="21" transform="translate(0.428 23.107)" fill="#00e17b"/><rect width="23" height="26" transform="translate(0.428 46.107)" fill="#00e17b"/><rect width="23" height="23" transform="translate(0.428 74.107)" fill="#00e17b"/></g><g transform="translate(30.102 23.155)"><rect width="21" height="21" transform="translate(-0.102 -0.048)" fill="#8efe5d"/><rect width="21" height="26" transform="translate(-0.102 22.952)" fill="#8efe5d"/><rect width="21" height="23" transform="translate(-0.102 50.952)" fill="#8efe5d"/></g><g transform="translate(0 0)"><rect width="25" height="21" transform="translate(0 0.107)" fill="#00e17b"/><rect width="25" height="21" transform="translate(0 23.107)" fill="#00e17b"/><rect width="25" height="26" transform="translate(0 46.107)" fill="#00e17b"/><rect width="25" height="23" transform="translate(0 74.107)" fill="#00e17b"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="453" height="130" viewBox="0 0 453 130">
+  <g id="Group_149" data-name="Group 149" transform="translate(0 5)">
+    <text id="Grønjords_Buddy" data-name="Grønjords 
+Buddy" transform="translate(86 58)" font-size="60" font-family="Roboto-Bold, Roboto" font-weight="700"><tspan x="0" y="0">GRØNJORDS </tspan><tspan x="0" y="51">BUDDY</tspan></text>
+    <g id="Group_94" data-name="Group 94" transform="translate(0 14)">
+      <g id="Group_91" data-name="Group 91" transform="translate(56 0)">
+        <rect id="Rectangle_41" data-name="Rectangle 41" width="23" height="22" transform="translate(0 0)" fill="#00e17b"/>
+        <rect id="Rectangle_42" data-name="Rectangle 42" width="23" height="22" transform="translate(0 24)" fill="#00e17b"/>
+        <rect id="Rectangle_43" data-name="Rectangle 43" width="23" height="28" transform="translate(0 48)" fill="#00e17b"/>
+        <rect id="Rectangle_44" data-name="Rectangle 44" width="23" height="24" transform="translate(0 78)" fill="#00e17b"/>
+      </g>
+      <g id="Group_92" data-name="Group 92" transform="translate(30 24)">
+        <rect id="Rectangle_42-2" data-name="Rectangle 42" width="21" height="22" transform="translate(0 0)" fill="#8efe5d"/>
+        <rect id="Rectangle_43-2" data-name="Rectangle 43" width="21" height="28" transform="translate(0 24)" fill="#8efe5d"/>
+        <rect id="Rectangle_44-2" data-name="Rectangle 44" width="21" height="24" transform="translate(0 54)" fill="#8efe5d"/>
+      </g>
+      <g id="Group_93" data-name="Group 93" transform="translate(0 0)">
+        <rect id="Rectangle_41-2" data-name="Rectangle 41" width="25" height="22" transform="translate(0 0)" fill="#00e17b"/>
+        <rect id="Rectangle_42-3" data-name="Rectangle 42" width="25" height="22" transform="translate(0 24)" fill="#00e17b"/>
+        <rect id="Rectangle_43-3" data-name="Rectangle 43" width="25" height="28" transform="translate(0 48)" fill="#00e17b"/>
+        <rect id="Rectangle_44-3" data-name="Rectangle 44" width="25" height="24" transform="translate(0 78)" fill="#00e17b"/>
+      </g>
+    </g>
+  </g>
+</svg>

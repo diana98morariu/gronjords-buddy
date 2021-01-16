@@ -14,6 +14,7 @@ import {
   recoverOrResendValidation,
   changePassword,
 } from "../../helpers/auth";
+import { contactTechnician, contactAdministration } from "../../helpers/email";
 import { validateForm } from "../../helpers/validation";
 import {
   useStore,
@@ -198,11 +199,9 @@ const AuthModal = (props) => {
       <React.Fragment>
         <div>
           <EmailTextField
-            id="outlined-multiline-static"
-            label="Message"
+            id="outlined-subject-input"
+            label="Subject"
             type="text"
-            multiline
-            rows={4}
             autoComplete="off"
             variant="outlined"
             value={user_subject}
@@ -421,20 +420,28 @@ const AuthModal = (props) => {
       showPage === "Contact Blåmænd"
     ) {
       // ====================== VALIDATION ======================
-      const resetPassValidData = [{ type: "email", val: user_email }];
+      const resetPassValidData = [
+        { type: "subject", val: user_subject },
+        { type: "message", val: user_message },
+      ];
 
       const isFormValid = validateForm(resetPassValidData);
       if (!isFormValid.formIsValid)
         return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
-      const resetPassData = { email: user_email };
+      const resetPassData = { subject: user_subject, message: user_message };
       setLoadingButton(true);
-      const res = await recoverOrResendValidation(resetPassData);
+      let res;
+      if (showPage === "Contact Blåmænd") {
+        res = await contactTechnician(resetPassData);
+      } else if (showPage === "Contact Administration") {
+        res = await contactAdministration(resetPassData);
+      }
       setLoadingButton(false);
 
       // ====================== RESPONSE ======================
       if (res.status === 1) {
         toastr.success(
-          "Follow the email instructions to complete this action",
+          "You contacted the Administration",
           "Email was sent successfully!"
         );
 
