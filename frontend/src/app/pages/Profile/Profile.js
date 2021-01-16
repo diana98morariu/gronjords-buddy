@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GroupCard from "../../components/GroupsCard/GroupsCard";
+import PostCard from "../../components/PostCard/PostCard";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import classes from "./Profile.module.css";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -62,7 +62,19 @@ const Profile = () => {
       ) : (
         <div className={classes.ProfileContainer}>
           <div className={classes.LeftContainer}>
-            <GroupCard posts={posts} delete={handleDeletePost} />
+            <div className={classes.GroupsPostsContainer}>
+              {posts.map((post) => {
+                return (
+                  <div className={classes.PostCard} key={post.id}>
+                    <PostCard
+                      post={post}
+                      from={"Home"}
+                      delete={handleDeletePost}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className={classes.RightContainer}>
             <ProfileCard user={user} />

@@ -113,6 +113,8 @@ const AuthModal = (props) => {
   const [user_phone, setPhone] = useState("");
   const [user_password, setPassword] = useState("");
   const [user_rePassword, setRepassword] = useState("");
+  const [user_message, setMessage] = useState("");
+  const [user_subject, setSubject] = useState("");
 
   const changeDate = (newDate) => {
     const date = moment(newDate).format("yyyy-MM-DD");
@@ -121,7 +123,7 @@ const AuthModal = (props) => {
 
   const handleClose = () => props.closeModal();
 
-  let signUpContent, switchModalButtons;
+  let signUpContent, switchModalButtons, contactInfo;
 
   if (showPage === "Sign up") {
     signUpContent = (
@@ -188,6 +190,39 @@ const AuthModal = (props) => {
           Already have an account? Log in
         </div>
       </div>
+    );
+  }
+
+  if (showPage === "Contact Administration" || showPage === "Contact Blåmænd") {
+    contactInfo = (
+      <React.Fragment>
+        <div>
+          <EmailTextField
+            id="outlined-multiline-static"
+            label="Message"
+            type="text"
+            multiline
+            rows={4}
+            autoComplete="off"
+            variant="outlined"
+            value={user_subject}
+            onChange={(e) => setSubject(e.target.value)}
+          />
+        </div>
+        <div>
+          <EmailTextField
+            id="outlined-multiline-static"
+            label="Message"
+            type="text"
+            multiline
+            rows={4}
+            autoComplete="off"
+            variant="outlined"
+            value={user_message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+        </div>
+      </React.Fragment>
     );
   }
 
@@ -379,8 +414,44 @@ const AuthModal = (props) => {
         setShowPage("Log in");
       } else return toastr.error(res.response);
     }
+
+    // ====================== CONTACT ADMINISTRATION OR TECHNICIAN ======================
+    else if (
+      showPage === "Contact Administration" ||
+      showPage === "Contact Blåmænd"
+    ) {
+      // ====================== VALIDATION ======================
+      const resetPassValidData = [{ type: "email", val: user_email }];
+
+      const isFormValid = validateForm(resetPassValidData);
+      if (!isFormValid.formIsValid)
+        return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
+      const resetPassData = { email: user_email };
+      setLoadingButton(true);
+      const res = await recoverOrResendValidation(resetPassData);
+      setLoadingButton(false);
+
+      // ====================== RESPONSE ======================
+      if (res.status === 1) {
+        toastr.success(
+          "Follow the email instructions to complete this action",
+          "Email was sent successfully!"
+        );
+
+        setRedirectTo(undefined);
+        props.closeModal();
+      } else return toastr.error(res.response);
+    }
   };
 
+  let closeIcon;
+  if (showPage !== "Log In" || "Sign up") {
+    closeIcon = (
+      <div onClick={handleClose} className={classes.closeButton}>
+        <FontAwesomeIcon icon={faTimes} />
+      </div>
+    );
+  }
   return (
     <React.Fragment>
       <Modal
@@ -391,9 +462,7 @@ const AuthModal = (props) => {
       >
         <div className={classes.modalContainer}>
           <div className={classes.titleContainer}>
-            {/* <div onClick={handleClose} className={classes.closeButton}>
-              <FontAwesomeIcon icon={faTimes} />
-            </div> */}
+            {closeIcon}
             <div className={classes.loginTitle}>
               <p>
                 <img src={LogoGrojords} alt="Login" style={{ width: "15em" }} />
@@ -403,6 +472,7 @@ const AuthModal = (props) => {
           <div className={classes.FormContainer}>
             <form className={classes.loginForm} noValidate autoComplete="off">
               {signUpContent ? signUpContent : undefined}
+              {contactInfo ? contactInfo : undefined}
               {showPage === "Sign up" ||
               showPage === "Log in" ||
               showPage === "Recover password" ? (

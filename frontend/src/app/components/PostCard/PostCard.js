@@ -77,7 +77,7 @@ const PostCard = (props) => {
   return (
     <div className={classes.PostContainer}>
       <div className={classes.topContainer}>
-        <ProfileImg />
+        <div className={classes.Icon} />
         <div className="nameContainer">
           <div className={classes.name}>{first_name + " " + last_name}</div>
 

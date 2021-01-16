@@ -1,13 +1,16 @@
 import React from "react";
 import classes from "./SmallProfile.module.css";
 import { useStoreValue } from "react-context-hook";
-
-const SmallProfile = () => {
+import ProfileImg from "../MiniComponents/ProfileImage";
+const SmallProfile = (props) => {
   const user_data = useStoreValue("user");
   return (
-    <div className={classes.SmallProfileContainer}>
+    <div
+      className={classes.SmallProfileContainer}
+      onClick={() => props.click(user_data.id)}
+    >
       <div className={classes.ProfileLink}>
-        <div className={classes.Icon} />
+        <ProfileImg />
         <div className={classes.infoContainer}>
           <div className={classes.Name}>
             {user_data

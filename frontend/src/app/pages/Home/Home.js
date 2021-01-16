@@ -4,16 +4,26 @@ import PostCard from "../../components/PostCard/PostCard";
 import SmallProfile from "../../components/SmallProfile/SmallProfile";
 import AdministrationIcon from "../../assets/images/administration.svg";
 import TechnicianIcon from "../../assets/images/technician.svg";
-import { useStore } from "react-context-hook";
+import { useStore, useSetAndDelete } from "react-context-hook";
 import ClipLoader from "react-spinners/ClipLoader";
 import { getFeedPosts } from "../../helpers/posts";
+import Modal from "../../components/Modal/Modal";
 import toastr from "toastr";
 import { removePost } from "../../helpers/posts";
+import { useHistory } from "react-router-dom";
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
+  const [showModal, setShowModal] = useStore("showModal");
+  const [setRedirectTo] = useSetAndDelete("redirectTo");
   const [posts, setPosts] = useState(undefined);
   const [showPage, setShowPage] = useState("0");
+  const history = useHistory();
+  const setModal = (modalName) => setShowModal(modalName);
+  const closeModal = () => {
+    setRedirectTo(undefined);
+    setShowModal(undefined);
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -49,6 +59,14 @@ const Home = () => {
     }
   };
 
+  const openPropertyPage = (id) => {
+    history.push(`/profile`);
+  };
+
+  let modalToShow;
+  if (showModal)
+    modalToShow = <Modal page={showModal} closeModal={closeModal} />;
+
   return (
     <React.Fragment>
       <div className="loading">
@@ -79,7 +97,7 @@ const Home = () => {
           </div>
           <div className={classes.RightContainers}>
             {" "}
-            <SmallProfile />
+            <SmallProfile click={openPropertyPage} />
             <div className={classes.AdministrationContainer}>
               <div className={classes.ProfileLink}>
                 <img src={TechnicianIcon} alt="Technician" />
@@ -91,7 +109,12 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className={classes.Button}>Contact Blåmænd</div>
+              <div
+                className={classes.Button}
+                onClick={() => setModal("Contact Blåmænd")}
+              >
+                Contact Blåmænd
+              </div>
             </div>
             <div className={classes.AdministrationContainer}>
               <div className={classes.ProfileLink}>
@@ -108,11 +131,17 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className={classes.Button}>Contact Administration</div>
+              <div
+                className={classes.Button}
+                onClick={() => setModal("Contact Administration")}
+              >
+                Contact Administration
+              </div>
             </div>
           </div>
         </div>
       )}
+      {modalToShow ? modalToShow : undefined}
     </React.Fragment>
   );
 };
