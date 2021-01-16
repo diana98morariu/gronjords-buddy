@@ -46,7 +46,7 @@ export const validateInputValue = (type, value) => {
       return (
         value.length >= 2 && value.length <= 12 && /^([0-9]{8})$/.test(value)
       );
-    // ====================== PROPERTY VALIDATION ======================
+    // ====================== POST VALIDATION ======================
     case "title":
       return value.length >= 4 && value.length <= 60;
     case "description":
@@ -95,19 +95,12 @@ export const validateInputValue = (type, value) => {
     case "postal_code":
       return value.length >= 2 && value.length <= 20;
 
-    // ====================== RESERVATION VALIDATION ======================
-    case "from_date":
-      return (
-        value.length === 10 &&
-        /^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$/.test(value)
-      );
-    case "to_date":
-      return (
-        value.length === 10 &&
-        /^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$/.test(value)
-      );
-    case "persons_count":
-      return Number.isInteger(value);
+    // ====================== CONTACT VALIDATION ======================
+    case "subject":
+      return value.length >= 4 && value.length <= 60;
+    case "message":
+      return value.length >= 4 && value.length <= 800;
+
     default:
       console.log(`Validation failed! No validation for ${type}!`);
       return false;

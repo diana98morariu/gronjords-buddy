@@ -72,7 +72,7 @@ const Home = () => {
       <div className="loading">
         <ClipLoader
           size={50}
-          color={"#E4215B"}
+          color={"#00e17b"}
           loading={showPage === "1" ? false : true}
         />
       </div>
