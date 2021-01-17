@@ -5,10 +5,9 @@ import classes from "./Profile.module.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import { getUserPosts } from "../../helpers/posts";
 import { getSpecificUser } from "../../helpers/auth";
-import { useStore, useStoreValue } from "react-context-hook";
+import { useStoreValue } from "react-context-hook";
 
 const Profile = () => {
-  const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
   const [posts, setPosts] = useState(undefined);
   const [user, setUser] = useState(undefined);
   const [showPage, setShowPage] = useState("0");
@@ -57,30 +56,27 @@ const Profile = () => {
           loading={showPage === "1" ? false : true}
         />
       </div>
-      {!isAuthenticated ? (
-        ""
-      ) : (
-        <div className={classes.ProfileContainer} style={{ opacity: showPage }}>
-          <div className={classes.LeftContainer}>
-            <div className={classes.GroupsPostsContainer}>
-              {posts.map((post) => {
-                return (
-                  <div className={classes.PostCard} key={post.id}>
-                    <PostCard
-                      post={post}
-                      from={"Home"}
-                      delete={handleDeletePost}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className={classes.RightContainer}>
-            <ProfileCard user={user} />
+
+      <div className={classes.ProfileContainer} style={{ opacity: showPage }}>
+        <div className={classes.LeftContainer}>
+          <div className={classes.GroupsPostsContainer}>
+            {posts.map((post) => {
+              return (
+                <div className={classes.PostCard} key={post.id}>
+                  <PostCard
+                    post={post}
+                    from={"Home"}
+                    delete={handleDeletePost}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
-      )}
+        <div className={classes.RightContainer}>
+          <ProfileCard user={user} />
+        </div>
+      </div>
     </React.Fragment>
   );
 };

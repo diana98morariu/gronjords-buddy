@@ -12,7 +12,6 @@ import { getGroupPosts } from "../../helpers/posts";
 import { useStore, useStoreValue } from "react-context-hook";
 
 const GroupsPage = () => {
-  const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
   const [notJoinedGroups, setNotJoinedGroups] = useState(undefined);
   const [joinedGroups, setJoinedGroups] = useState(undefined);
   //   const [posts, setPosts] = useState(undefined);
@@ -55,21 +54,18 @@ const GroupsPage = () => {
           loading={showPage === "1" ? false : true}
         />
       </div>
-      {!isAuthenticated ? (
-        ""
-      ) : (
-        <div className={classes.GroupsPageContainer}>
-          <div className={classes.LeftContainer}>
-            <BigGroupCard />
-          </div>
-          <div className={classes.RightContainer}>
-            <GroupsCard
-              notJoinedGroups={notJoinedGroups}
-              joinedGroups={joinedGroups}
-            />
-          </div>
+
+      <div className={classes.GroupsPageContainer}>
+        <div className={classes.LeftContainer}>
+          <BigGroupCard />
         </div>
-      )}
+        <div className={classes.RightContainer}>
+          <GroupsCard
+            notJoinedGroups={notJoinedGroups}
+            joinedGroups={joinedGroups}
+          />
+        </div>
+      </div>
     </React.Fragment>
   );
 };

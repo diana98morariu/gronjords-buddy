@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "./PostCard.module.css";
-import ProfileImg from "../MiniComponents/ProfileImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -20,6 +19,7 @@ const PostCard = (props) => {
     user_id,
     first_name,
     last_name,
+    image,
   } = props.post;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
@@ -77,7 +77,13 @@ const PostCard = (props) => {
   return (
     <div className={classes.PostContainer}>
       <div className={classes.topContainer}>
-        <div className={classes.Icon} />
+        <div className={classes.ImageContainer}>
+          <img
+            src={"https://gronjords-buddy.s3.eu-north-1.amazonaws.com/" + image}
+            className={classes.Image}
+            alt={image}
+          />
+        </div>
         <div className="nameContainer">
           <div className={classes.name}>{first_name + " " + last_name}</div>
 
