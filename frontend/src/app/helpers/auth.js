@@ -13,8 +13,6 @@ const auth = {
 
   showModal: undefined,
   redirectTo: undefined,
-  changeKey: undefined,
-  countLoadedImages: 0,
 };
 
 export const login = async (loginData) => {

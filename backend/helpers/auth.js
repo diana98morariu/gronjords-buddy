@@ -1,12 +1,13 @@
 const isAuthenticated = (req, res, next) => {
   try {
-    if (req.session.user) next();
-    else return res.json({ status: 0, msg: "User not authorized!" });
+    if (req.session.user) {
+      next();
+    } else {
+      return res.json({ status: 0, msg: "User not authorized middleware!" });
+    }
   } catch (err) {
     return res.json({ status: 0, msg: "User not authorized!" });
   }
 };
 
-module.exports = {
-  isAuthenticated,
-};
+module.exports = { isAuthenticated };

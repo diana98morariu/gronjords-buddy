@@ -8,3 +8,10 @@
   margin-bottom: 1rem;
   box-shadow: 0 0 10px 0 #dcdcdc;
 }
+.OneGroupImage {
+  width: 100%;
+  height: auto;
+}
+.GroupImage {
+  width: 100%;
+}
