@@ -20,6 +20,7 @@ const PostCard = (props) => {
     first_name,
     last_name,
     image,
+    images,
   } = props.post;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
@@ -97,6 +98,19 @@ const PostCard = (props) => {
       <div className={classes.textContainer}>
         <div className={classes.title}>{title}</div>
         {content}
+        {images ? (
+          <div className={classes.PostImageContainer}>
+            <img
+              src={
+                "https://gronjords-buddy.s3.eu-north-1.amazonaws.com/" + images
+              }
+              className={classes.PostImage}
+              alt={image}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <div className={classes.likes}>
         <FontAwesomeIcon icon={faThumbsUp} className={classes.ThumbsUp} />
