@@ -1,7 +1,12 @@
 .JoinedGroupContainer {
+  position: relative;
   display: flex;
-  padding-bottom: 0.5em;
+  padding: 0.5em 0 0.5em 0.5em;
   cursor: pointer;
+  border-radius: 8px;
+}
+.JoinedGroupContainer:hover {
+  background-color: var(--hover-black);
 }
 .JoinedGroupImage {
   display: block;

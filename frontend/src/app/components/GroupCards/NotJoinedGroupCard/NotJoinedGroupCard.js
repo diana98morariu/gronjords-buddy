@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import classes from "./NotJoinedGroupCard.module.css";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -8,11 +8,12 @@ const JoinButton = withStyles({
     width: "100%",
     height: "30px",
     fontSize: "14px",
-    backgroundColor: "#d3d3d3",
+    backgroundColor: "rgba(0,0,0,0)",
     boxShadow: "none",
+    fontWeight: "bold",
     "&:hover": {
       boxShadow: "none",
-      backgroundColor: "rgba(0,0,0,0)",
+      backgroundColor: "#2c225508",
     },
     textTransform: "none",
   },
