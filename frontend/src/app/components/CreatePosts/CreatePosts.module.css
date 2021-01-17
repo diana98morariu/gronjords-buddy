@@ -1,0 +1,75 @@
+.CreatePostsContainer {
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 0 10px 0 #dcdcdc;
+}
+
+.topContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 0.7rem 0.7rem;
+}
+
+.inputNewPost {
+  background-color: var(--light-grey);
+  width: 100%;
+  padding: 0 1rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.925rem;
+  cursor: pointer;
+}
+
+.bottomContainer {
+  border-top: 1px solid var(--thin-border);
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0.25rem 0;
+  margin: 0 0.7rem 0.55rem 0.7rem;
+}
+
+.button {
+  border-radius: 4px;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 2rem;
+  color: rgb(101, 103, 107);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.button img {
+  margin-right: 0.4rem;
+}
+.faShare {
+  font-size: 19px;
+  color: var(--green-color);
+  margin-right: 0.4rem;
+}
+
+.button:hover {
+  background-color: var(--light-grey);
+}
+
+.Image {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+}
+.ImageContainer {
+  display: block;
+  width: 2.2em;
+  margin-right: 0.5em;
+  border-radius: 8px;
+}

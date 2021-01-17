@@ -2,8 +2,6 @@ import React from "react";
 import classes from "./ProfileImg.module.css";
 import { useStoreValue } from "react-context-hook";
 
-export let size;
-
 const ProfileImg = (props) => {
   const user_data = useStoreValue("user");
   return (
