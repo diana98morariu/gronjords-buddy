@@ -92,535 +92,535 @@ exports.seed = (knex) => {
   const groups = [
     {
       group_name: "Gronjords Main",
-      image: "gronjords-main.jpg",
+      image: "gronjords-main.svg",
     },
     {
       group_name: "Market",
-      image: "market.jpg",
+      image: "market.svg",
     },
     {
       group_name: "Sublet rooms",
-      image: "sublet-rooms.jpg",
+      image: "sublet-rooms.svg",
     },
     ////////////////////////////////////////////////
     {
       group_name: "Floor 11",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 11A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 11B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 12",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 12A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 12B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 13",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 13A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 13B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 14",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 14A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 14B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 15",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 15A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 15B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 16",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 16A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 16B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 17",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 17A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 17B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 18",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 18A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 18B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 21",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 21A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 21B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 22",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 22A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 22B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 23",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 23A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 23B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 24",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 24A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 24B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 25",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 25A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 25B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 26",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 26A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 26B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 27",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 27A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 27B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 28",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 28A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 28B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 31",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 31A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 31B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 32",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 32A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 32B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 33",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 33A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 33B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 34",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 34A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 34B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 35",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 35A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 35B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 36",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 36A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 36B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 37",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 37A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 37B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 38",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 38A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 38B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 41",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 41A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 41B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 42",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 42A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 42B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 43",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 43A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 43B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 44",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 44A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 44B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 45",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 45A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 45B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 46",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 46A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 46B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 47",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 47A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 47B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 48",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 48A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 48B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 61",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 61A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 61B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 62",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 62A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 62B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 63",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 63A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 63B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 64",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 64A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 64B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 65",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 65A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 65B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 66",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 66A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 66B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 67",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 67A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 67B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
     {
       group_name: "Floor 68",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 68A",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     {
       group_name: "Kitchen 68B",
-      image: "groups.jpg",
+      image: "groups.svg",
     },
     ///////////////////////////////////////////////
   ];

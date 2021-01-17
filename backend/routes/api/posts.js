@@ -30,7 +30,8 @@ router.get("/", isAuthenticated, async (req, res, next) => {
         "posts.price",
         "posts.created_at"
       )
-      .join("posts", "users.id", "posts.user_id");
+      .join("posts", "users.id", "posts.user_id")
+      .orderBy("posts.created_at", "desc");
     if (!posts) {
       res.json({
         status: 0,
@@ -71,7 +72,8 @@ router.get("/group/:groupId", isAuthenticated, async (req, res, next) => {
         "posts.created_at"
       )
       .join("posts", "users.id", "posts.user_id")
-      .where("posts.group_id", groupId);
+      .where("posts.group_id", groupId)
+      .orderBy("posts.created_at", "desc");
     if (!posts) {
       res.json({
         status: 0,
@@ -106,7 +108,8 @@ router.get("/:userId", isAuthenticated, async (req, res, next) => {
           "posts.created_at"
         )
         .join("posts", "users.id", "posts.user_id")
-        .where("posts.user_id", req.params.userId);
+        .where("posts.user_id", req.params.userId)
+        .orderBy("posts.created_at", "desc");
       if (!posts) {
         res.json({
           status: 0,
