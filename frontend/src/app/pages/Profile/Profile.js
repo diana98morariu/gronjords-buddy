@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PostCard from "../../components/PostCard/PostCard";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import classes from "./Profile.module.css";
+import CreatePosts from "../../components/CreatePosts/CreatePosts";
 import ClipLoader from "react-spinners/ClipLoader";
 import { getUserPosts } from "../../helpers/posts";
 import { getSpecificUser } from "../../helpers/auth";
@@ -59,6 +60,7 @@ const Profile = () => {
 
       <div className={classes.ProfileContainer} style={{ opacity: showPage }}>
         <div className={classes.LeftContainer}>
+          <CreatePosts />
           <div className={classes.GroupsPostsContainer}>
             {posts.map((post) => {
               return (
