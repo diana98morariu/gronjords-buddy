@@ -1,24 +1,28 @@
 .NotJoinedGroupContainer {
   display: flex;
-  padding: 0.5em 0;
+  padding: 0.5em 0 0.5em 0.5em;
 }
 .NotJoinedGroupImage {
   display: block;
-  width: 45%;
-  height: 100%;
+  width: 11rem;
   border-radius: 8px;
 }
 .GroupImage {
   display: block;
   width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 .NotJoinedGroupName {
   margin: auto 0;
+  padding-left: 0.5em;
   width: 100%;
 }
 .JoinButton {
   margin: auto 0;
-  right: 0;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.JoinButton:hover {
+  background-color: var(--hover-black);
 }

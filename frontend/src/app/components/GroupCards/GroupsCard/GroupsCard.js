@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import classes from "./GroupsCard.module.css";
 import JoinedGroupCard from "../JoinedGroupCard/JoinedGroupCard";
 import NotJoinedGroupCard from "../NotJoinedGroupCard/NotJoinedGroupCard";
-import { useStore, useStoreValue } from "react-context-hook";
-import { useHistory, useLocation } from "react-router-dom";
+import { useStoreValue } from "react-context-hook";
 import { joinGroup, leaveGroup } from "../../../helpers/groups";
 import toastr from "toastr";
 
@@ -11,7 +10,6 @@ const GroupsCard = (props) => {
   const [joinedGroups, setJoinedGroups] = useState(props.joinedGroups);
   const [notJoinedGroups, setNotJoinedGroups] = useState(props.notJoinedGroups);
   const user_data = useStoreValue("user");
-  const history = useHistory();
 
   const joinedGroupsIds = [];
   for (let i = 0; i < joinedGroups.length; i++) {
@@ -62,13 +60,7 @@ const GroupsCard = (props) => {
         <div className={classes.JoinedGroupsContainer}>
           {joinedGroups.map((joinedGroup) => {
             return (
-              <div
-                className={classes.JoinedGroupCard}
-                key={joinedGroup.id}
-                onClick={() => {
-                  history.push(`/groups/${joinedGroup.id}`);
-                }}
-              >
+              <div className={classes.JoinedGroupCard} key={joinedGroup.id}>
                 <JoinedGroupCard
                   joinedGroup={joinedGroup}
                   handleLeaveGroup={handleLeaveGroup}
@@ -79,7 +71,7 @@ const GroupsCard = (props) => {
         </div>
       </div>
       <div className={classes.BottomContainer}>
-        <div className={classes.BottomContainerTitle}>Groups to join</div>
+        <div className={classes.BottomContainerTitle}>Other groups</div>
         <div className={classes.NotJoinedGroupsContainer}>
           {notJoinedGroups.map((notJoinedGroup) => {
             if (
