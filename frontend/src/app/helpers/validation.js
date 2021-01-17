@@ -49,7 +49,7 @@ export const validateInputValue = (type, value) => {
     // ====================== POST VALIDATION ======================
     case "title":
       return value.length >= 4 && value.length <= 60;
-    case "description":
+    case "content":
       return value.length >= 4 && value.length <= 800;
     case "type":
       return value.length >= 4 && value.length <= 60;

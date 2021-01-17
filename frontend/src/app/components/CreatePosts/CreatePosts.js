@@ -1,10 +1,24 @@
 import React from "react";
 import classes from "./CreatePosts.module.css";
-import { useStoreValue } from "react-context-hook";
+import { useStoreValue, useStore, useSetAndDelete } from "react-context-hook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare, faImages } from "@fortawesome/free-solid-svg-icons";
+import Modal from "../Modal/Modal";
+
 const CreatePosts = () => {
   const user_data = useStoreValue("user");
+  const [showModal, setShowModal] = useStore("showModal");
+  const [setRedirectTo] = useSetAndDelete("redirectTo");
+
+  const setModal = (modalName) => setShowModal(modalName);
+  const closeModal = () => {
+    setRedirectTo(undefined);
+    setShowModal(undefined);
+  };
+
+  let modalToShow;
+  if (showModal)
+    modalToShow = <Modal page={showModal} closeModal={closeModal} />;
 
   return (
     <React.Fragment>
@@ -24,7 +38,7 @@ const CreatePosts = () => {
             className={classes.inputNewPost}
             type="text"
             placeholder={"What's on your mind, " + user_data.first_name + " ?"}
-            // onClick={showDialog}
+            onClick={() => setModal("Post")}
           />
         </div>
 
@@ -40,6 +54,7 @@ const CreatePosts = () => {
           </div>
         </div>
       </div>
+      {modalToShow ? modalToShow : undefined}
     </React.Fragment>
   );
 };

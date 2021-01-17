@@ -3,6 +3,7 @@ import classes from "./Modal.module.css";
 import TextField from "@material-ui/core/TextField";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
+import DragAndDrop from "../DragAndDrop/DragAndDrop";
 import LogoGrojords from "../../assets/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +17,7 @@ import {
 } from "../../helpers/auth";
 import { contactTechnician, contactAdministration } from "../../helpers/email";
 import { validateForm } from "../../helpers/validation";
+import { createAnnouncement } from "../../helpers/posts";
 import {
   useStore,
   useSetStoreValue,
@@ -116,6 +118,11 @@ const AuthModal = (props) => {
   const [user_rePassword, setRepassword] = useState("");
   const [user_message, setMessage] = useState("");
   const [user_subject, setSubject] = useState("");
+  const [user_title, setTitle] = useState("");
+  const [user_content, setContent] = useState("");
+  const [files, setFiles] = useState([]);
+
+  const setNewFiles = (files) => setFiles(files);
 
   const changeDate = (newDate) => {
     const date = moment(newDate).format("yyyy-MM-DD");
@@ -124,7 +131,41 @@ const AuthModal = (props) => {
 
   const handleClose = () => props.closeModal();
 
-  let signUpContent, switchModalButtons, contactInfo;
+  let signUpContent, switchModalButtons, contactInfo, createPostContent;
+
+  if (showPage === "Post") {
+    createPostContent = (
+      <React.Fragment>
+        <div>
+          <EmailTextField
+            id="outlined-title-input"
+            label="Title"
+            type="text"
+            autoComplete="off"
+            variant="outlined"
+            value={user_title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div>
+          <EmailTextField
+            id="outlined-multiline-static"
+            label="Content"
+            type="text"
+            multiline
+            rows={4}
+            autoComplete="off"
+            variant="outlined"
+            value={user_content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </div>
+        <div>
+          <DragAndDrop files={files} setNewFiles={setNewFiles} />
+        </div>
+      </React.Fragment>
+    );
+  }
 
   if (showPage === "Sign up") {
     signUpContent = (
@@ -449,10 +490,39 @@ const AuthModal = (props) => {
         props.closeModal();
       } else return toastr.error(res.response);
     }
+    // ====================== CREATE A POST ======================
+    else if (showPage === "Post") {
+      // ====================== VALIDATION ======================
+      const postContentData = [
+        { type: "title", val: user_title },
+        { type: "content", val: user_content },
+      ];
+
+      const isFormValid = validateForm(postContentData);
+      if (!isFormValid.formIsValid)
+        return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
+      const requestData = new FormData();
+      const postContent = { title: user_title, content: user_content };
+      requestData.append("data", JSON.stringify(postContent));
+      files.map((file) => requestData.append("images", file, file.name));
+
+      setLoadingButton(true);
+      const res = await createAnnouncement(requestData);
+
+      setLoadingButton(false);
+
+      // ====================== RESPONSE ======================
+      if (res.status === 1) {
+        toastr.success("Post was created successfully!");
+
+        setRedirectTo(undefined);
+        props.closeModal();
+      } else return toastr.error(res.response);
+    }
   };
 
   let closeIcon;
-  if (showPage !== "Log In" || "Sign up") {
+  if (showPage !== "Log In" || showPage !== "Sign up") {
     closeIcon = (
       <div onClick={handleClose} className={classes.closeButton}>
         <FontAwesomeIcon icon={faTimes} />
@@ -480,6 +550,7 @@ const AuthModal = (props) => {
             <form className={classes.loginForm} noValidate autoComplete="off">
               {signUpContent ? signUpContent : undefined}
               {contactInfo ? contactInfo : undefined}
+              {createPostContent ? createPostContent : undefined}
               {showPage === "Sign up" ||
               showPage === "Log in" ||
               showPage === "Recover password" ? (

@@ -161,7 +161,8 @@ router.post("/:groupId", isAuthenticated, async (req, res, next) => {
         return res.json({ status: 0, message: "Missing id!", code: 404 });
 
       let newPost = {};
-      const data = req.body;
+      const data = JSON.parse(req.body.data);
+      console.log(data);
       const groupId = req.params.groupId;
 
       if (req.files.length > 0) {
