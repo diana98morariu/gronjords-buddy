@@ -8,6 +8,27 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useStoreValue } from "react-context-hook";
+import { withStyles } from "@material-ui/core/styles";
+
+const EditDeleteButton = withStyles({
+  root: {
+    width: "100%",
+    position: "absolute",
+    top: "0",
+    right: "0",
+    fontSize: "14px",
+    boxShadow: "none",
+    color: "#65676b",
+    minWidth: "2em",
+    "&:hover": {
+      boxShadow: "none",
+      backgroundColor: "#2c225508",
+      backgroundSize: "100%",
+      color: "#000",
+    },
+    textTransform: "none",
+  },
+})(Button);
 
 const PostCard = (props) => {
   const user_data = useStoreValue("user");
@@ -16,7 +37,6 @@ const PostCard = (props) => {
     title,
     content,
     created_at,
-    user_id,
     first_name,
     last_name,
     image,
@@ -42,7 +62,7 @@ const PostCard = (props) => {
   // if (user_data && user_data.id === user_id) {
   editButton = (
     <React.Fragment>
-      <Button
+      <EditDeleteButton
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
@@ -54,7 +74,7 @@ const PostCard = (props) => {
           height="16"
           width="16"
         />{" "}
-      </Button>
+      </EditDeleteButton>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -92,7 +112,11 @@ const PostCard = (props) => {
             {moment(created_at).format("HH:mm A")}
           </div>
         </div>
-        <div className={classes.editDelete}>{editButton}</div>
+        {user_data.id === id ? (
+          <div className={classes.editDelete}>{editButton}</div>
+        ) : (
+          ""
+        )}
       </div>
 
       <div className={classes.textContainer}>

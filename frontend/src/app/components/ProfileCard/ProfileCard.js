@@ -6,6 +6,27 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import { withStyles } from "@material-ui/core/styles";
+
+const EditDeleteButton = withStyles({
+  root: {
+    width: "100%",
+    position: "absolute",
+    top: "0",
+    right: "0",
+    fontSize: "14px",
+    boxShadow: "none",
+    color: "#65676b",
+    minWidth: "2em",
+    "&:hover": {
+      boxShadow: "none",
+      backgroundColor: "#2c225508",
+      backgroundSize: "100%",
+      color: "#000",
+    },
+    textTransform: "none",
+  },
+})(Button);
 const ProfileCard = (props) => {
   const [birthdate, setUserBirthdate] = useState(undefined);
   const [created_at, setCreatedAt] = useState(undefined);
@@ -50,7 +71,7 @@ const ProfileCard = (props) => {
 
   let editButton = (
     <React.Fragment>
-      <Button
+      <EditDeleteButton
         style={{ padding: "none" }}
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -63,7 +84,7 @@ const ProfileCard = (props) => {
           height="16"
           width="16"
         />{" "}
-      </Button>
+      </EditDeleteButton>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
