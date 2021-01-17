@@ -1,9 +1,8 @@
 // ====================== IMPORTS ======================
 const express = require("express");
-var bodyParser = require("body-parser");
-
+// const bodyParser = require("body-parser");
 const app = express();
-const helmet = require("helmet");
+// const helmet = require("helmet");
 const { Model } = require("objection");
 const Knex = require("knex");
 const knexFile = require(__dirname + "/knexfile");
@@ -16,24 +15,24 @@ const routes = require(__dirname + "/routes/routes.js");
 const client = process.env.CLIENT || clientEndpoint;
 
 // ====================== MIDDLEWARE ======================
-app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
-app.use(bodyParser.json()); // parse application/json
+app.use(express.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
+app.use(express.json()); // parse application/json
 
 // ====================== HELMET ======================
-app.use(helmet());
+// app.use(helmet());
 
 // ====================== CORS HEADERS ======================
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", client);
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, DELETE, PATCH"
-  );
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "POST,GET,OPTIONS,PUT,DELETE, PATCH"
+  );
   next();
 });
 

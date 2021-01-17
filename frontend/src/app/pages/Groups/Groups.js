@@ -8,40 +8,45 @@ import {
   getOneGroup,
   getUserGroups,
 } from "../../helpers/groups";
-import { getGroupPosts } from "../../helpers/posts";
+
 import { useStore, useStoreValue } from "react-context-hook";
 
 const GroupsPage = () => {
   const [notJoinedGroups, setNotJoinedGroups] = useState(undefined);
   const [joinedGroups, setJoinedGroups] = useState(undefined);
-  //   const [posts, setPosts] = useState(undefined);
-  //   const [user, setUser] = useState(undefined);
+  const [oneGroup, setOneGroup] = useState(undefined);
   const [showPage, setShowPage] = useState("0");
   const user_data = useStoreValue("user");
+  const id = window.location.pathname.split("/")[2];
 
   useEffect(() => {
     const fetchData = async () => {
       if (user_data) {
         const notJoinedGroups = await getNotJoinedGroups(user_data.id);
         const joinedGroups = await getUserGroups(user_data.id);
-        // const oneGroup = await getOneGroup(id)
-        // const groupPosts = await getGroupPosts(id)
+        const oneGroup = await getOneGroup(id);
+
         setNotJoinedGroups(notJoinedGroups);
         setJoinedGroups(joinedGroups);
+        setOneGroup(oneGroup);
       }
     };
 
     if (user_data) fetchData();
-  }, [user_data]);
+  }, [user_data, id]);
 
-  if (joinedGroups === undefined || notJoinedGroups === undefined)
+  if (
+    joinedGroups === undefined ||
+    notJoinedGroups === undefined ||
+    oneGroup === undefined
+  )
     return (
       <div className="loading">
         <ClipLoader size={50} color={"#00e17b"} />
       </div>
     );
 
-  if (showPage !== "1" && joinedGroups && notJoinedGroups) {
+  if (showPage !== "1" && joinedGroups && notJoinedGroups && oneGroup) {
     setShowPage("1");
   }
 
@@ -55,15 +60,30 @@ const GroupsPage = () => {
         />
       </div>
 
-      <div className={classes.GroupsPageContainer}>
-        <div className={classes.LeftContainer}>
-          <BigGroupCard />
-        </div>
-        <div className={classes.RightContainer}>
-          <GroupsCard
-            notJoinedGroups={notJoinedGroups}
-            joinedGroups={joinedGroups}
-          />
+      {!isAuthenticated ? (
+        ""
+      ) : (
+        <div className={classes.GroupsPageContainer}>
+          <div className={classes.LeftContainer}>
+            {!id ? (
+              <div className={classes.ChooseGroupImageContainer}>
+                <img
+                  className={classes.ChooseGroupImage}
+                  src="https://gronjords-buddy.s3.eu-north-1.amazonaws.com/choose-group.jpg"
+                  alt="choose-group"
+                />
+                <div>Choose a group</div>
+              </div>
+            ) : (
+              <BigGroupCard oneGroup={oneGroup} />
+            )}
+          </div>
+          <div className={classes.RightContainer}>
+            <GroupsCard
+              notJoinedGroups={notJoinedGroups}
+              joinedGroups={joinedGroups}
+            />
+          </div>
         </div>
       </div>
     </React.Fragment>

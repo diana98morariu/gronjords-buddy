@@ -1,9 +1,19 @@
 .GroupsPageContainer {
   display: flex;
+  overflow: hidden;
+  height: 100%;
 }
 .LeftContainer {
   flex: 60%;
 }
 .RightContainer {
   flex: 40%;
+}
+.ChooseGroupImageContainer {
+  height: 500px;
+  width: 100%;
+}
+.ChooseGroupImage {
+  width: 100%;
+  height: auto;
 }

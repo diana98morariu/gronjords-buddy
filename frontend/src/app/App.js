@@ -14,6 +14,7 @@ import { useStore, useSetStoreValue } from "react-context-hook";
 // import { useStoreState } from 'react-context-hook';
 import ClipLoader from "react-spinners/ClipLoader";
 import GroupsPage from "./pages/Groups/Groups";
+import BigGroupCard from "./components/GroupCards/BigGroupCard/BigGroupCard";
 
 // const Test = () => {
 //   const globalState = useStoreState()
@@ -72,6 +73,10 @@ const App = () => {
               <Route
                 path="/groups"
                 component={(props) => <GroupsPage {...props} />}
+              />
+              <Route
+                path="/groups/:id"
+                component={(props) => <BigGroupCard {...props} />}
               />
               <Route
                 path="/market"

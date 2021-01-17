@@ -22,13 +22,13 @@ router.get("/checkauth", isAuthenticated, async (req, res) => {
       )
       .findById(req.session.user.id);
     if (!loggedUser)
-      return res.json({ status: 0, msg: "User not authorized!" });
+      return res.json({ status: 0, msg: "error-backend-authentication" });
 
     return res
       .status(200)
       .json({ status: 1, msg: "User authorized!", user: loggedUser });
   } catch (err) {
-    return res.json({ status: 0, msg: "User not authorized!" });
+    return res.json(err);
   }
 });
 
