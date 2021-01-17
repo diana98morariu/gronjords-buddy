@@ -4,6 +4,11 @@
 
 .LeftContainers {
   flex: 60%;
+  overflow-y: scroll;
+  height: 85vh;
+}
+.LeftContainers::-webkit-scrollbar {
+  display: none;
 }
 .RightContainers {
   flex: 40%;

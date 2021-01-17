@@ -75,10 +75,9 @@ const GroupsPage = () => {
               <div className={classes.ChooseGroupImageContainer}>
                 <img
                   className={classes.ChooseGroupImage}
-                  src="https://gronjords-buddy.s3.eu-north-1.amazonaws.com/choose-group.jpg"
+                  src="https://gronjords-buddy.s3.eu-north-1.amazonaws.com/choose-group-grayscale.svg"
                   alt="choose-group"
                 />
-                <div>Choose a group</div>
               </div>
             ) : (
               <BigGroupCard oneGroup={oneGroup} />
