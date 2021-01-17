@@ -22,17 +22,21 @@ const GroupsPage = () => {
   const [showPage, setShowPage] = useState("0");
   const user_data = useStoreValue("user");
   const id = window.location.pathname.split("/")[2];
-
+  console.log(user_data, id);
   useEffect(() => {
     const fetchData = async () => {
       if (user_data) {
-        const notJoinedGroups = await getNotJoinedGroups(user_data.id);
-        const joinedGroups = await getUserGroups(user_data.id);
-        const oneGroup = await getOneGroup(id);
+        const fetchedNotJoinedGroups = await getNotJoinedGroups(user_data.id);
+        const fetchedJoinedGroups = await getUserGroups(user_data.id);
+        if (id) {
+          // if (!oneGroup) {
+          const fetchedOneGroup = await getOneGroup(id);
+          setOneGroup(fetchedOneGroup);
+          // }
+        }
 
-        setNotJoinedGroups(notJoinedGroups);
-        setJoinedGroups(joinedGroups);
-        setOneGroup(oneGroup);
+        setNotJoinedGroups(fetchedNotJoinedGroups);
+        setJoinedGroups(fetchedJoinedGroups);
       }
     };
 
@@ -42,7 +46,7 @@ const GroupsPage = () => {
   if (
     joinedGroups === undefined ||
     notJoinedGroups === undefined ||
-    oneGroup === undefined
+    (id && oneGroup === undefined)
   )
     return (
       <div className="loading">
@@ -50,7 +54,7 @@ const GroupsPage = () => {
       </div>
     );
 
-  if (showPage !== "1" && joinedGroups && notJoinedGroups && oneGroup) {
+  if (showPage !== "1" && joinedGroups && notJoinedGroups) {
     setShowPage("1");
   }
 

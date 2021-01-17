@@ -72,6 +72,7 @@ export const getOneGroup = async (id) => {
 export const joinGroup = async (id) => {
   try {
     const options = {
+      credentials: "include",
       method: "POST",
       headers: {
         Accept: "*/*",
@@ -89,6 +90,7 @@ export const leaveGroup = async (id) => {
   try {
     const options = {
       method: "DELETE",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
