@@ -38,7 +38,7 @@
   padding: 0.75rem 1.2rem;
   border-radius: 0.5rem;
   transition: 0.3s;
-  margin: 0 -0.15rem;
+  /* margin: 0 -0.15rem; */
   font-size: 0.95rem;
   display: flex;
   justify-content: center;
@@ -49,11 +49,6 @@
   font-size: 1.4rem;
 }
 
-.HeaderContainer .NavbarRight .SignupButton:hover,
-.ProfileButton:hover {
-  box-shadow: var(--box-shadow);
-}
-
 .HeaderContainer .NavbarRight .Button:hover {
   background-color: var(--hover-black);
   color: var(--green-color);
@@ -61,6 +56,14 @@
 
 .HeaderContainer .NavbarRight .ProfileButton img {
   width: 1.5rem;
-  margin-left: 0.3rem;
   transition: 0.3s;
+}
+.Image {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+}
+.active {
+  background-color: var(--hover-black);
+  color: var(--green-color);
 }

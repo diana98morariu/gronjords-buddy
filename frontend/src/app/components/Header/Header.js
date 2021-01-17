@@ -12,6 +12,7 @@ import {
   useStore,
   useSetStoreValue,
   useSetAndDelete,
+  useStoreValue,
 } from "react-context-hook";
 import UserIcon from "../../assets/images/user_icon.svg";
 import { NavLink, useHistory } from "react-router-dom";
@@ -20,7 +21,6 @@ import { logout } from "../../helpers/auth";
 
 const Header = (props) => {
   const history = useHistory();
-
   const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
   const [showModal, setShowModal] = useStore("showModal");
   const [setRedirectTo] = useSetAndDelete("redirectTo");
@@ -44,6 +44,7 @@ const Header = (props) => {
       // window.location.reload();
     }
   };
+  const user_data = useStoreValue("user");
 
   return (
     <React.Fragment>
@@ -52,43 +53,65 @@ const Header = (props) => {
       ) : (
         <div className={classes.HeaderContainer}>
           <div className={classes.NavbarLeft}>
-            <img className={classes.Logo} src={LogoGrojords} alt="logo" />
+            <NavLink exact to="/">
+              <img className={classes.Logo} src={LogoGrojords} alt="logo" />
+            </NavLink>
           </div>
           <React.Fragment>
             <div className={classes.NavbarRight}>
-              <NavLink exact to="/" activeClassName={classes.active}>
-                <span className={classes.Button}>
-                  <FontAwesomeIcon icon={faHome} className={classes.NavIcons} />
-                </span>
+              <NavLink
+                exact
+                to="/"
+                className={classes.Button}
+                activeClassName={classes.active}
+              >
+                <FontAwesomeIcon icon={faHome} className={classes.NavIcons} />
               </NavLink>
-              <NavLink exact to="/groups" activeClassName={classes.active}>
-                <span className={classes.Button}>
-                  <FontAwesomeIcon
-                    icon={faUsers}
-                    className={classes.NavIcons}
+              <NavLink
+                exact
+                to="/groups"
+                className={classes.Button}
+                activeClassName={classes.active}
+              >
+                <FontAwesomeIcon icon={faUsers} className={classes.NavIcons} />
+              </NavLink>
+              <NavLink
+                exact
+                to="/market"
+                className={classes.Button}
+                activeClassName={classes.active}
+              >
+                <FontAwesomeIcon icon={faStore} className={classes.NavIcons} />
+              </NavLink>
+              <NavLink
+                exact
+                to="/profile"
+                className={classes.Button + " " + classes.ProfileButton}
+                activeClassName={classes.active}
+              >
+                {user_data ? (
+                  <img
+                    src={
+                      "https://gronjords-buddy.s3.eu-north-1.amazonaws.com/" +
+                      user_data.image
+                    }
+                    className={classes.Image}
+                    alt={user_data.image}
                   />
-                </span>
-              </NavLink>
-              <NavLink exact to="/market" activeClassName={classes.active}>
-                <span className={classes.Button}>
-                  <FontAwesomeIcon
-                    icon={faStore}
-                    className={classes.NavIcons}
-                  />
-                </span>
-              </NavLink>
-              <NavLink exact to="/profile" activeClassName={classes.active}>
-                <span className={classes.ProfileButton}>
+                ) : (
                   <img src={UserIcon} alt="user-icon" />
-                </span>
+                )}
               </NavLink>
-              <NavLink exact to="/" activeClassName={classes.active}>
-                <span className={classes.Button} onClick={handleLogout}>
-                  <FontAwesomeIcon
-                    icon={faPowerOff}
-                    className={classes.NavIcons}
-                  />
-                </span>
+              <NavLink
+                exact
+                to="/"
+                className={classes.Button}
+                onClick={handleLogout}
+              >
+                <FontAwesomeIcon
+                  icon={faPowerOff}
+                  className={classes.NavIcons}
+                />
               </NavLink>
             </div>
           </React.Fragment>

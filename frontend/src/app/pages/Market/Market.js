@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import classes from "./Market.module.css";
 import PostCard from "../../components/PostCard/PostCard";
 import SmallProfile from "../../components/SmallProfile/SmallProfile";
-import { useStore } from "react-context-hook";
 import ClipLoader from "react-spinners/ClipLoader";
 import { getFeedPosts } from "../../helpers/posts";
 import toastr from "toastr";
@@ -10,7 +9,6 @@ import { removePost } from "../../helpers/posts";
 import { useHistory } from "react-router-dom";
 
 const Market = () => {
-  const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
   const [posts, setPosts] = useState(undefined);
   const [showPage, setShowPage] = useState("0");
   const history = useHistory();
@@ -60,31 +58,28 @@ const Market = () => {
           loading={showPage === "1" ? false : true}
         />
       </div>
-      {!isAuthenticated ? (
-        ""
-      ) : (
-        <div className={classes.MarketContainer} style={{ opacity: showPage }}>
-          <div className={classes.LeftContainers}>
-            <div className={classes.GroupsPostsContainer}>
-              {posts.map((post) => {
-                return (
-                  <div className={classes.PostCard} key={post.id}>
-                    <PostCard
-                      post={post}
-                      from={"Home"}
-                      delete={handleDeletePost}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className={classes.RightContainers}>
-            {" "}
-            <SmallProfile click={openProfilePage} />
+
+      <div className={classes.MarketContainer} style={{ opacity: showPage }}>
+        <div className={classes.LeftContainers}>
+          <div className={classes.GroupsPostsContainer}>
+            {posts.map((post) => {
+              return (
+                <div className={classes.PostCard} key={post.id}>
+                  <PostCard
+                    post={post}
+                    from={"Home"}
+                    delete={handleDeletePost}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
-      )}
+        <div className={classes.RightContainers}>
+          {" "}
+          <SmallProfile click={openProfilePage} />
+        </div>
+      </div>
     </React.Fragment>
   );
 };
