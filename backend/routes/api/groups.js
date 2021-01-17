@@ -128,10 +128,16 @@ router.post("/:groupId/join", isAuthenticated, async (req, res) => {
     if (!newJoin) {
       return res.json({ status: 0, message: "Could not join group!" });
     }
+    const joinedGroup = {
+      group_id: JSON.parse(groupId),
+      group_name: newGroup.group_name,
+      image: newGroup.image,
+      user_id,
+    };
     return res.json({
       status: 1,
       message: "Group joined added successfully!",
-      data: newJoin,
+      data: joinedGroup,
     });
   } catch (err) {
     return res.json({ status: 0, message: "Error joining group!" });
@@ -166,9 +172,16 @@ router.delete("/:groupId/leave", isAuthenticated, async (req, res) => {
     if (!leaveGroup) {
       return res.json({ status: 0, message: "Could not like post!" });
     }
+    const leftGroup = {
+      group_id: JSON.parse(groupId),
+      group_name: newGroup.group_name,
+      image: newGroup.image,
+      user_id,
+    };
     return res.json({
       status: 1,
       message: "Group left successfully!",
+      data: leftGroup,
     });
   } catch (err) {
     return res.json({ status: 0, message: "Error leaving group!" });

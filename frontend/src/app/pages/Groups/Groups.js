@@ -22,17 +22,15 @@ const GroupsPage = () => {
   const [showPage, setShowPage] = useState("0");
   const user_data = useStoreValue("user");
   const id = window.location.pathname.split("/")[2];
-  console.log(user_data, id);
+
   useEffect(() => {
     const fetchData = async () => {
       if (user_data) {
         const fetchedNotJoinedGroups = await getNotJoinedGroups(user_data.id);
         const fetchedJoinedGroups = await getUserGroups(user_data.id);
         if (id) {
-          // if (!oneGroup) {
           const fetchedOneGroup = await getOneGroup(id);
           setOneGroup(fetchedOneGroup);
-          // }
         }
 
         setNotJoinedGroups(fetchedNotJoinedGroups);

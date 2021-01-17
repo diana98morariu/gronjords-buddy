@@ -1,7 +1,6 @@
 .NotJoinedGroupContainer {
   display: flex;
   padding-bottom: 0.5em;
-  cursor: pointer;
 }
 .NotJoinedGroupImage {
   display: block;
