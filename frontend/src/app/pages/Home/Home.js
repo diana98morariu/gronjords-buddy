@@ -11,6 +11,7 @@ import Modal from "../../components/Modal/Modal";
 import toastr from "toastr";
 import { removePost } from "../../helpers/posts";
 import { useHistory } from "react-router-dom";
+import CreatePosts from "../../components/CreatePosts/CreatePosts";
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
@@ -81,6 +82,7 @@ const Home = () => {
       ) : (
         <div className={classes.HomeContainer} style={{ opacity: showPage }}>
           <div className={classes.LeftContainers}>
+            <CreatePosts />
             <div className={classes.GroupsPostsContainer}>
               {posts.map((post) => {
                 return (
