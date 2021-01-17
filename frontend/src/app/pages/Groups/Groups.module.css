@@ -15,6 +15,7 @@
 }
 .ChooseGroupImage {
   width: 100%;
+  padding: 2em;
   height: auto;
   opacity: 0.7;
 }
