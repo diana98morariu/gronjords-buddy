@@ -12,7 +12,6 @@ import {
 import { useStore, useStoreValue } from "react-context-hook";
 
 const GroupsPage = () => {
-  const [isAuthenticated, setIsAuthenticated] = useStore("isAuthenticated");
   const [notJoinedGroups, setNotJoinedGroups] = useState(undefined);
   const [joinedGroups, setJoinedGroups] = useState(undefined);
   const [oneGroup, setOneGroup] = useState(undefined);
@@ -60,6 +59,7 @@ const GroupsPage = () => {
           loading={showPage === "1" ? false : true}
         />
       </div>
+
       {!isAuthenticated ? (
         ""
       ) : (
@@ -85,7 +85,7 @@ const GroupsPage = () => {
             />
           </div>
         </div>
-      )}
+      </div>
     </React.Fragment>
   );
 };

@@ -77,7 +77,7 @@ const Home = () => {
         />
       </div>
       {!isAuthenticated ? (
-        ""
+        " "
       ) : (
         <div className={classes.HomeContainer} style={{ opacity: showPage }}>
           <div className={classes.LeftContainers}>
