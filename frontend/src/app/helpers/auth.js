@@ -90,6 +90,7 @@ export const recoverOrResendValidation = async (email) => {
   try {
     const options = {
       method: "POST",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -108,6 +109,7 @@ export const register = async (registerData) => {
   try {
     const options = {
       method: "POST",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -126,6 +128,7 @@ export const changePassword = async (changePassData) => {
   try {
     const options = {
       method: "POST",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

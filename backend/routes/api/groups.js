@@ -23,7 +23,7 @@ router.get("/", isAuthenticated, async (req, res, next) => {
   }
 });
 
-// get groups of a specific user
+//get groups that are not joined by the user
 router.get("/notjoined/:userId", isAuthenticated, async (req, res, next) => {
   try {
     if (req.params.userId == req.session.user.id) {
@@ -34,9 +34,11 @@ router.get("/notjoined/:userId", isAuthenticated, async (req, res, next) => {
           "groups.image",
           "enrollments.user_id"
         )
+        .where("groups.group_name", "NOT LIKE", "%Kitchen%")
+        .where("groups.group_name", "NOT LIKE", "%Floor%")
+        .where("groups.group_name", "!=", "Gronjords Main")
         .leftOuterJoin("enrollments", "groups.id", "=", "enrollments.group_id")
-        // .whereNot("enrollments.user_id", req.session.user.id)
-        .distinct();
+        .distinct("groups.id");
       if (!enrollments) {
         res.json({
           status: 0,
@@ -54,7 +56,7 @@ router.get("/notjoined/:userId", isAuthenticated, async (req, res, next) => {
   }
 });
 
-//get groups that are not joined by the user
+// get groups of a specific user
 router.get("/:userId", isAuthenticated, async (req, res, next) => {
   try {
     if (req.params.userId == req.session.user.id) {

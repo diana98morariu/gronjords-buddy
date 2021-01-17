@@ -22,17 +22,17 @@ const GroupCard = (props) => {
       toastr.success("Property deleted successfully!");
     }
   };
-
+  console.log("hello");
   useEffect(() => {
     const fetchData = async () => {
-      if (user_data) {
-        const posts = await getGroupPosts(id);
-        setPosts(posts);
+      if (user_data && id) {
+        const fetchedPosts = await getGroupPosts(id);
+        setPosts(fetchedPosts);
       }
     };
 
     if (user_data) fetchData();
-  }, [user_data, id, posts]);
+  }, [user_data, id]);
 
   return (
     <div>

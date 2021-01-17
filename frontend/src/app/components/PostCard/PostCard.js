@@ -38,41 +38,41 @@ const PostCard = (props) => {
     );
 
   let editButton;
-  if (user_data && user_data.id === user_id) {
-    editButton = (
-      <React.Fragment>
-        <Button
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
+  // if (user_data && user_data.id === user_id) {
+  editButton = (
+    <React.Fragment>
+      <Button
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        <img
+          className={classes.editDelete}
+          src="https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/oVV-iPd4q_P.png"
+          alt=""
+          height="16"
+          width="16"
+        />{" "}
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem
+          onClick={(e) => {
+            props.delete(id);
+          }}
         >
-          <img
-            className={classes.editDelete}
-            src="https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/oVV-iPd4q_P.png"
-            alt=""
-            height="16"
-            width="16"
-          />{" "}
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Edit</MenuItem>
-          <MenuItem
-            onClick={(e) => {
-              props.delete(id);
-            }}
-          >
-            Delete
-          </MenuItem>
-        </Menu>
-      </React.Fragment>
-    );
-  }
+          Delete
+        </MenuItem>
+      </Menu>
+    </React.Fragment>
+  );
+  // }
 
   return (
     <div className={classes.PostContainer}>

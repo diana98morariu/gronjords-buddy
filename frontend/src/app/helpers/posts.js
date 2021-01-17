@@ -55,6 +55,7 @@ export const addPost = async (id, postData) => {
   try {
     const options = {
       method: "POST",
+      credentials: "include",
       headers: {
         Accept: "*/*",
       },
@@ -72,6 +73,7 @@ export const removePost = async (id) => {
   try {
     const options = {
       method: "DELETE",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -89,6 +91,7 @@ export const editPost = async (id, text) => {
   try {
     const options = {
       method: "PATCH",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -107,6 +110,7 @@ export const likePost = async (id) => {
   try {
     const options = {
       method: "POST",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -124,6 +128,7 @@ export const dislikePost = async (id) => {
   try {
     const options = {
       method: "DELETE",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -141,6 +146,7 @@ export const addCommentToPost = async (id, commentData) => {
   try {
     const options = {
       method: "PATCH",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -159,6 +165,7 @@ export const removeComment = async (id, comment_id) => {
   try {
     const options = {
       method: "DELETE",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
