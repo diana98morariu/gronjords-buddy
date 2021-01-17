@@ -4,7 +4,6 @@
   background: #fff;
   padding: 1em;
   margin: 0 1em;
-  width: 100%;
   height: 85vh;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -26,14 +25,12 @@
   display: none;
 }
 .TopContainerTitle {
-  margin: 0 0 1em 1em;
+  margin: 0 0 1em 0;
   font-weight: 700;
-  font-size: 19px;
-  text-decoration: underline;
+  font-size: 18px;
 }
 .BottomContainerTitle {
-  margin: 1em 0 1em 1em;
+  margin: 1em 0 1em 0;
   font-weight: 700;
-  font-size: 19px;
-  text-decoration: underline;
+  font-size: 18px;
 }

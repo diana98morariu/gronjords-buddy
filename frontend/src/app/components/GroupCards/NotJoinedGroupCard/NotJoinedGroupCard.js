@@ -19,7 +19,7 @@ const JoinButton = withStyles({
 })(Button);
 
 const NotJoinedGroupCard = (props) => {
-  const { group_name, image } = props.notJoinedGroup;
+  const { id, group_name, image } = props.notJoinedGroup;
 
   return (
     <React.Fragment>
@@ -33,7 +33,13 @@ const NotJoinedGroupCard = (props) => {
         </div>
         <div className={classes.NotJoinedGroupName}>{group_name}</div>
         <div className={classes.JoinButton}>
-          <JoinButton variant="contained" size="small">
+          <JoinButton
+            variant="contained"
+            size="small"
+            onClick={(e) => {
+              props.handleJoinGroup(id);
+            }}
+          >
             Join
           </JoinButton>
         </div>

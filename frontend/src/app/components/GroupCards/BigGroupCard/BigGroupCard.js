@@ -22,7 +22,6 @@ const GroupCard = (props) => {
       toastr.success("Property deleted successfully!");
     }
   };
-  console.log("hello");
   useEffect(() => {
     const fetchData = async () => {
       if (user_data && id) {
@@ -35,7 +34,7 @@ const GroupCard = (props) => {
   }, [user_data, id]);
 
   return (
-    <div>
+    <div className={classes.GroupPageContainer}>
       <div className={classes.GroupCardContainer}>
         <div className={classes.OneGroupImage}>
           <img
