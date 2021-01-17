@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import classes from "./JoinedGroupCard.module.css";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const LeaveButton = withStyles({
   root: {
     width: "100%",
-    height: "30px",
+    position: "absolute",
+    top: "0",
+    right: "0",
     fontSize: "14px",
-    backgroundColor: "#d3d3d3",
+    backgroundColor: "rgba(0,0,0,0)",
     boxShadow: "none",
+    color: "#65676b",
     "&:hover": {
       boxShadow: "none",
       backgroundColor: "rgba(0,0,0,0)",
+      color: "#000",
     },
     textTransform: "none",
   },
@@ -40,7 +45,7 @@ const JoinedGroupCard = (props) => {
             props.handleLeaveGroup(id);
           }}
         >
-          Leave
+          <FontAwesomeIcon icon={faTimes} />
         </LeaveButton>
       </div>
     </div>
