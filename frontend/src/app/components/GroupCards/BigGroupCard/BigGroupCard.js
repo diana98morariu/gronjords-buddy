@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import classes from "./BigGroupCard.module.css";
 import { getGroupPosts } from "../../../helpers/posts";
 import PostCard from "../../PostCard/PostCard";
-import { useStore, useStoreValue } from "react-context-hook";
+import { useStoreValue } from "react-context-hook";
 import toastr from "toastr";
 import { removePost } from "../../../helpers/posts";
 
@@ -60,7 +60,7 @@ const GroupCard = (props) => {
           })}
         </div>
       ) : (
-        "No posts found"
+        ""
       )}
     </div>
   );

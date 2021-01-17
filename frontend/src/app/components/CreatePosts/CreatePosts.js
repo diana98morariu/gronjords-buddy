@@ -43,12 +43,18 @@ const CreatePosts = () => {
         </div>
 
         <div className={classes.bottomContainer}>
-          <div className={classes.photo + " " + classes.button}>
+          <div
+            className={classes.photo + " " + classes.button}
+            onClick={() => setModal("Post")}
+          >
             <FontAwesomeIcon icon={faImages} className={classes.faShare} />
             Photos
           </div>
 
-          <div className={classes.post + " " + classes.button}>
+          <div
+            className={classes.post + " " + classes.button}
+            onClick={() => setModal("Post")}
+          >
             <FontAwesomeIcon icon={faShare} className={classes.faShare} />
             Post
           </div>
