@@ -3,7 +3,7 @@ import classes from "./Market.module.css";
 import PostCard from "../../components/PostCard/PostCard";
 import SmallProfile from "../../components/SmallProfile/SmallProfile";
 import ClipLoader from "react-spinners/ClipLoader";
-import { getFeedPosts } from "../../helpers/posts";
+import { getGroupPosts } from "../../helpers/posts";
 import toastr from "toastr";
 import { removePost } from "../../helpers/posts";
 import { useHistory } from "react-router-dom";
@@ -16,7 +16,7 @@ const Market = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       if (posts === undefined) {
-        const posts = await getFeedPosts();
+        const posts = await getGroupPosts(2);
         if (posts) setPosts(posts);
         else toastr.error("Something went wrong!");
       }
