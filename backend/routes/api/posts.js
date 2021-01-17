@@ -165,7 +165,6 @@ router.post("/:groupId", isAuthenticated, async (req, res, next) => {
 
       let newPost = {};
       const data = JSON.parse(req.body.data);
-      console.log(data);
       const groupId = req.params.groupId;
 
       if (req.files.length > 0) {

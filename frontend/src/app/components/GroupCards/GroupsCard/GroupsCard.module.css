@@ -25,12 +25,12 @@
   display: none;
 }
 .TopContainerTitle {
-  margin: 0 0 1em 0;
+  padding: 0 0 1em 0.5em;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 17px;
 }
 .BottomContainerTitle {
-  margin: 1em 0 1em 0;
+  padding: 1em 0 1em 0.5em;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 17px;
 }
