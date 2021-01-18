@@ -82,7 +82,7 @@ const Home = () => {
       ) : (
         <div className={classes.HomeContainer} style={{ opacity: showPage }}>
           <div className={classes.LeftContainers}>
-            <CreatePosts />
+            <CreatePosts type={"Post Announcement"} />
             <div className={classes.GroupsPostsContainer}>
               {posts.map((post) => {
                 return (

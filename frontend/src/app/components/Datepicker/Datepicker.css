@@ -1,9 +1,9 @@
 /* ############# MODALS ############# */
 
 .DatePickerContainer .MuiFormControl-marginNormal {
-   margin-top: 11px;
-   margin-bottom: 2px;
-   width: 100%;
+  margin-top: 11px;
+  margin-bottom: 2px;
+  width: 100%;
 }
 
 /* .reservationCardClass {
@@ -12,127 +12,130 @@
 } */
 
 div.MuiToolbar-root.MuiToolbar-regular.MuiPickersToolbar-toolbar.MuiPickersDatePickerRoot-toolbar.MuiToolbar-gutters {
-   background-color: #E4215B !important;
+  background-color: var(--green-color) !important;
 }
 
-.MuiPickersDay-daySelected  {
-   background-color: #E4215B !important;
+.MuiPickersDay-daySelected {
+  background-color: var(--green-color) !important;
 }
 
-.MuiPickersDay-daySelected span p { 
-   color: #fff !important;
+.MuiPickersDay-daySelected span p {
+  color: #fff !important;
 }
 
-div.MuiDialogActions-root.MuiDialogActions-spacing > button:nth-child(1) > span.MuiButton-label {
-   color: #E4215B !important;
+div.MuiDialogActions-root.MuiDialogActions-spacing
+  > button:nth-child(1)
+  > span.MuiButton-label {
+  color: var(--green-color) !important;
 }
 
-div.MuiDialogActions-root.MuiDialogActions-spacing > button:nth-child(2) > span.MuiButton-label {
-   color: #E4215B !important;
+div.MuiDialogActions-root.MuiDialogActions-spacing
+  > button:nth-child(2)
+  > span.MuiButton-label {
+  color: var(--green-color) !important;
 }
 
 .DatePickerContainer > div {
-   padding: 7.5px 14px;
-   border: 1px solid;
-   border-color: rgba(0, 0, 0, 0.23);
-   border-radius: 4px;
+  padding: 7.5px 14px;
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
 }
 
 .DatePickerContainer .MuiInput-underline:before {
-   border-bottom: 1px solid rgb(135, 135, 135) !important;
+  border-bottom: 1px solid rgb(135, 135, 135) !important;
 }
 
 .DatePickerContainer .MuiInput-underline:after {
-   border-bottom: 2px solid #E4215B !important;
+  border-bottom: 2px solid var(--green-color) !important;
 }
 
 .DatePickerContainer * .MuiInputLabel-formControl {
-   margin-top: 0.3rem;
-   margin-left: 0.85rem;
+  margin-top: 0.3rem;
+  margin-left: 0.85rem;
 }
 
 .DatePickerContainer * .MuiInputLabel-root.Mui-focused {
-   color: #E4215B !important;
-   margin-top: 0.3rem;
-   margin-left: 0.85rem;
+  color: var(--green-color) !important;
+  margin-top: 0.3rem;
+  margin-left: 0.85rem;
 }
 
 .MuiInput-underline:hover:before {
-   border-bottom: 0.5px solid black;
-   transition:none;
+  border-bottom: 0.5px solid black;
+  transition: none;
 }
 .MuiInput-underline:after {
-   transition: 0.3s;
-   border-bottom: 1px solid red;
-} 
+  transition: 0.3s;
+  border-bottom: 1px solid red;
+}
 
 /* ############# SEARCHBAR ############# */
 div.SearchbarContainer > div > div:nth-child(2) > div {
-   width: 20vw;
-   border-right: 1px solid #dbdbdb;
+  width: 20vw;
+  border-right: 1px solid #dbdbdb;
 }
 
 .DatePickerContainer .MuiInput-underline:before {
-   border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
 
 input#date-picker-inline.MuiInputBase-input.MuiInput-input.MuiInputBase-inputAdornedEnd {
-   color: rgba(0, 0, 0, 0.54);
+  color: rgba(0, 0, 0, 0.54);
 }
 
 input#date-picker-inline.MuiInputBase-input.MuiInput-input.MuiInputBase-inputAdornedEnd:focus {
-   color: var(--black);
-   fill: var(--black) !important;
+  color: var(--black);
+  fill: var(--black) !important;
 }
 
 div.SearchbarContainer > div > div:nth-child(3) > div {
-   width: 20vw;
-   border-right: 1px solid #dbdbdb;
+  width: 20vw;
+  border-right: 1px solid #dbdbdb;
 }
 
 div.SearchbarContainer > div > div:nth-child(2) > div > div {
-   margin-top: 2.8px;
+  margin-top: 2.8px;
 }
 
 div.SearchbarContainer > div > div:nth-child(3) > div > div {
-   margin-top: 2.8px;
+  margin-top: 2.8px;
 }
 
 div.SearchbarContainer .DatePickerContainer > div {
-   padding: 3.1px 14px;
-   border: 1px solid;
-   border-color: rgba(0, 0, 0, 0.23);
-   border-radius: 4px;
+  padding: 3.1px 14px;
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
 }
 
 div.SearchbarContainer .DatePickerContainer > div {
-   border: none !important;
+  border: none !important;
 }
 
 div.SearchbarContainer .DatePickerContainer > div {
-   text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .MuiSvgIcon-root {
-   fill: rgba(0, 0, 0, 0.54) !important;
+  fill: rgba(0, 0, 0, 0.54) !important;
 }
 
 .MuiSvgIcon-root:hover {
-   fill: var(--black) !important;
+  fill: var(--black) !important;
 }
 
 .MuiSvgIcon-root:active {
-   fill: var(--black) !important;
+  fill: var(--black) !important;
 }
 
 .MuiPickersDay-dayDisabled span p {
-   color: var(--grey);
-   pointer-events: none;
+  color: var(--grey);
+  pointer-events: none;
 }
 
 .MuiIconButton-root {
-   padding: 0 !important;
+  padding: 0 !important;
 }
 
 /* ############# ADD PROPERTY ############# */
-

@@ -7,7 +7,7 @@ import { getGroupPosts } from "../../helpers/posts";
 import toastr from "toastr";
 import { removePost } from "../../helpers/posts";
 import { useHistory } from "react-router-dom";
-
+import CreatePosts from "../../components/CreatePosts/CreatePosts";
 const Market = () => {
   const [posts, setPosts] = useState(undefined);
   const [showPage, setShowPage] = useState("0");
@@ -61,6 +61,7 @@ const Market = () => {
 
       <div className={classes.MarketContainer} style={{ opacity: showPage }}>
         <div className={classes.LeftContainers}>
+          <CreatePosts type={"Post Item"} />
           <div className={classes.GroupsPostsContainer}>
             {posts.map((post) => {
               return (

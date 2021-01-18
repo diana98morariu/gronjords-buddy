@@ -17,7 +17,12 @@ import {
 } from "../../helpers/auth";
 import { contactTechnician, contactAdministration } from "../../helpers/email";
 import { validateForm } from "../../helpers/validation";
-import { createAnnouncement } from "../../helpers/posts";
+import {
+  createPost,
+  createAnnouncementPost,
+  createItemPost,
+  createRoomPost,
+} from "../../helpers/posts";
 import {
   useStore,
   useSetStoreValue,
@@ -116,10 +121,16 @@ const AuthModal = (props) => {
   const [user_phone, setPhone] = useState("");
   const [user_password, setPassword] = useState("");
   const [user_rePassword, setRepassword] = useState("");
-  const [user_message, setMessage] = useState("");
-  const [user_subject, setSubject] = useState("");
-  const [user_title, setTitle] = useState("");
-  const [user_content, setContent] = useState("");
+  const [mail_message, setMessage] = useState("");
+  const [mail_subject, setSubject] = useState("");
+  const [post_title, setTitle] = useState("");
+  const [post_content, setContent] = useState("");
+  const [item_price, setPrice] = useState("");
+  const [room_from_date, setFromDate] = useState(moment().format("yyyy-MM-DD"));
+  const [room_to_date, setToDate] = useState(
+    moment().add(1, "days").format("yyyy-MM-DD")
+  );
+
   const [files, setFiles] = useState([]);
 
   const setNewFiles = (files) => setFiles(files);
@@ -127,13 +138,22 @@ const AuthModal = (props) => {
   const changeDate = (newDate) => {
     const date = moment(newDate).format("yyyy-MM-DD");
     setBirthdate(date);
+    setFromDate(date);
+    setToDate(date);
   };
-
+  const changeFromDate = (newDate) => {
+    const date = moment(newDate).format("yyyy-MM-DD");
+    setFromDate(date);
+  };
+  const changeToDate = (newDate) => {
+    const date = moment(newDate).format("yyyy-MM-DD");
+    setToDate(date);
+  };
   const handleClose = () => props.closeModal();
 
   let signUpContent, switchModalButtons, contactInfo, createPostContent;
 
-  if (showPage === "Post") {
+  if (showPage === "Post" || showPage === "Post Announcement") {
     createPostContent = (
       <React.Fragment>
         <div>
@@ -143,7 +163,7 @@ const AuthModal = (props) => {
             type="text"
             autoComplete="off"
             variant="outlined"
-            value={user_title}
+            value={post_title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
@@ -156,7 +176,103 @@ const AuthModal = (props) => {
             rows={4}
             autoComplete="off"
             variant="outlined"
-            value={user_content}
+            value={post_content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </div>
+        <div>
+          <DragAndDrop files={files} setNewFiles={setNewFiles} />
+        </div>
+      </React.Fragment>
+    );
+  }
+
+  if (showPage === "Post Item") {
+    createPostContent = (
+      <React.Fragment>
+        <div>
+          <EmailTextField
+            id="outlined-title-input"
+            label="Title"
+            type="text"
+            autoComplete="off"
+            variant="outlined"
+            value={post_title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div>
+          <EmailTextField
+            id="outlined-select"
+            label="Price"
+            type="number"
+            variant="outlined"
+            value={item_price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+        <div>
+          <EmailTextField
+            id="outlined-multiline-static"
+            label="Content"
+            type="text"
+            multiline
+            rows={4}
+            autoComplete="off"
+            variant="outlined"
+            value={post_content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </div>
+        <div>
+          <DragAndDrop files={files} setNewFiles={setNewFiles} />
+        </div>
+      </React.Fragment>
+    );
+  }
+
+  if (showPage === "Post Room") {
+    createPostContent = (
+      <React.Fragment>
+        <div>
+          <EmailTextField
+            id="outlined-title-input"
+            label="Title"
+            type="text"
+            autoComplete="off"
+            variant="outlined"
+            value={post_title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className={classes.Datepicker}>
+          <div>
+            <Datepicker
+              date={room_from_date}
+              newLabel="From date"
+              from={"Reservation card"}
+              handleChange={changeFromDate}
+            />
+          </div>
+          <div>
+            <Datepicker
+              date={room_to_date}
+              newLabel="To date"
+              from={"Reservation card"}
+              handleChange={changeToDate}
+            />
+          </div>
+        </div>
+        <div>
+          <EmailTextField
+            id="outlined-multiline-static"
+            label="Content"
+            type="text"
+            multiline
+            rows={4}
+            autoComplete="off"
+            variant="outlined"
+            value={post_content}
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
@@ -245,7 +361,7 @@ const AuthModal = (props) => {
             type="text"
             autoComplete="off"
             variant="outlined"
-            value={user_subject}
+            value={mail_subject}
             onChange={(e) => setSubject(e.target.value)}
           />
         </div>
@@ -258,7 +374,7 @@ const AuthModal = (props) => {
             rows={4}
             autoComplete="off"
             variant="outlined"
-            value={user_message}
+            value={mail_message}
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>
@@ -462,14 +578,14 @@ const AuthModal = (props) => {
     ) {
       // ====================== VALIDATION ======================
       const emailContentData = [
-        { type: "subject", val: user_subject },
-        { type: "message", val: user_message },
+        { type: "subject", val: mail_subject },
+        { type: "message", val: mail_message },
       ];
 
       const isFormValid = validateForm(emailContentData);
       if (!isFormValid.formIsValid)
         return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
-      const emailContent = { subject: user_subject, message: user_message };
+      const emailContent = { subject: mail_subject, message: mail_message };
       setLoadingButton(true);
       let res;
       if (showPage === "Contact Blåmænd") {
@@ -491,29 +607,108 @@ const AuthModal = (props) => {
       } else return toastr.error(res.response);
     }
     // ====================== CREATE A POST ======================
-    else if (showPage === "Post") {
+    else if (showPage === "Post" || showPage === "Post Announcement") {
       // ====================== VALIDATION ======================
       const postContentData = [
-        { type: "title", val: user_title },
-        { type: "content", val: user_content },
+        { type: "title", val: post_title },
+        { type: "content", val: post_content },
       ];
 
       const isFormValid = validateForm(postContentData);
       if (!isFormValid.formIsValid)
         return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
       const requestData = new FormData();
-      const postContent = { title: user_title, content: user_content };
+
+      const postContent = { title: post_title, content: post_content };
+
       requestData.append("data", JSON.stringify(postContent));
       files.map((file) => requestData.append("images", file, file.name));
 
       setLoadingButton(true);
-      const res = await createAnnouncement(requestData);
+      let res;
+      if (showPage === "Post Announcement")
+        res = await createAnnouncementPost(requestData);
+      else if (showPage === "Post")
+        res = await createPost(props.groupId, requestData);
+      setLoadingButton(false);
+
+      // ====================== RESPONSE ======================
+      if (res.status === 1) {
+        toastr.success("You created a post", "Post was created successfully!");
+
+        setRedirectTo(undefined);
+        props.closeModal();
+      } else return toastr.error(res.response);
+    }
+    // ====================== CREATE AN ITEM POST ======================
+    else if (showPage === "Post Item") {
+      // ====================== VALIDATION ======================
+      const postContentData = [
+        { type: "title", val: post_title },
+        { type: "content", val: post_content },
+        { type: "price", val: parseInt(item_price) },
+      ];
+
+      const isFormValid = validateForm(postContentData);
+      if (!isFormValid.formIsValid)
+        return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
+      const requestData = new FormData();
+      const postContent = {
+        title: post_title,
+        price: item_price,
+        content: post_content,
+      };
+
+      requestData.append("data", JSON.stringify(postContent));
+      files.map((file) => requestData.append("images", file, file.name));
+
+      setLoadingButton(true);
+      const res = await createItemPost(requestData);
 
       setLoadingButton(false);
 
       // ====================== RESPONSE ======================
       if (res.status === 1) {
-        toastr.success("Post was created successfully!");
+        toastr.success("You created a post", "Post was created successfully!");
+
+        setRedirectTo(undefined);
+        props.closeModal();
+      } else return toastr.error(res.response);
+    }
+
+    // ====================== CREATE A ROOM POST ======================
+    else if (showPage === "Post Room") {
+      // ====================== VALIDATION ======================
+      const postContentData = [
+        { type: "title", val: post_title },
+        { type: "content", val: post_content },
+        { type: "available_start", val: room_from_date },
+        { type: "available_end", val: room_to_date },
+      ];
+
+      const isFormValid = validateForm(postContentData);
+      if (!isFormValid.formIsValid)
+        return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
+      const requestData = new FormData();
+
+      const postContent = {
+        title: post_title,
+        content: post_content,
+        from_date: room_from_date,
+        to_date: room_to_date,
+      };
+
+      requestData.append("data", JSON.stringify(postContent));
+      files.map((file) => requestData.append("images", file, file.name));
+
+      setLoadingButton(true);
+      const res = await createRoomPost(requestData);
+
+      setLoadingButton(false);
+
+      // ====================== RESPONSE ======================
+      if (res.status === 1) {
+        toastr.success("You created a post", "Post was created successfully!");
 
         setRedirectTo(undefined);
         props.closeModal();
