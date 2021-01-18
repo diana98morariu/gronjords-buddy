@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./PostCard.module.css";
+import ReplyCommentCard from "../ReplyCommentCard/ReplyCommentCard";
+import CommentCard from "../CommentCard/CommentCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faComment } from "@fortawesome/free-solid-svg-icons";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -9,12 +11,16 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useStoreValue } from "react-context-hook";
 import { withStyles } from "@material-ui/core/styles";
+import { validateForm } from "./../../helpers/validation";
 import {
   getPostLikes,
   likePost,
   dislikePost,
   checkLike,
+  addCommentToPost,
+  getPostComments,
 } from "./../../helpers/posts";
+
 import toastr from "toastr";
 
 const EditDeleteButton = withStyles({
@@ -40,8 +46,12 @@ const EditDeleteButton = withStyles({
 const PostCard = (props) => {
   const user_data = useStoreValue("user");
   const [likes, setLikes] = useState(undefined);
+  const [newContent, setNewContent] = useState("");
+  const [comments, setComments] = useState("");
+  const [numberComments, setNumberComments] = useState(0);
   const [numberLikes, setNumberLikes] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [showComments, setShowComments] = useState(false);
   const {
     id,
     post_id,
@@ -71,6 +81,10 @@ const PostCard = (props) => {
     }/${available_to_date.split("-")[0]}`;
   }
 
+  const handleShowComments = () => {
+    setShowComments(true);
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -78,17 +92,39 @@ const PostCard = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const submitComment = async (post_id, content) => {
+    const validComment = [{ type: "content", val: newContent }];
+    const isFormValid = validateForm(validComment);
+    if (!isFormValid.formIsValid)
+      return toastr.error(`Invalid ${isFormValid.invalids.join(", ")}`);
+    const CommentData = { content: newContent };
+    const response = await addCommentToPost(post_id, CommentData);
+
+    if (response.status === 1) {
+      const newComments = [...comments];
+      newComments.push(response.data);
+      setComments(newComments);
+      setNewContent("");
+      setNumberComments(newComments.length);
+      toastr.success("Commented successfully!");
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (user_data) {
         if (post_id) {
           const fetchedPostLikes = await getPostLikes(post_id);
           const response = await checkLike(post_id);
+          const fetchedPostComments = await getPostComments(post_id);
+          setComments(fetchedPostComments);
           if (response.status !== 0) {
             setLiked(true);
           }
           setLikes(fetchedPostLikes);
           setNumberLikes(fetchedPostLikes.length);
+          setNumberComments(fetchedPostComments.length);
         }
       }
     };
@@ -245,22 +281,46 @@ const PostCard = (props) => {
             <div className={classes.LikeButton}>
               <FontAwesomeIcon
                 icon={faThumbsUp}
-                className={classes.likedText}
+                className={classes.likedIcon}
               />
               <div className={classes.likedText}>Liked</div>
             </div>
           ) : (
             <div className={classes.LikeButton}>
-              <FontAwesomeIcon icon={faThumbsUp} />
+              <FontAwesomeIcon icon={faThumbsUp} className={classes.likeIcon} />
               <div>Like</div>
             </div>
           )}
         </div>
-        <div className={classes.button + " " + classes.comm}>
+        <div
+          className={classes.button + " " + classes.comm}
+          onClick={handleShowComments}
+        >
           <FontAwesomeIcon icon={faComment} className={classes.CommentIcon} />
-          Comment
+          {numberComments} Comments
         </div>
       </div>
+
+      {comments && showComments ? (
+        <div className={classes.PostCommentsContainer}>
+          {comments.map((comment) => {
+            return (
+              <div className={classes.PostComment} key={comment.id}>
+                <CommentCard comment={comment} />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        ""
+      )}
+
+      <ReplyCommentCard
+        post_id={post_id}
+        submitComment={submitComment}
+        newContent={newContent}
+        setNewContent={setNewContent}
+      />
     </div>
   );
 };

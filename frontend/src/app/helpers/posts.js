@@ -227,10 +227,27 @@ export const dislikePost = async (id) => {
   }
 };
 
+export const getPostComments = async (id) => {
+  try {
+    const options = {
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(postsEndpoint + `/comments/${id}`, options);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return { status: 0, message: "Can not connect to the server", code: 999 };
+  }
+};
+
 export const addCommentToPost = async (id, commentData) => {
   try {
     const options = {
-      method: "PATCH",
+      method: "POST",
       credentials: "include",
       headers: {
         Accept: "application/json",
