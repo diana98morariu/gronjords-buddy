@@ -79,6 +79,12 @@
   cursor: pointer;
 }
 
+.Datepicker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.7rem;
+}
+
 div.Modal_FormContainer__2s9g6 > form > button > span.MuiButton-label {
   color: white !important;
 }

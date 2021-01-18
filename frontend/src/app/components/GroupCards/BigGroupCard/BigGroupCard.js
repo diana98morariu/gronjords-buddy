@@ -5,7 +5,7 @@ import PostCard from "../../PostCard/PostCard";
 import { useStoreValue } from "react-context-hook";
 import toastr from "toastr";
 import { removePost } from "../../../helpers/posts";
-
+import CreatePosts from "../../CreatePosts/CreatePosts";
 const GroupCard = (props) => {
   const { id, group_name, image } = props.oneGroup;
   const [posts, setPosts] = useState(undefined);
@@ -45,6 +45,16 @@ const GroupCard = (props) => {
         </div>
         {group_name}
       </div>
+      {id === 2 ? (
+        <CreatePosts type={"Post Item"} />
+      ) : id === 1 ? (
+        <CreatePosts type={"Post Announcement"} />
+      ) : id === 3 ? (
+        <CreatePosts type={"Post Room"} />
+      ) : (
+        <CreatePosts type={"Post"} groupId={id} />
+      )}
+
       {posts ? (
         <div className={classes.PostsContainer}>
           {posts.map((post) => {

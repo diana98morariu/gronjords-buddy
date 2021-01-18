@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare, faImages } from "@fortawesome/free-solid-svg-icons";
 import Modal from "../Modal/Modal";
 
-const CreatePosts = () => {
+const CreatePosts = (props) => {
   const user_data = useStoreValue("user");
   const [showModal, setShowModal] = useStore("showModal");
   const [setRedirectTo] = useSetAndDelete("redirectTo");
@@ -18,7 +18,9 @@ const CreatePosts = () => {
 
   let modalToShow;
   if (showModal)
-    modalToShow = <Modal page={showModal} closeModal={closeModal} />;
+    modalToShow = (
+      <Modal page={showModal} closeModal={closeModal} groupId={props.groupId} />
+    );
 
   return (
     <React.Fragment>
@@ -38,14 +40,14 @@ const CreatePosts = () => {
             className={classes.inputNewPost}
             type="text"
             placeholder={"What's on your mind, " + user_data.first_name + " ?"}
-            onClick={() => setModal("Post")}
+            onClick={() => setModal(props.type)}
           />
         </div>
 
         <div className={classes.bottomContainer}>
           <div
             className={classes.photo + " " + classes.button}
-            onClick={() => setModal("Post")}
+            onClick={() => setModal(props.type)}
           >
             <FontAwesomeIcon icon={faImages} className={classes.faShare} />
             Photos
@@ -53,7 +55,7 @@ const CreatePosts = () => {
 
           <div
             className={classes.post + " " + classes.button}
-            onClick={() => setModal("Post")}
+            onClick={() => setModal(props.type)}
           >
             <FontAwesomeIcon icon={faShare} className={classes.faShare} />
             Post

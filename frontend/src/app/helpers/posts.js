@@ -51,7 +51,7 @@ export const getUserPosts = async (id) => {
   }
 };
 
-export const createAnnouncement = async (postData) => {
+export const createAnnouncementPost = async (postData) => {
   try {
     const options = {
       method: "POST",
@@ -62,6 +62,40 @@ export const createAnnouncement = async (postData) => {
       body: postData,
     };
     const response = await fetch(postsEndpoint + `/1`, options);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return { status: 0, message: "Can not connect to the server", code: 999 };
+  }
+};
+export const createItemPost = async (postData) => {
+  try {
+    const options = {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Accept: "*/*",
+      },
+      body: postData,
+    };
+    const response = await fetch(postsEndpoint + `/2`, options);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return { status: 0, message: "Can not connect to the server", code: 999 };
+  }
+};
+export const createRoomPost = async (postData) => {
+  try {
+    const options = {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Accept: "*/*",
+      },
+      body: postData,
+    };
+    const response = await fetch(postsEndpoint + `/3`, options);
     const data = await response.json();
     return data;
   } catch (err) {
@@ -79,7 +113,7 @@ export const createPost = async (id, postData) => {
       },
       body: postData,
     };
-    const response = await fetch(postsEndpoint + `/${id}`, options);
+    const response = await fetch(postsEndpoint + `/` + id, options);
     const data = await response.json();
     console.log(data);
     return data;
