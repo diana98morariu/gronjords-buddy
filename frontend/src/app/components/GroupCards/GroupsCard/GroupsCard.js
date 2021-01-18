@@ -25,9 +25,11 @@ const GroupsCard = (props) => {
       setNotJoinedGroups(newNotJoinedGroups);
 
       const newJoinedGroups = [...joinedGroups];
+      console.log(newJoinedGroups);
       newJoinedGroups.unshift(result.data);
       setJoinedGroups(newJoinedGroups);
       toastr.success("Group joined successfully!");
+      window.location.reload(1);
     }
   };
 
@@ -44,16 +46,16 @@ const GroupsCard = (props) => {
       const newNotJoinedGroups = [...notJoinedGroups];
       newNotJoinedGroups.unshift(result.data);
       setNotJoinedGroups(newNotJoinedGroups);
-
       toastr.success("Group left successfully!");
+      window.location.reload(1);
     }
   };
   useEffect(() => {}, [joinedGroups, notJoinedGroups]);
 
   return (
     <div className={classes.GroupsCardContainer}>
+      <div className={classes.TopContainerTitle}>Joined groups</div>
       <div className={classes.TopContainer}>
-        <div className={classes.TopContainerTitle}>Joined groups</div>
         <div className={classes.JoinedGroupsContainer}>
           {joinedGroups.map((joinedGroup) => {
             return (
@@ -67,8 +69,8 @@ const GroupsCard = (props) => {
           })}
         </div>
       </div>
+      <div className={classes.BottomContainerTitle}>Other groups</div>
       <div className={classes.BottomContainer}>
-        <div className={classes.BottomContainerTitle}>Other groups</div>
         <div className={classes.NotJoinedGroupsContainer}>
           {notJoinedGroups.map((notJoinedGroup) => {
             if (

@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import classes from "./ProfileCard.module.css";
 import ProfileImg from "../MiniComponents/ProfileImage";
-import { useStoreValue } from "react-context-hook";
+import {
+  useStoreValue,
+  useSetAndDelete,
+  useSetStoreValue,
+} from "react-context-hook";
 import ClipLoader from "react-spinners/ClipLoader";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import YesNoModal from "../YesNoModal/YesNoModal";
+import { deleteUser } from "../../helpers/auth";
 
 const EditDeleteButton = withStyles({
   root: {
@@ -28,10 +35,14 @@ const EditDeleteButton = withStyles({
   },
 })(Button);
 const ProfileCard = (props) => {
+  const [setIsAuthenticated] = useSetAndDelete("isAuthenticated");
   const [birthdate, setUserBirthdate] = useState(undefined);
   const [created_at, setCreatedAt] = useState(undefined);
+  const [showDialog, setShowDialog] = useState(false);
+  const setUser = useSetStoreValue("user");
+  const history = useHistory();
   const {
-    id,
+    // id,
     room,
     first_name,
     last_name,
@@ -62,12 +73,32 @@ const ProfileCard = (props) => {
     }
   }, [props]);
 
+  const handleAnswer = async (e, answer) => {
+    e.stopPropagation();
+    setShowDialog(false);
+
+    if (answer === "Yes") {
+      const result = await deleteUser();
+      if (result.status === 1) {
+        history.push("/");
+        setIsAuthenticated(false);
+        setUser(undefined);
+      }
+    }
+  };
+
   if (user_data === undefined)
     return (
       <div className="loading">
         <ClipLoader size={50} color={"#00e17b"} />
       </div>
     );
+
+  const openModal = (e) => {
+    e.stopPropagation();
+    setShowDialog(true);
+    setAnchorEl(null);
+  };
 
   let editButton = (
     <React.Fragment>
@@ -93,14 +124,15 @@ const ProfileCard = (props) => {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem
-          onClick={(e) => {
-            props.delete(id);
-          }}
-        >
-          Delete Account
-        </MenuItem>
+        <MenuItem onClick={(e) => openModal(e)}>Delete Account</MenuItem>
       </Menu>
+      <YesNoModal
+        id={user_data.id}
+        sendAnswer={handleAnswer}
+        open={showDialog}
+        close={() => setShowDialog(!showDialog)}
+        from={"Delete profile"}
+      />
     </React.Fragment>
   );
 

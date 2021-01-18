@@ -15,7 +15,7 @@
   overflow-y: scroll;
 }
 .BottomContainer {
-  height: 55%;
+  height: 41%;
   overflow-y: scroll;
 }
 .BottomContainer::-webkit-scrollbar {
