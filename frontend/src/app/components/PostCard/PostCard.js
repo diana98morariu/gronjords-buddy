@@ -195,23 +195,29 @@ const PostCard = (props) => {
       <div className={classes.textContainer}>
         <div className={classes.title}>{title}</div>
         {content}
-        {images ? (
-          <div className={classes.PostImageContainer}>
-            <img
-              src={
-                "https://gronjords-buddy.s3.eu-north-1.amazonaws.com/" + images
-              }
-              className={classes.PostImage}
-              alt={image}
-            />
-          </div>
-        ) : (
-          ""
-        )}
       </div>
-      {price ? <div>{available ? `${price} kr.` : "SOLD"}</div> : ""}
+      {images ? (
+        <div className={classes.PostImageContainer}>
+          <img
+            src={
+              "https://gronjords-buddy.s3.eu-north-1.amazonaws.com/" + images
+            }
+            className={classes.PostImage}
+            alt={image}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {price ? (
+        <div className={classes.PriceTextContainer}>
+          {available ? `${price} kr.` : "SOLD"}
+        </div>
+      ) : (
+        ""
+      )}
       {from_date && to_date ? (
-        <div>
+        <div className={classes.DatesTextContainer}>
           {available
             ? `${availableFromDate} - ${availableToDate}`
             : "Not available"}
