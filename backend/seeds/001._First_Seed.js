@@ -655,6 +655,10 @@ exports.seed = (knex) => {
       group_name: "Dungeons & Dragons",
       image: "groups.svg",
     },
+    {
+      group_name: "Hatten Bar",
+      image: "groups.svg",
+    },
   ];
   const enrollments = [
     {
