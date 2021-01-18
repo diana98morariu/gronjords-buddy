@@ -5,7 +5,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import classes from "./DragAndDrop.module.css";
 import DragDrop from "../../assets/images/drag_drop.svg";
 import toastr from "toastr";
-import AddMoreImages from "./AddMoreImages/AddMoreImages";
+// import AddMoreImages from "./AddMoreImages/AddMoreImages";
 
 const baseStyle = {
   flex: 1,
@@ -94,35 +94,35 @@ const DragAndDrop = (props) => {
     props.setNewFiles(newFiles);
   };
 
-  const addImages = (e) => {
-    const inputImages = Array.from(e.target.files);
+  // const addImages = (e) => {
+  //   const inputImages = Array.from(e.target.files);
 
-    // eslint-disable-next-line
-    const newImages = inputImages.filter((file) => {
-      if (
-        props.files.findIndex((propFile) => propFile.name === file.name) === -1
-      )
-        return Object.assign(file, { preview: URL.createObjectURL(file) });
-    });
+  //   // eslint-disable-next-line
+  //   const newImages = inputImages.filter((file) => {
+  //     if (
+  //       props.files.findIndex((propFile) => propFile.name === file.name) === -1
+  //     )
+  //       return Object.assign(file, { preview: URL.createObjectURL(file) });
+  //   });
 
-    if (inputImages.length !== newImages.length)
-      toastr.warning(
-        "Only the new images will be added!",
-        "You uploaded duplicates!"
-      );
+  //   if (inputImages.length !== newImages.length)
+  //     toastr.warning(
+  //       "Only the new images will be added!",
+  //       "You uploaded duplicates!"
+  //     );
 
-    let updateImages = [...props.files, ...newImages];
+  //   let updateImages = [...props.files, ...newImages];
 
-    if (updateImages.length > 10) {
-      updateImages = updateImages.filter((img, index) => index < 10);
-      toastr.warning(
-        "Only the first 10 iamges will be kept!",
-        "Too many images!"
-      );
-    }
+  //   if (updateImages.length > 10) {
+  //     updateImages = updateImages.filter((img, index) => index < 10);
+  //     toastr.warning(
+  //       "Only the first 10 iamges will be kept!",
+  //       "Too many images!"
+  //     );
+  //   }
 
-    props.setNewFiles(updateImages);
-  };
+  //   props.setNewFiles(updateImages);
+  // };
 
   const style = useMemo(
     () => ({

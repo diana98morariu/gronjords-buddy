@@ -59,16 +59,17 @@ const PostCard = (props) => {
   } = props.post;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const available_from_date = from_date;
-  const availableFromDate = `${available_from_date
-    .split("-")[2]
-    .slice(0, -14)}/${available_from_date.split("-")[1]}/${
-    available_from_date.split("-")[0]
-  }`;
-  const available_to_date = to_date;
-  const availableToDate = `${available_to_date.split("-")[2].slice(0, -14)}/${
-    available_to_date.split("-")[1]
-  }/${available_to_date.split("-")[0]}`;
+  let availableFromDate, availableToDate;
+  if (from_date && to_date) {
+    const available_from_date = from_date;
+    availableFromDate = `${available_from_date.split("-")[2].slice(0, -14)}/${
+      available_from_date.split("-")[1]
+    }/${available_from_date.split("-")[0]}`;
+    const available_to_date = to_date;
+    availableToDate = `${available_to_date.split("-")[2].slice(0, -14)}/${
+      available_to_date.split("-")[1]
+    }/${available_to_date.split("-")[0]}`;
+  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -208,12 +209,12 @@ const PostCard = (props) => {
           ""
         )}
       </div>
-      {price ? <div>{available ? price : "SOLD"}</div> : ""}
+      {price ? <div>{available ? `${price} kr.` : "SOLD"}</div> : ""}
       {from_date && to_date ? (
         <div>
           {available
-            ? `Available from ${availableFromDate} until ${availableToDate}`
-            : "Not available anymore"}
+            ? `${availableFromDate} - ${availableToDate}`
+            : "Not available"}
         </div>
       ) : (
         ""
