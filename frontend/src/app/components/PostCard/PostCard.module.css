@@ -147,7 +147,13 @@
   filter: invert(38%) sepia(39%) saturate(6421%) hue-rotate(205deg)
     brightness(100%) contrast(92%);
 }
-
+.likedText {
+  color: #00e17b;
+}
+.LikeButton {
+  display: flex;
+  flex-direction: row;
+}
 .button:hover {
   background-color: rgb(240, 242, 245);
 }
