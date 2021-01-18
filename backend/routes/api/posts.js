@@ -394,6 +394,46 @@ router.delete("/:postId/dislike", isAuthenticated, async (req, res) => {
   }
 });
 
+//get all comments
+router.get("/comments/:postId", isAuthenticated, async (req, res, next) => {
+  try {
+    const postId = req.params.postId;
+    if (!postId)
+      return res.json({ status: 0, message: "Missing id!", code: 404 });
+
+    const posts = await Post.query().select("*").findById(postId);
+    if (!posts) {
+      return res.json({
+        status: 0,
+        message: "Could not find post!",
+        code: 404,
+      });
+    }
+
+    const comments = await Comment.query()
+      .select(
+        "comments.id",
+        "comments.content",
+        "users.first_name",
+        "users.last_name",
+        "users.image",
+        { post_id: "comments.post_id" },
+        { user_id: "comments.user_id" }
+      )
+      .join("users", "comments.user_id", "users.id")
+      .where("comments.post_id", postId);
+    if (!comments) {
+      res.json({
+        status: 0,
+        message: "Error getting the comments from the db",
+      });
+    }
+    return res.send(comments);
+  } catch (error) {
+    return res.json({ status: 0, message: "Error returning the comments" });
+  }
+});
+
 //comment post
 router.post("/:postId/comment", isAuthenticated, async (req, res) => {
   try {

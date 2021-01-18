@@ -2,12 +2,12 @@
   display: flex;
 }
 
-.LeftContainers {
+.LeftContainer {
   flex: 60%;
   overflow-y: scroll;
   height: 85vh;
 }
-.LeftContainers::-webkit-scrollbar {
+.LeftContainer::-webkit-scrollbar {
   display: none;
 }
 .RightContainer {

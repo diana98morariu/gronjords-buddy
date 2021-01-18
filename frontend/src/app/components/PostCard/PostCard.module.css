@@ -146,6 +146,7 @@
   padding: 0.25rem 0;
   margin: 0 0.9rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .button {
@@ -167,6 +168,10 @@
   filter: invert(38%) sepia(39%) saturate(6421%) hue-rotate(205deg)
     brightness(100%) contrast(92%);
 }
+.likedIcon {
+  color: #00e17b;
+  margin-right: 0.2rem;
+}
 .likedText {
   color: #00e17b;
 }
@@ -184,7 +189,10 @@
 .comm {
   background-blend-mode: normal;
 }
-.LikeButton {
+.likeIcon {
+  margin-right: 0.2rem;
+}
+.CommentIcon {
   margin-right: 0.2rem;
 }
 
@@ -237,4 +245,11 @@
 }
 .PostImage {
   width: 100%;
+}
+.PostCommentsContainer {
+  overflow-y: scroll;
+  height: 16vh;
+}
+.PostCommentsContainer::-webkit-scrollbar {
+  display: none;
 }
