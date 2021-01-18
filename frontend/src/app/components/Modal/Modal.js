@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import classes from "./Modal.module.css";
 import TextField from "@material-ui/core/TextField";
 import Modal from "@material-ui/core/Modal";
@@ -130,7 +130,6 @@ const AuthModal = (props) => {
   const [room_to_date, setToDate] = useState(
     moment().add(1, "days").format("yyyy-MM-DD")
   );
-  const [posts, setPosts] = useState("");
 
   const [files, setFiles] = useState([]);
 
@@ -151,10 +150,6 @@ const AuthModal = (props) => {
     setToDate(date);
   };
   const handleClose = () => props.closeModal();
-
-  useEffect(() => {
-    if (props.posts) setPosts(props.posts);
-  }, [props.posts]);
 
   let signUpContent, switchModalButtons, contactInfo, createPostContent;
 
@@ -639,14 +634,10 @@ const AuthModal = (props) => {
 
       // ====================== RESPONSE ======================
       if (res.status === 1) {
-        console.log(posts);
-        const newPosts = [...posts];
-        newPosts.unshift(res.data);
-        setPosts(newPosts);
-
         toastr.success("You created a post", "Post was created successfully!");
         setRedirectTo(undefined);
         props.closeModal();
+        window.location.reload(1);
       } else return toastr.error(res.response);
     }
     // ====================== CREATE AN ITEM POST ======================
@@ -678,13 +669,11 @@ const AuthModal = (props) => {
 
       // ====================== RESPONSE ======================
       if (res.status === 1) {
-        const newPosts = [...posts];
-        newPosts.unshift(res.data);
-        setPosts(newPosts);
         toastr.success("You created a post", "Post was created successfully!");
 
         setRedirectTo(undefined);
         props.closeModal();
+        window.location.reload(1);
       } else return toastr.error(res.response);
     }
 
@@ -720,14 +709,11 @@ const AuthModal = (props) => {
 
       // ====================== RESPONSE ======================
       if (res.status === 1) {
-        console.log(posts);
-        const newPosts = [...posts];
-        newPosts.unshift(res.data);
-        setPosts(newPosts);
         toastr.success("You created a post", "Post was created successfully!");
 
         setRedirectTo(undefined);
         props.closeModal();
+        window.location.reload(1);
       } else return toastr.error(res.response);
     }
   };
