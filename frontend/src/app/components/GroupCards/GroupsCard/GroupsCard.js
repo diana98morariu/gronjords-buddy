@@ -10,7 +10,6 @@ const GroupsCard = (props) => {
   const [joinedGroups, setJoinedGroups] = useState(props.joinedGroups);
   const [notJoinedGroups, setNotJoinedGroups] = useState(props.notJoinedGroups);
   const user_data = useStoreValue("user");
-  console.log(notJoinedGroups);
   const joinedGroupsIds = [];
   for (let i = 0; i < joinedGroups.length; i++) {
     joinedGroupsIds.push(JSON.stringify(joinedGroups[i].id));
