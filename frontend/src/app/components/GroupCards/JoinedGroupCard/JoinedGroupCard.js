@@ -8,6 +8,27 @@ const JoinedGroupCard = (props) => {
   const { id, group_name, image } = props.joinedGroup;
   const history = useHistory();
 
+  let leaveButton;
+
+  if (id !== 1) {
+    if (id !== 2) {
+      if (!group_name.startsWith("Floor")) {
+        if (!group_name.startsWith("Kitchen")) {
+          leaveButton = (
+            <div
+              className={classes.LeaveButton}
+              onClick={(e) => {
+                props.handleLeaveGroup(id);
+              }}
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </div>
+          );
+        }
+      }
+    }
+  }
+
   return (
     <div className={classes.GroupContainer}>
       <div
@@ -25,14 +46,7 @@ const JoinedGroupCard = (props) => {
         </div>
         <div className={classes.JoinedGroupName}>{group_name}</div>
       </div>
-      <div
-        className={classes.LeaveButton}
-        onClick={(e) => {
-          props.handleLeaveGroup(id);
-        }}
-      >
-        <FontAwesomeIcon icon={faTimes} />
-      </div>
+      {id ? leaveButton : ""}
     </div>
   );
 };
