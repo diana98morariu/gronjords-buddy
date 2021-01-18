@@ -184,20 +184,8 @@
 .comm {
   background-blend-mode: normal;
 }
-.button.comm::before {
-  content: "";
-  display: inline-block;
-  height: 18px;
-  margin: 0 6px -4px 0;
-  min-width: 18px;
-  position: relative;
-  top: -2px;
-  width: 18px;
-  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/6BkyJKAGM8A.png);
-  background-blend-mode: normal;
-  background-size: 25px 842px;
-  background-position: 0 -218px;
-  background-repeat: no-repeat;
+.LikeButton {
+  margin-right: 0.2rem;
 }
 
 .viewComments {
