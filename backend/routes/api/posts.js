@@ -248,6 +248,78 @@ router.delete("/:id", isAuthenticated, async (req, res, next) => {
   }
 });
 
+//get all likes
+router.get("/likes/:postId", isAuthenticated, async (req, res, next) => {
+  try {
+    const postId = req.params.postId;
+    if (!postId)
+      return res.json({ status: 0, message: "Missing id!", code: 404 });
+
+    const posts = await Post.query().select("*").findById(postId);
+    if (!posts)
+      return res.json({
+        status: 0,
+        message: "Could not find post!",
+        code: 404,
+      });
+
+    const likes = await User.query()
+      .select(
+        "users.id",
+        "users.first_name",
+        "users.last_name",
+        { post_id: "likes.post_id" },
+        {
+          like_id: "likes.id",
+        }
+      )
+      .join("likes", "users.id", "likes.user_id")
+      .where("likes.post_id", postId);
+
+    if (!likes) {
+      res.json({
+        status: 0,
+        message: "Error getting the likes from the db",
+      });
+    }
+    return res.send(likes);
+  } catch (error) {
+    return res.json({ status: 0, message: "Error returning the likes" });
+  }
+});
+
+// check if liked
+router.get("/checklike/:postId", isAuthenticated, async (req, res, next) => {
+  try {
+    const postId = req.params.postId;
+    if (!postId)
+      return res.json({ status: 0, message: "Missing id!", code: 404 });
+
+    const posts = await Post.query().select("*").findById(postId);
+    if (!posts) {
+      return res.json({
+        status: 0,
+        message: "Could not find post!",
+        code: 404,
+      });
+    }
+
+    const likes = await Like.query()
+      .select("*")
+      .where({ post_id: JSON.parse(postId), user_id: req.session.user.id });
+
+    if (likes.length === 0) {
+      return res.json({
+        status: 0,
+        message: "Error getting the likes from the db",
+      });
+    }
+    return res.send(likes).status(200);
+  } catch (error) {
+    return res.json({ status: 0, message: "Error returning the likes" });
+  }
+});
+
 //like a post
 router.post("/:postId/like", isAuthenticated, async (req, res) => {
   try {
@@ -263,7 +335,8 @@ router.post("/:postId/like", isAuthenticated, async (req, res) => {
     const oldLike = await Like.query()
       .select("*")
       .where({ post_id: JSON.parse(postId), user_id });
-    if (oldLike) {
+
+    if (oldLike.length > 1) {
       return res.json({ status: 0, message: "Like already exists!" });
     }
     const addedLike = {

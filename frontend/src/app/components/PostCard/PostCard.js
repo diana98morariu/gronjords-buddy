@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./PostCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +9,13 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useStoreValue } from "react-context-hook";
 import { withStyles } from "@material-ui/core/styles";
+import {
+  getPostLikes,
+  likePost,
+  dislikePost,
+  checkLike,
+} from "./../../helpers/posts";
+import toastr from "toastr";
 
 const EditDeleteButton = withStyles({
   root: {
@@ -32,6 +39,10 @@ const EditDeleteButton = withStyles({
 
 const PostCard = (props) => {
   const user_data = useStoreValue("user");
+  const [likes, setLikes] = useState(undefined);
+  const [numberLikes, setNumberLikes] = useState(undefined);
+  const [liked, setLiked] = useState(false);
+
   const {
     id,
     title,
@@ -50,6 +61,51 @@ const PostCard = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user_data) {
+        if (id) {
+          const fetchedPostLikes = await getPostLikes(id);
+          const response = await checkLike(id);
+          console.log(response);
+          if (response.status !== 0) {
+            setLiked(true);
+          }
+          setLikes(fetchedPostLikes);
+          setNumberLikes(fetchedPostLikes.length);
+        }
+      }
+    };
+
+    if (user_data) fetchData();
+  }, [id]);
+
+  const addLike = async () => {
+    const response = await likePost(id);
+    if (response.status === 1) {
+      const newLikes = [...likes];
+      newLikes.unshift(response.data);
+      setLikes(newLikes);
+      setNumberLikes(newLikes.length);
+      setLiked(true);
+
+      toastr.success("Post liked successfully!");
+    }
+  };
+
+  const removeLike = async () => {
+    const response = await dislikePost(id);
+    if (response.status === 1) {
+      const newLikes = [...likes];
+      const indexDeleted = newLikes.findIndex((newLike) => newLike.id === id);
+      newLikes.splice(indexDeleted, 1);
+      setLikes(newLikes);
+      setNumberLikes(newLikes.length);
+      setLiked(false);
+
+      toastr.success("Post disliked successfully!");
+    }
+  };
 
   if (user_data === undefined)
     return (
@@ -59,7 +115,7 @@ const PostCard = (props) => {
     );
 
   let editButton;
-  // if (user_data && user_data.id === user_id) {
+
   editButton = (
     <React.Fragment>
       <EditDeleteButton
@@ -93,7 +149,6 @@ const PostCard = (props) => {
       </Menu>
     </React.Fragment>
   );
-  // }
 
   return (
     <div className={classes.PostContainer}>
@@ -136,21 +191,37 @@ const PostCard = (props) => {
           ""
         )}
       </div>
+
       <div className={classes.likes}>
         <FontAwesomeIcon icon={faThumbsUp} className={classes.ThumbsUp} />
-        <span className={classes.likesNumber}>3</span>
+        <span className={classes.likesNumber}>{numberLikes}</span>
       </div>
 
       <div className={classes.buttonsContainer}>
-        <div className={classes.button}>
-          <img
-            draggable="false"
-            height="18"
-            width="18"
-            alt="likeIcon"
-            src="https://static.xx.fbcdn.net/rsrc.php/v3/ym/r/HayyIjBF1VN.png"
-          />
-          Like
+        <div
+          className={classes.button}
+          onClick={(e) => {
+            if (liked === false) {
+              addLike(id);
+            } else {
+              removeLike(id);
+            }
+          }}
+        >
+          {liked === true ? (
+            <div className={classes.LikeButton}>
+              <FontAwesomeIcon
+                icon={faThumbsUp}
+                className={classes.likedText}
+              />
+              <div className={classes.likedText}>Like</div>
+            </div>
+          ) : (
+            <div className={classes.LikeButton}>
+              <FontAwesomeIcon icon={faThumbsUp} />
+              <div>Like</div>
+            </div>
+          )}
         </div>
         <div className={classes.button + " " + classes.comm}>Comment</div>
       </div>
