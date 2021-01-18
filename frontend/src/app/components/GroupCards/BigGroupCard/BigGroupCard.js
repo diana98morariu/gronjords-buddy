@@ -58,7 +58,7 @@ const GroupCard = (props) => {
         <div className={classes.PostsContainer}>
           {posts.map((post) => {
             return (
-              <div className={classes.PostCard} key={post.id}>
+              <div className={classes.PostCard} key={post.post_id}>
                 <PostCard
                   post={post}
                   from={"Groups"}
