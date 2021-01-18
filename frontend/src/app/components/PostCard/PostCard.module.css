@@ -97,6 +97,26 @@
   color: rgb(5, 5, 5);
   font-size: 15px;
 }
+.PriceTextContainer {
+  padding: 0.5rem 0.4rem;
+  margin: 0 0.5rem;
+  color: rgb(5, 5, 5);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0.25rem 0;
+  margin: 0 0.9rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.DatesTextContainer {
+  padding: 0.5rem 0.4rem;
+  margin: 0 0.5rem;
+  color: rgb(5, 5, 5);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  margin: 0 0.9rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
 
 .editDelete {
   cursor: pointer;
@@ -108,7 +128,7 @@
 
 .likes {
   margin: 0 0.9rem;
-  padding-bottom: 1rem;
+  padding: 0.6rem 0;
   display: flex;
   align-items: center;
 }
