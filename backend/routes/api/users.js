@@ -313,6 +313,15 @@ router.post("/register", async (req, res, next) => {
               return res.status(404).send({
                 response: "Error while inserting user in main group",
               });
+            const newMarketMate = await Enrollment.query().insert({
+              user_id: createdUser.id,
+              group_id: 2,
+            });
+
+            if (!newMarketMate)
+              return res.status(404).send({
+                response: "Error while inserting user in main group",
+              });
 
             const groups = await Enrollment.query()
               .select("group_id")

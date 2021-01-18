@@ -623,6 +623,38 @@ exports.seed = (knex) => {
       image: "groups.svg",
     },
     ///////////////////////////////////////////////
+    {
+      group_name: "Music Rooms",
+      image: "groups.svg",
+    },
+    {
+      group_name: "Sports",
+      image: "groups.svg",
+    },
+    {
+      group_name: "Network GJK",
+      image: "groups.svg",
+    },
+    {
+      group_name: "Brewery Club",
+      image: "groups.svg",
+    },
+    {
+      group_name: "Knitting Club",
+      image: "groups.svg",
+    },
+    {
+      group_name: "Boardgames Club",
+      image: "groups.svg",
+    },
+    {
+      group_name: "Printing",
+      image: "groups.svg",
+    },
+    {
+      group_name: "Dungeons & Dragons",
+      image: "groups.svg",
+    },
   ];
   const enrollments = [
     {
@@ -660,6 +692,18 @@ exports.seed = (knex) => {
     {
       user_id: 2,
       group_id: 59,
+    },
+    {
+      user_id: 1,
+      group_id: 2,
+    },
+    {
+      user_id: 2,
+      group_id: 2,
+    },
+    {
+      user_id: 3,
+      group_id: 2,
     },
   ];
   return knex("likes")
