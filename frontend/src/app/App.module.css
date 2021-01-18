@@ -16,6 +16,12 @@
 }
 
 .Root {
-  padding: 5rem 20rem;
+  padding: 5rem 18rem;
   padding-bottom: 1.5rem;
+}
+@media all and (min-width: 480px) and (max-width: 1100px) {
+  .Root {
+    padding: 5rem 3rem;
+    padding-bottom: 1.5rem;
+  }
 }
