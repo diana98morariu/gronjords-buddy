@@ -17,8 +17,10 @@ const Market = () => {
     const fetchPosts = async () => {
       if (posts === undefined) {
         const posts = await getGroupPosts(2);
-        if (posts) setPosts(posts);
-        else toastr.error("Something went wrong!");
+
+        if (posts) {
+          setPosts(posts);
+        } else toastr.error("Something went wrong!");
       }
     };
 

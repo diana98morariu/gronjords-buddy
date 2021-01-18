@@ -40,7 +40,7 @@ const EditDeleteButton = withStyles({
 const PostCard = (props) => {
   const user_data = useStoreValue("user");
   const [likes, setLikes] = useState(undefined);
-  const [numberLikes, setNumberLikes] = useState(undefined);
+  const [numberLikes, setNumberLikes] = useState(0);
   const [liked, setLiked] = useState(false);
 
   const {
@@ -66,6 +66,7 @@ const PostCard = (props) => {
       if (user_data) {
         if (id) {
           const fetchedPostLikes = await getPostLikes(id);
+          console.log(fetchedPostLikes);
           const response = await checkLike(id);
           console.log(response);
           if (response.status !== 0) {
