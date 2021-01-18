@@ -99,7 +99,8 @@ const Header = (props) => {
                     alt={user_data.image}
                   />
                 ) : (
-                  <img src={UserIcon} alt="user-icon" />
+                  ""
+                  // <img src={UserIcon} alt="user-icon" />
                 )}
               </NavLink>
               <NavLink
