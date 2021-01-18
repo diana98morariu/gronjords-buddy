@@ -228,7 +228,9 @@
 .time {
   font-size: 12px;
 }
-
+.ImageContainer img {
+  border-radius: 50%;
+}
 .Image {
   display: block;
   width: 100%;

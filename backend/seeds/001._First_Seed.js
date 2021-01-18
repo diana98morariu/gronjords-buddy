@@ -9,7 +9,7 @@ exports.seed = (knex) => {
       birthdate: "1997-05-09",
       phone_nr: "45268917",
       room: 4420,
-      image: "user.png",
+      image: "jonathan.jpg",
     },
     {
       first_name: "Andreea",
@@ -20,7 +20,7 @@ exports.seed = (knex) => {
       birthdate: "1995-11-16",
       phone_nr: "45967823",
       room: 3302,
-      image: "user.png",
+      image: "andreea.jpg",
     },
     {
       first_name: "Diana",
@@ -31,31 +31,31 @@ exports.seed = (knex) => {
       birthdate: "1998-06-03",
       phone_nr: "49276378",
       room: 4420,
-      image: "user.png",
+      image: "diana.jpg",
     },
   ];
 
   const posts = [
     {
-      title: "Beautiful 1 room studio",
+      title: "Transparent umbrella",
       content:
-        "The apartment is compact, but well-appointed and bright one-bedroom apartments with private bath, kitchen niche and French balcony. There are three different types (A, B and C) and this ad relates to type B. Type C is 33 m2 and has storage space in the apartment.",
+        "Does anyone have a transparent umbrella I could borrow on the 26th?",
       user_id: 1,
       group_id: 1,
     },
     {
-      title: "Beautiful 1 room studio",
+      title: "Football pump",
       content:
-        "The apartment is compact, but well-appointed and bright one-bedroom apartments with private bath, kitchen niche and French balcony. There are three different types (A, B and C) and this ad relates to type B. Type C is 33 m2 and has storage space in the apartment.",
+        "Hey everybody. Anyone who has a football pump that I can borrow, just for two￼ minutes?",
       user_id: 2,
       group_id: 1,
     },
     {
-      title: "Beautiful 1 room studio",
+      title: "Tripod",
       content:
-        "The apartment is compact, but well-appointed and bright one-bedroom apartments with private bath, kitchen niche and French balcony. There are three different types (A, B and C) and this ad relates to type B. Type C is 33 m2 and has storage space in the apartment.",
+        "Hi! Does someone have a tripod for a phone which I could borrow for a day or two?",
       user_id: 3,
-      group_id: 2,
+      group_id: 1,
     },
   ];
   const likes = [
@@ -76,17 +76,17 @@ exports.seed = (knex) => {
     {
       post_id: 1,
       user_id: 2,
-      content: "blablablabala",
+      content: "I do. You can come to pick it up at room 3303.",
     },
     {
       post_id: 2,
       user_id: 3,
-      content: "uerhp90dnwjeforgkr",
+      content: "What do you need it for? haha",
     },
     {
       post_id: 2,
       user_id: 2,
-      content: "vberuvbeiuveibrtve",
+      content: "I found one actually.",
     },
   ];
   const groups = [

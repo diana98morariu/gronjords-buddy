@@ -20,7 +20,7 @@ const CommentCard = (props) => {
           <img
             src={
               "https://gronjords-buddy.s3.eu-north-1.amazonaws.com/" +
-              user_data.image
+              props.comment.image
             }
             className={classes.Image}
             alt={user_data.image}
