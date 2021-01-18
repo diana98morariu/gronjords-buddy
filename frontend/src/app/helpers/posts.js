@@ -115,7 +115,6 @@ export const createPost = async (id, postData) => {
     };
     const response = await fetch(postsEndpoint + `/` + id, options);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (err) {
     return { status: 0, message: "Can not connect to the server", code: 999 };

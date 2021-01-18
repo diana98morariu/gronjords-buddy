@@ -36,7 +36,7 @@ const Home = () => {
     };
 
     if (posts === undefined) fetchPosts();
-  });
+  }, [posts]);
 
   if (posts === undefined)
     return (
@@ -50,10 +50,9 @@ const Home = () => {
   }
   const handleDeletePost = async (id) => {
     const result = await removePost(id);
-    console.log(result);
     if (result.status === 1) {
+      const indexDeleted = posts.findIndex((post) => post.post_id === id);
       const newPosts = [...posts];
-      const indexDeleted = newPosts.findIndex((post) => post.id === id);
       newPosts.splice(indexDeleted, 1);
       setPosts(newPosts);
       toastr.success("Property deleted successfully!");
@@ -86,7 +85,7 @@ const Home = () => {
             <div className={classes.GroupsPostsContainer}>
               {posts.map((post) => {
                 return (
-                  <div className={classes.PostCard} key={post.id}>
+                  <div className={classes.PostCard} key={post.post_id}>
                     <PostCard
                       post={post}
                       from={"Home"}
