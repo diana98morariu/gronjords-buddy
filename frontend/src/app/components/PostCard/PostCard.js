@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./PostCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp, faComment } from "@fortawesome/free-solid-svg-icons";
 import ClipLoader from "react-spinners/ClipLoader";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
@@ -256,7 +256,10 @@ const PostCard = (props) => {
             </div>
           )}
         </div>
-        <div className={classes.button + " " + classes.comm}>Comment</div>
+        <div className={classes.button + " " + classes.comm}>
+          <FontAwesomeIcon icon={faComment} className={classes.CommentIcon} />
+          Comment
+        </div>
       </div>
     </div>
   );
