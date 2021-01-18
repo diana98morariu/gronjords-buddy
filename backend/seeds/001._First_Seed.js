@@ -91,7 +91,7 @@ exports.seed = (knex) => {
   ];
   const groups = [
     {
-      group_name: "Gronjords Main",
+      group_name: "Grønjordskollegiet",
       image: "gronjords-main.svg",
     },
     {

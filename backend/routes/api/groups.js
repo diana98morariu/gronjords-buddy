@@ -36,7 +36,8 @@ router.get("/notjoined/:userId", isAuthenticated, async (req, res, next) => {
         )
         .where("groups.group_name", "NOT LIKE", "%Kitchen%")
         .where("groups.group_name", "NOT LIKE", "%Floor%")
-        .where("groups.group_name", "!=", "Gronjords Main")
+        .where("groups.group_name", "!=", "Grønjordskollegiet")
+        .where("groups.group_name", "!=", "Market")
         .leftOuterJoin("enrollments", "groups.id", "=", "enrollments.group_id")
         .distinct("groups.id");
       if (!enrollments) {
