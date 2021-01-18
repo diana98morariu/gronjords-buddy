@@ -69,7 +69,8 @@ router.get("/group/:groupId", isAuthenticated, async (req, res, next) => {
         "posts.from_date",
         "posts.to_date",
         "posts.price",
-        "posts.created_at"
+        "posts.created_at",
+        "posts.available"
       )
       .join("posts", "users.id", "posts.user_id")
       .where("posts.group_id", groupId)
@@ -105,7 +106,8 @@ router.get("/:userId", isAuthenticated, async (req, res, next) => {
           "posts.from_date",
           "posts.to_date",
           "posts.price",
-          "posts.created_at"
+          "posts.created_at",
+          "posts.available"
         )
         .join("posts", "users.id", "posts.user_id")
         .where("posts.user_id", req.params.userId)

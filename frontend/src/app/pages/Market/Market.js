@@ -38,7 +38,6 @@ const Market = () => {
   }
   const handleDeletePost = async (id) => {
     const result = await removePost(id);
-    console.log(result);
     if (result.status === 1) {
       const newPosts = [...posts];
       const indexDeleted = newPosts.findIndex((post) => post.id === id);

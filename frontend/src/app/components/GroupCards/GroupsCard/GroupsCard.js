@@ -17,7 +17,6 @@ const GroupsCard = (props) => {
   }
   const handleJoinGroup = async (id) => {
     const result = await joinGroup(id);
-    console.log(result);
     if (result.status === 1) {
       const newNotJoinedGroups = [...notJoinedGroups];
       const indexDeleted = newNotJoinedGroups.findIndex(
@@ -35,7 +34,6 @@ const GroupsCard = (props) => {
 
   const handleLeaveGroup = async (id) => {
     const result = await leaveGroup(id);
-    console.log(result);
     if (result.status === 1) {
       const newJoinedGroups = [...joinedGroups];
       const indexDeleted = newJoinedGroups.findIndex(

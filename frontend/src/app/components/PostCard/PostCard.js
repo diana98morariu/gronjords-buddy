@@ -42,9 +42,9 @@ const PostCard = (props) => {
   const [likes, setLikes] = useState(undefined);
   const [numberLikes, setNumberLikes] = useState(0);
   const [liked, setLiked] = useState(false);
-
   const {
     id,
+    post_id,
     title,
     content,
     created_at,
@@ -52,8 +52,24 @@ const PostCard = (props) => {
     last_name,
     image,
     images,
+    price,
+    from_date,
+    to_date,
+    available,
   } = props.post;
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const available_from_date = from_date;
+  const availableFromDate = `${available_from_date
+    .split("-")[2]
+    .slice(0, -14)}/${available_from_date.split("-")[1]}/${
+    available_from_date.split("-")[0]
+  }`;
+  const available_to_date = to_date;
+  const availableToDate = `${available_to_date.split("-")[2].slice(0, -14)}/${
+    available_to_date.split("-")[1]
+  }/${available_to_date.split("-")[0]}`;
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -64,11 +80,9 @@ const PostCard = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       if (user_data) {
-        if (id) {
-          const fetchedPostLikes = await getPostLikes(id);
-          console.log(fetchedPostLikes);
-          const response = await checkLike(id);
-          console.log(response);
+        if (post_id) {
+          const fetchedPostLikes = await getPostLikes(post_id);
+          const response = await checkLike(post_id);
           if (response.status !== 0) {
             setLiked(true);
           }
@@ -79,10 +93,10 @@ const PostCard = (props) => {
     };
 
     if (user_data) fetchData();
-  }, [id]);
+  }, [post_id, user_data]);
 
   const addLike = async () => {
-    const response = await likePost(id);
+    const response = await likePost(post_id);
     if (response.status === 1) {
       const newLikes = [...likes];
       newLikes.unshift(response.data);
@@ -95,10 +109,12 @@ const PostCard = (props) => {
   };
 
   const removeLike = async () => {
-    const response = await dislikePost(id);
+    const response = await dislikePost(post_id);
     if (response.status === 1) {
       const newLikes = [...likes];
-      const indexDeleted = newLikes.findIndex((newLike) => newLike.id === id);
+      const indexDeleted = newLikes.findIndex(
+        (newLike) => newLike.id === post_id
+      );
       newLikes.splice(indexDeleted, 1);
       setLikes(newLikes);
       setNumberLikes(newLikes.length);
@@ -142,7 +158,7 @@ const PostCard = (props) => {
         <MenuItem onClick={handleClose}>Edit</MenuItem>
         <MenuItem
           onClick={(e) => {
-            props.delete(id);
+            props.delete(post_id);
           }}
         >
           Delete
@@ -192,7 +208,16 @@ const PostCard = (props) => {
           ""
         )}
       </div>
-
+      {price ? <div>{available ? price : "SOLD"}</div> : ""}
+      {from_date && to_date ? (
+        <div>
+          {available
+            ? `Available from ${availableFromDate} until ${availableToDate}`
+            : "Not available anymore"}
+        </div>
+      ) : (
+        ""
+      )}
       <div className={classes.likes}>
         <FontAwesomeIcon icon={faThumbsUp} className={classes.ThumbsUp} />
         <span className={classes.likesNumber}>{numberLikes}</span>
@@ -203,9 +228,9 @@ const PostCard = (props) => {
           className={classes.button}
           onClick={(e) => {
             if (liked === false) {
-              addLike(id);
+              addLike(post_id);
             } else {
-              removeLike(id);
+              removeLike(post_id);
             }
           }}
         >
@@ -215,7 +240,7 @@ const PostCard = (props) => {
                 icon={faThumbsUp}
                 className={classes.likedText}
               />
-              <div className={classes.likedText}>Like</div>
+              <div className={classes.likedText}>Liked</div>
             </div>
           ) : (
             <div className={classes.LikeButton}>

@@ -13,10 +13,9 @@ const GroupCard = (props) => {
 
   const handleDeletePost = async (id) => {
     const result = await removePost(id);
-    console.log(result);
     if (result.status === 1) {
+      const indexDeleted = posts.findIndex((post) => post.post_id === id);
       const newPosts = [...posts];
-      const indexDeleted = newPosts.findIndex((post) => post.id === id);
       newPosts.splice(indexDeleted, 1);
       setPosts(newPosts);
       toastr.success("Property deleted successfully!");

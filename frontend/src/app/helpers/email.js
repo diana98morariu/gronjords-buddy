@@ -29,7 +29,6 @@ export const contactTechnician = async (contactData) => {
     const response = await fetch(usersEndpoint + "/blamaend", options);
 
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (err) {
     return { status: 0, message: "Can not connect to the server", code: 999 };
@@ -49,7 +48,6 @@ export const contactAdministration = async (contactData) => {
     };
     const response = await fetch(usersEndpoint + "/administration", options);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (err) {
     return { status: 0, message: "Can not connect to the server", code: 999 };
