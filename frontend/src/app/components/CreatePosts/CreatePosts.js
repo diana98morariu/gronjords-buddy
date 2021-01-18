@@ -19,7 +19,12 @@ const CreatePosts = (props) => {
   let modalToShow;
   if (showModal)
     modalToShow = (
-      <Modal page={showModal} closeModal={closeModal} groupId={props.groupId} />
+      <Modal
+        page={showModal}
+        closeModal={closeModal}
+        groupId={props.groupId}
+        posts={props.posts}
+      />
     );
 
   return (

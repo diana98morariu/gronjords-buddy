@@ -60,7 +60,7 @@ const Profile = () => {
 
       <div className={classes.ProfileContainer} style={{ opacity: showPage }}>
         <div className={classes.LeftContainer}>
-          <CreatePosts type={"Post Announcement"} />
+          <CreatePosts type={"Post Announcement"} posts={posts} />
           <div className={classes.GroupsPostsContainer}>
             {posts.map((post) => {
               return (
