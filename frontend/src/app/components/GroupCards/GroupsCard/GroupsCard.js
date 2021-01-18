@@ -71,7 +71,7 @@ const GroupsCard = (props) => {
       <div className={classes.BottomContainer}>
         <div className={classes.BottomContainerTitle}>Other groups</div>
         <div className={classes.NotJoinedGroupsContainer}>
-          {notJoinedGroups.forEach((notJoinedGroup) => {
+          {notJoinedGroups.map((notJoinedGroup) => {
             if (
               notJoinedGroup.user_id !== user_data.id &&
               joinedGroupsIds.length > 1 &&
@@ -90,6 +90,7 @@ const GroupsCard = (props) => {
                 </div>
               );
             }
+            return <span key={notJoinedGroup.id}></span>;
           })}
         </div>
       </div>

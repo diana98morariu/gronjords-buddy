@@ -28,7 +28,8 @@ router.get("/", isAuthenticated, async (req, res, next) => {
         "posts.from_date",
         "posts.to_date",
         "posts.price",
-        "posts.created_at"
+        "posts.created_at",
+        "posts.available"
       )
       .join("posts", "users.id", "posts.user_id")
       .orderBy("posts.created_at", "desc");
