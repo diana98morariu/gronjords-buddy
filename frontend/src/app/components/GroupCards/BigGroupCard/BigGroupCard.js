@@ -46,13 +46,13 @@ const GroupCard = (props) => {
         {group_name}
       </div>
       {id === 2 ? (
-        <CreatePosts type={"Post Item"} />
+        <CreatePosts type={"Post Item"} posts={posts} />
       ) : id === 1 ? (
-        <CreatePosts type={"Post Announcement"} />
+        <CreatePosts type={"Post Announcement"} posts={posts} />
       ) : id === 3 ? (
-        <CreatePosts type={"Post Room"} />
+        <CreatePosts type={"Post Room"} posts={posts} />
       ) : (
-        <CreatePosts type={"Post"} groupId={id} />
+        <CreatePosts type={"Post"} groupId={id} posts={posts} />
       )}
 
       {posts ? (

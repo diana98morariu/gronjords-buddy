@@ -63,7 +63,7 @@ const Market = () => {
 
       <div className={classes.MarketContainer} style={{ opacity: showPage }}>
         <div className={classes.LeftContainers}>
-          <CreatePosts type={"Post Item"} />
+          <CreatePosts type={"Post Item"} posts={posts} />
           <div className={classes.GroupsPostsContainer}>
             {posts.map((post) => {
               return (
